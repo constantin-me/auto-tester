@@ -1,0 +1,45 @@
+{
+  "commit": "7510c3f",
+  "summary": "feat(labels): add printable QR label per item",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "new print-label button"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "new print-label button"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "new print-label button"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "new print-label button"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "new print-label button"
+    }
+  ],
+  "not_flows": [
+    "GET /<prefix>/:id/label is new (no flow at the parent)"
+  ],
+  "not_affected_notes": [
+    "adminRoutes: getPublicProtocol moved to core/helpers, same behavior (refactor)"
+  ]
+}

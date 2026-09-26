@@ -204,6 +204,42 @@ export async function triageFlow(
   return decideTriage(await askTriage(judge, change, flow, focus), policy);
 }
 
+// ---- 1b. execution check: does the change matter for this flow's requests (PER-69) ----
+
+/**
+ * Separate from triage on purpose: its own evidence (built in evidence.ts), its own cache
+ * key, and one narrow question. Asked only for candidates linked indirectly.
+ */
+export const EXECUTION_QUESTIONS = {
+  differs_for_flow: noul(
+    {
+      question:
+        "For the requests listed in `flow.requests`, would the code changed in `change.hunks` produce a different result than it did before the change?",
+      notes: [
+        "Trace the changed lines against these specific requests: which branches, conditions and path checks do they reach, with the values `flow.params` describes?",
+        "For an action on this page, `call_site` shows what the page really sends (`fields_sent`); a branch taken only when a field is present does not run if the page never sends it.",
+        "`change.render_data_keys` lists keys the change writes; \"none found\" means this flow's templates never read that key.",
+        "A result includes the response, status code, redirect, rendered output, and anything saved or deleted.",
+      ],
+    },
+    {
+      true: "At least one of these requests can now get a different result.",
+      false: "Every one of these requests gets the same result as before; the changed code is not reached, or reached without changing the outcome.",
+    },
+  ),
+} as const;
+
+export async function askExecution(judge: Judge, state: { [key: string]: JsonValue }): Promise<number> {
+  const a = await judge.ask("execution", state, EXECUTION_QUESTIONS);
+  return a.differs_for_flow.noul;
+}
+
+/** Pre-registered combine rule; see Policy.execution. */
+export function dropByExecution(pDiffers: number, links: { kind: string }[], policy: Policy = DEFAULT_POLICY): boolean {
+  const indirectOnly = links.length > 0 && links.every((l) => l.kind !== "handler" && l.kind !== "template");
+  return indirectOnly && pDiffers < policy.execution.dropBelow;
+}
+
 // ---- 2. observation vs expectation (comparator core) -----------------------
 
 export interface Observation {

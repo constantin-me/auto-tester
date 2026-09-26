@@ -26,11 +26,24 @@ import { appMounts, middlewareReason, mountOrderOf, type Mount } from "./middlew
  * Jev triage then judges each candidate; this stage only has to not miss.
  */
 
+/**
+ * How a change reached a flow. `handler` and `template` are direct (the flow's own code
+ * changed); the rest are indirect and may not matter for this flow's requests.
+ */
+export type LinkKind = "handler" | "template" | "action" | "helper" | "middleware";
+export interface Link {
+  kind: LinkKind;
+  /** for `action`: the route the page calls */
+  action?: { method: string; path: string };
+}
+export const isDirect = (l: Link) => l.kind === "handler" || l.kind === "template";
+
 export interface Candidate {
   nodeId: string;
   reasons: string[];
   /** hunk texts relevant to this flow */
   hunks: string[];
+  links: Link[];
 }
 
 export interface Detection {
@@ -57,29 +70,34 @@ export function detectCandidates(
   const views = viewIndexFor(appRoot, crawler);
   const nodeIds = new Set(map.nodes.map((n) => n.id));
 
-  const hits = new Map<string, { reasons: Set<string>; hunks: Set<string> }>();
+  const hits = new Map<string, { reasons: Set<string>; hunks: Set<string>; links: Map<string, Link> }>();
   const unmapped: Detection["unmapped"] = [];
   const dropped = new Set<string>();
-  const hit = (id: string, reason: string, hunk: string) => {
+  const hit = (id: string, reason: string, hunk: string, link: Link) => {
     if (!nodeIds.has(id)) {
       dropped.add(id);
       return;
     }
-    const h = hits.get(id) ?? { reasons: new Set(), hunks: new Set() };
+    const h = hits.get(id) ?? { reasons: new Set(), hunks: new Set(), links: new Map() };
     h.reasons.add(reason);
     h.hunks.add(hunk);
+    h.links.set(`${link.kind} ${link.action?.method ?? ""} ${link.action?.path ?? ""}`, link);
     hits.set(id, h);
   };
-  const hitRoute = (r: RouteDef, reason: string, hunk: string) => {
+  // `direct`: the hunk is inside this route's own handler (vs reached through a helper chain)
+  const hitRoute = (r: RouteDef, reason: string, hunk: string, direct: boolean) => {
     const label = `${r.method.toUpperCase()} ${r.path}`;
     if (r.method === "get") {
-      hit(nodeId(r.path), reason.replace("{route}", label), hunk);
+      hit(nodeId(r.path), reason.replace("{route}", label), hunk, { kind: direct ? "handler" : "helper" });
       return;
     }
     // a mutating route belongs to the flows whose pages trigger it
     for (const e of map.edges) {
       if (e.backing?.method === r.method.toUpperCase() && e.backing.path === r.path) {
-        hit(e.from, reason.replace("{route}", label) + ` (action on this page)`, hunk);
+        hit(e.from, reason.replace("{route}", label) + ` (action on this page)`, hunk, {
+          kind: "action",
+          action: { method: r.method.toUpperCase(), path: r.path },
+        });
       }
     }
   };
@@ -111,7 +129,7 @@ export function detectCandidates(
       const at = flowOrder.get(n.id)!;
       if (at.order <= m.order) continue; // mounted before the middleware: never runs through it
       if (m.prefix && !(n.route ?? "").startsWith(m.prefix)) continue;
-      hit(n.id, `${origin}; ${middlewareReason(m, entry!, appRoot, at.assumed)}`, hunk);
+      hit(n.id, `${origin}; ${middlewareReason(m, entry!, appRoot, at.assumed)}`, hunk, { kind: "middleware" });
     }
   };
 
@@ -133,7 +151,7 @@ export function detectCandidates(
               : views.closure(viewAbs).has(abs)
                 ? `renders ${relative(appRoot, viewAbs)}, which includes ${file.path} (changed)`
                 : undefined;
-          if (reason) for (const h of hunks) hit(n.id, reason, h.text);
+          if (reason) for (const h of hunks) hit(n.id, reason, h.text, { kind: "template" });
         }
       }
       continue;
@@ -157,7 +175,7 @@ export function detectCandidates(
       for (const m of inInline) hitMiddleware(m, `${file.path}: inline middleware changed`, h.text);
       const owning = routes.filter((r) => spanTouched(r.span, touched));
       if (owning.length) {
-        for (const r of owning) hitRoute(r, `handler of {route} changed`, h.text);
+        for (const r of owning) hitRoute(r, `handler of {route} changed`, h.text, true);
         continue;
       }
       // innermost function around each touched line / insertion point
@@ -198,7 +216,7 @@ export function detectCandidates(
     for (const r of routes) {
       // used in the handler, or applied as a guard (inline or via router.use)
       const guarded = r.guards.some((g) => g.replace(/^\.\.\./, "").split(":")[0] === item.name);
-      if (guarded || uses.test(spanText(r.span))) hitRoute(r, `{route} uses ${item.origin}`, item.hunk);
+      if (guarded || uses.test(spanText(r.span))) hitRoute(r, `{route} uses ${item.origin}`, item.hunk, false);
     }
     // the entry registers it with app.use: every flow mounted after it runs through it
     if (item.abs === entry) {
@@ -220,7 +238,7 @@ export function detectCandidates(
   }
 
   const candidates = [...hits]
-    .map(([id, h]) => ({ nodeId: id, reasons: [...h.reasons], hunks: [...h.hunks] }))
+    .map(([id, h]) => ({ nodeId: id, reasons: [...h.reasons], hunks: [...h.hunks], links: [...h.links.values()] }))
     .sort((a, b) => b.reasons.length - a.reasons.length || a.nodeId.localeCompare(b.nodeId));
   return { candidates, unmapped, dropped: [...dropped] };
 }

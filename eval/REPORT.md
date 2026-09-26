@@ -3,6 +3,35 @@
 **Status: labels UNREVIEWED.** All labels were drafted by the assistant from diffs and
 templates. Every number below is provisional until a human reviews `eval/labels/`.
 
+## Round 3 — 2026-09-26: Jev live on everything + execution check (PER-69)
+
+Labels for train/dev/batch 1/batch 2 reviewed by the user at rule level (error-path,
+crafted-input and scenario changes count as affected). Batch 3 labels are not yet reviewed.
+Jev spend this round: 544k (full triage) + 180k (execution check, design data) + 234k (batch 3).
+
+| (sure labels) | detector R / P | + Jev triage | + execution check |
+|---|---|---|---|
+| DEV pooled | 0.99 / 0.55 | 0.97 / 0.69 | 0.96 / 0.69 (at the pre-registered 0.2) |
+| DEV + TRAIN, execution check at 0.45 | | 0.97 / 0.67 | **0.97 / 0.83** |
+| HELDOUT2 pooled | 0.97 / 0.98 | 0.97 / 0.98 | 0.97 / 0.98 |
+| **HELDOUT3 pooled** (scored once) | 1.00 / 0.99 | **1.00 / 1.00** | 0.99 / 1.00 |
+| HELDOUT3 dedup | 1.00 / 0.96 | 1.00 / 1.00 | 0.96 / 1.00 |
+
+- **Every false positive on every split comes from an indirect link** (middleware, a page
+  action posting to a changed handler, a helper chain). Direct handler/template hits: 0 false
+  positives across dev, train and batch 3.
+- **Jev triage gate: confirmed.** Untuned defaults removed 29 of 64 dev false positives for one
+  true positive, and on batch 3 removed its only false positive with no loss.
+- **Execution check (separate Jev request, evidence built in code):** the pre-registered drop
+  threshold 0.2 did nothing (Jev answers are moderate). Re-set on dev+train only to 0.45, the
+  highest value with zero recall loss there (precision 0.67 → 0.83). On batch 3 it saw only 4
+  indirect candidates and dropped one true positive (8707d43 `/collection`: the bulk print now
+  sorts and keeps empty sheets; P(differs) 0.27). **Promising on dev, unproven on held-out.**
+- **Middleware is still unmeasured on held-out data:** batch 3's `app.ts` commits changed boot
+  code and view locals only. 887c1c7 (boot code) correctly produced zero candidates.
+
+---
+
 ## Round 2 — 2026-09-26: recall fixes (PER-62 / PER-65 / PER-66), detector only
 
 Held-out batch 2 (PER-67) was selected by a fixed rule (6 newest unused app-code commits)

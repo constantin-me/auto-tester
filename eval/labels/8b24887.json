@@ -1,0 +1,82 @@
+{
+  "commit": "8b24887",
+  "summary": "feat(labels): bulk QR/barcode sheet printing, select-all, and a per-item code choice",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "selection mode and bulk print UI; albums-grid checkboxes"
+    },
+    {
+      "flow": "node:root",
+      "confidence": "unsure",
+      "note": "albums-grid gains selection markup; may only render on the collection page"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "unsure",
+      "note": "albums-grid gains selection markup; may only render on the collection page"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "label action becomes a QR/barcode dropdown"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "label action becomes a QR/barcode dropdown"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "label action becomes a QR/barcode dropdown"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "label action becomes a QR/barcode dropdown"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "label action becomes a QR/barcode dropdown"
+    },
+    {
+      "flow": "node:book-id-label",
+      "confidence": "sure",
+      "note": "per-item code choice (?type=barcode); label.ejs layout"
+    },
+    {
+      "flow": "node:dvd-id-label",
+      "confidence": "sure",
+      "note": "per-item code choice (?type=barcode); label.ejs layout"
+    },
+    {
+      "flow": "node:game-id-label",
+      "confidence": "sure",
+      "note": "per-item code choice (?type=barcode); label.ejs layout"
+    },
+    {
+      "flow": "node:lego-id-label",
+      "confidence": "sure",
+      "note": "per-item code choice (?type=barcode); label.ejs layout"
+    },
+    {
+      "flow": "node:album-id-label",
+      "confidence": "sure",
+      "note": "per-item code choice (?type=barcode); label.ejs layout"
+    }
+  ],
+  "not_flows": [
+    "POST /collection/labels and label-sheet.ejs are new (no flow at the parent)"
+  ]
+}

@@ -9,7 +9,7 @@ export type LabelConfidence = "sure" | "unsure";
 
 export interface FlowRow {
   commit: string;
-  split: "train" | "dev" | "heldout" | "heldout2";
+  split: "train" | "dev" | "heldout" | "heldout2" | "heldout3";
   flow: string;
   /** null = labelled not affected */
   label: LabelConfidence | null;
@@ -18,6 +18,10 @@ export interface FlowRow {
   predicted?: boolean;
   /** candidate reached only through app-level middleware (PER-62), reported separately */
   middlewareOnly?: boolean;
+  /** Jev triage alone (before the execution check) */
+  triageOnly?: boolean;
+  /** how the change reached this candidate: direct, or the indirect mechanism */
+  mechanism?: "direct" | "middleware" | "action" | "helper";
 }
 
 /** How `unsure` labels count: excluded from scoring, or counted as affected. */
@@ -49,12 +53,12 @@ function finish(c: Counts): Metrics {
   };
 }
 
-export function score(rows: FlowRow[], mode: Mode, stage: "detector" | "system"): Metrics {
+export function score(rows: FlowRow[], mode: Mode, stage: "detector" | "triage" | "system"): Metrics {
   const c: Counts = { tp: 0, fp: 0, fn: 0, tn: 0 };
   for (const r of rows) {
     const pos = positive(r, mode);
     if (pos === undefined) continue;
-    const pred = stage === "detector" ? r.candidate : r.candidate && r.predicted === true;
+    const pred = stage === "detector" ? r.candidate : stage === "triage" ? r.candidate && r.triageOnly === true : r.candidate && r.predicted === true;
     if (pred && pos) c.tp++;
     else if (pred && !pos) c.fp++;
     else if (!pred && pos) c.fn++;

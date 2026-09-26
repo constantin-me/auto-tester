@@ -112,6 +112,36 @@
       "sha": "018e6a8",
       "split": "heldout2",
       "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "887c1c7",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "1afb2c0",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "cc0076f",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "8707d43",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "8b24887",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "7510c3f",
+      "split": "heldout3",
+      "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
     }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "commit": "8707d43",
+  "summary": "fix(labels): scope the bulk sheet like the grid, make it print across pages",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "POST /collection/labels (bulk print action) now filters like the grid, sorts, keeps empty sheets"
+    },
+    {
+      "flow": "node:book-id-label",
+      "confidence": "sure",
+      "note": "blank barcodes no longer offered or encoded; label-box partial changed"
+    },
+    {
+      "flow": "node:dvd-id-label",
+      "confidence": "sure",
+      "note": "blank barcodes no longer offered or encoded; label-box partial changed"
+    },
+    {
+      "flow": "node:game-id-label",
+      "confidence": "sure",
+      "note": "blank barcodes no longer offered or encoded; label-box partial changed"
+    },
+    {
+      "flow": "node:lego-id-label",
+      "confidence": "sure",
+      "note": "blank barcodes no longer offered or encoded; label-box partial changed"
+    },
+    {
+      "flow": "node:album-id-label",
+      "confidence": "sure",
+      "note": "blank barcodes no longer offered or encoded; label-box partial changed"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail template change around the label action"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail template change around the label action"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail template change around the label action"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail template change around the label action"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail template change around the label action"
+    }
+  ]
+}

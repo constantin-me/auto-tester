@@ -8,7 +8,19 @@ import { loadBindings } from "../bootstrap/express.js";
 import { viewIndexFor } from "../bootstrap/crawl.js";
 import { readCommit } from "../diff/git.js";
 import { Judge, mapLimit, type UsageRecord } from "../jev/client.js";
-import { askTriage, decideTriage, triageState, TRIAGE_QUESTIONS, type FlowContext, type TriageRaw } from "../jev/judgments.js";
+import {
+  askExecution,
+  askTriage,
+  decideTriage,
+  dropByExecution,
+  EXECUTION_QUESTIONS,
+  triageState,
+  TRIAGE_QUESTIONS,
+  type FlowContext,
+  type TriageRaw,
+} from "../jev/judgments.js";
+import { executionState } from "../jev/evidence.js";
+import { isDirect, type Link } from "../detect/impact.js";
 import { DEFAULT_POLICY, type Policy } from "../jev/policy.js";
 
 /**
@@ -39,15 +51,27 @@ const args = process.argv.slice(2);
 const live = args.includes("--live");
 const policyPath = args.includes("--policy") ? args[args.indexOf("--policy") + 1] : undefined;
 const policy: Policy = policyPath ? JSON.parse(readFileSync(policyPath, "utf8")) : DEFAULT_POLICY;
-const SPLITS = ["heldout2", "heldout", "dev", "train"] as const;
+const SPLITS = ["heldout3", "heldout2", "heldout", "dev", "train"] as const;
 const QUESTIONS_JSON = JSON.stringify(TRIAGE_QUESTIONS);
 const QUESTIONS_HASH = createHash("sha256").update(QUESTIONS_JSON).digest("hex").slice(0, 12);
 const cacheKey = (state: unknown) => createHash("sha256").update(QUESTIONS_JSON).update(JSON.stringify(state)).digest("hex");
+const EXEC_JSON = JSON.stringify(EXECUTION_QUESTIONS);
+const execKey = (state: unknown) => createHash("sha256").update(EXEC_JSON).update(JSON.stringify(state)).digest("hex");
+type ExecCache = { entries: Record<string, { key: string; pDiffers: number }> };
+
+/** The strongest link wins: any direct link makes the candidate direct. */
+function mechanismOf(links: Link[]): FlowRow["mechanism"] {
+  if (links.some(isDirect)) return "direct";
+  if (links.some((l) => l.kind === "middleware")) return "middleware";
+  if (links.some((l) => l.kind === "action")) return "action";
+  return "helper";
+}
 
 async function main() {
   const spec = loadSpec(splitsArg(args));
   const rows: FlowRow[] = [];
   const raws: { row: FlowRow; raw: TriageRaw }[] = [];
+  const execAnswers: { row: FlowRow; p: number }[] = [];
   const usage: UsageRecord[] = [];
   let allReviewed = true;
   const notes: string[] = [];
@@ -79,13 +103,29 @@ async function main() {
     const cacheFile = join(EVAL_DIR, ".cache", "jev", `${c.sha}.json`);
     const loaded = existsSync(cacheFile) ? JSON.parse(readFileSync(cacheFile, "utf8")) : {};
     const cache: Cache = { entries: loaded.entries && !("questions" in loaded) ? loaded.entries : {} };
-    return { c, labels, map, change, detection, requests, cacheFile, cache };
+
+    // execution check (PER-69): only candidates every link to which is indirect
+    const evidence = { appRoot: treeDir(c.sha), views };
+    const execRequests = detection.candidates
+      .filter((k) => k.links.every((l) => !isDirect(l)))
+      .map((k) => {
+        const state = executionState(byId.get(k.nodeId)!, k, evidence);
+        return { nodeId: k.nodeId, state, links: k.links, key: execKey(state) };
+      });
+    const execFile = join(EVAL_DIR, ".cache", "jev-exec", `${c.sha}.json`);
+    const execCache: ExecCache = existsSync(execFile) ? JSON.parse(readFileSync(execFile, "utf8")) : { entries: {} };
+    return { c, labels, map, change, detection, requests, cacheFile, cache, execRequests, execFile, execCache };
   });
 
   const valid = (w: (typeof work)[number], r: (typeof work)[number]["requests"][number]) => w.cache.entries[r.nodeId]?.key === r.key;
+  const execValid = (w: (typeof work)[number], r: (typeof work)[number]["execRequests"][number]) =>
+    w.execCache.entries[r.nodeId]?.key === r.key;
   const missing = work.reduce((n, w) => n + w.requests.filter((r) => !valid(w, r)).length, 0);
-  console.log(`candidates without a valid cached Jev answer: ${missing} (~${(missing * TOKENS_PER_REQUEST_ESTIMATE).toLocaleString()} tokens to fill)`);
-  const judge = live && missing ? new Judge({ model: spec.config.jev.model, onUsage: (u) => usage.push(u) }) : undefined;
+  const execMissing = work.reduce((n, w) => n + w.execRequests.filter((r) => !execValid(w, r)).length, 0);
+  console.log(
+    `stale Jev answers: triage ${missing}, execution check ${execMissing} (~${((missing + execMissing) * TOKENS_PER_REQUEST_ESTIMATE).toLocaleString()} tokens to fill)`,
+  );
+  const judge = live && missing + execMissing ? new Judge({ model: spec.config.jev.model, onUsage: (u) => usage.push(u) }) : undefined;
 
   for (const w of work) {
     if (judge) {
@@ -94,17 +134,31 @@ async function main() {
       todo.forEach((r, i) => (w.cache.entries[r.nodeId] = { key: r.key, raw: answers[i]! }));
       mkdirSync(join(EVAL_DIR, ".cache", "jev"), { recursive: true });
       writeFileSync(w.cacheFile, JSON.stringify(w.cache, null, 2) + "\n");
+
+      const execTodo = w.execRequests.filter((r) => !execValid(w, r));
+      const execAnswers = await mapLimit(execTodo, spec.config.jev.concurrency, (r) => askExecution(judge, r.state));
+      execTodo.forEach((r, i) => (w.execCache.entries[r.nodeId] = { key: r.key, pDiffers: execAnswers[i]! }));
+      mkdirSync(join(EVAL_DIR, ".cache", "jev-exec"), { recursive: true });
+      writeFileSync(w.execFile, JSON.stringify(w.execCache, null, 2) + "\n");
     }
 
     const labelOf = new Map(w.labels.affected.map((a) => [a.flow, a.confidence]));
     const judged = new Map(w.requests.filter((r) => valid(w, r)).map((r) => [r.nodeId, w.cache.entries[r.nodeId]!.raw]));
+    const execOf = new Map(w.execRequests.map((r) => [r.nodeId, { links: r.links, p: execValid(w, r) ? w.execCache.entries[r.nodeId]!.pDiffers : undefined }]));
     const candidates = new Set(w.requests.map((r) => r.nodeId));
+    const linksOf = new Map(w.detection.candidates.map((k) => [k.nodeId, k.links]));
     const viaMiddlewareOnly = new Set(
       w.detection.candidates.filter((k) => k.reasons.every((r) => r.includes("runs for every request after"))).map((k) => k.nodeId),
     );
     for (const n of w.map.nodes) {
       if (n.kind === "synthetic") continue;
       const raw = judged.get(n.id);
+      const triageOnly = raw ? decideTriage(raw, policy).affected : undefined;
+      const exec = execOf.get(n.id);
+      // final = triage, then the pre-registered execution drop for indirect-only candidates
+      const predicted =
+        triageOnly === undefined ? undefined : !exec ? triageOnly : exec.p === undefined ? undefined : triageOnly && !dropByExecution(exec.p, exec.links, policy);
+      const links = linksOf.get(n.id);
       const row: FlowRow = {
         commit: w.c.sha,
         split: w.c.split,
@@ -112,8 +166,11 @@ async function main() {
         label: labelOf.get(n.id) ?? null,
         candidate: candidates.has(n.id),
         middlewareOnly: viaMiddlewareOnly.has(n.id),
-        predicted: raw ? decideTriage(raw, policy).affected : undefined,
+        triageOnly,
+        predicted,
+        mechanism: links ? mechanismOf(links) : undefined,
       };
+      if (exec?.p !== undefined) execAnswers.push({ row, p: exec.p });
       rows.push(row);
       if (raw) raws.push({ row, raw });
     }
@@ -155,12 +212,34 @@ async function main() {
       for (const mode of ["sure", "all"] as const) {
         const d = score(data, mode, "detector");
         const s = score(data, mode, "system");
-        console.log(`${pad(`${split.toUpperCase()} ${variant}`, 16)}${pad(mode === "sure" ? "sure" : "+unsure", 9)} detector ${line(d)}   system ${unjudgedIn(data) ? `n/a (${unjudgedIn(data)} unjudged)` : line(s)}`);
+        const t = score(data, mode, "triage");
+        const judgedOk = !unjudgedIn(data);
+        console.log(
+          `${pad(`${split.toUpperCase()} ${variant}`, 16)}${pad(mode === "sure" ? "sure" : "+unsure", 9)} detector ${line(d)}` +
+            (judgedOk ? `   triage ${line(t)}   final ${line(s)}` : `   final n/a (${unjudgedIn(data)} unjudged)`),
+        );
       }
     }
     const noMw = subset.map((r) => (r.middlewareOnly ? { ...r, candidate: false } : r));
     const mwCands = subset.filter((r) => r.middlewareOnly).length;
     console.log(`${pad(`${split.toUpperCase()} w/o mw`, 16)}${pad("sure", 9)} detector ${line(score(noMw, "sure", "detector"))}   (${mwCands} middleware-only candidates)`);
+  }
+
+  // per linking mechanism: where the detector's false positives come from, and what the checks remove
+  for (const split of SPLITS) {
+    const subset = rows.filter((r) => r.split === split && r.candidate && r.label !== "unsure");
+    if (!subset.length) continue;
+    console.log(`\nby mechanism, ${split}, sure labels (candidates: true / false positives; kept after triage / after execution check)`);
+    for (const m of ["direct", "middleware", "action", "helper"] as const) {
+      const g = subset.filter((r) => r.mechanism === m);
+      if (!g.length) continue;
+      const kept = (f: (r: FlowRow) => boolean | undefined) => `${g.filter((r) => r.label && f(r)).length}/${g.filter((r) => !r.label && f(r)).length}`;
+      console.log(`  ${pad(m, 11)} detector ${pad(kept(() => true), 8)} triage ${pad(kept((r) => r.triageOnly), 8)} final ${kept((r) => r.predicted)}`);
+    }
+    const ex = execAnswers.filter((x) => x.row.split === split && x.row.label !== "unsure");
+    if (ex.length) {
+      console.log(`  P(differs) on indirect candidates: affected ${summarize(ex.filter((x) => x.row.label).map((x) => x.p))}   not affected ${summarize(ex.filter((x) => !x.row.label).map((x) => x.p))}`);
+    }
   }
 
   for (const split of SPLITS) {

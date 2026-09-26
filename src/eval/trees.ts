@@ -19,7 +19,7 @@ export const EVAL_DIR = resolve(import.meta.dirname, "../../eval");
 
 export interface EvalCommit {
   sha: string;
-  split: "train" | "dev" | "heldout" | "heldout2";
+  split: "train" | "dev" | "heldout" | "heldout2" | "heldout3";
   why: string;
 }
 

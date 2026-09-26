@@ -1,0 +1,16 @@
+{
+  "commit": "887c1c7",
+  "summary": "fix(security): refuse the Unraid placeholder secrets too, and stop shipping working defaults",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [],
+  "not_flows": [
+    "app.ts: boot-time secret check (more placeholder values refused, new error text); runs before the server listens, no request flow"
+  ]
+}

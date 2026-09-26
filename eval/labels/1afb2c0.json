@@ -1,0 +1,158 @@
+{
+  "commit": "1afb2c0",
+  "summary": "Store uploaded item images on disk",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "card covers go through itemImageUrl (item-cover partial); visible for uploaded images"
+    },
+    {
+      "flow": "node:root",
+      "confidence": "sure",
+      "note": "card covers go through itemImageUrl (item-cover partial); visible for uploaded images"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "card covers go through itemImageUrl (item-cover partial); visible for uploaded images"
+    },
+    {
+      "flow": "node:search",
+      "confidence": "sure",
+      "note": "card covers go through itemImageUrl (item-cover partial); visible for uploaded images"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "gallery images resolved through itemImageUrl; delete cleans up uploaded files"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "gallery images resolved through itemImageUrl; delete cleans up uploaded files"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "gallery images resolved through itemImageUrl; delete cleans up uploaded files"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "gallery images resolved through itemImageUrl; delete cleans up uploaded files"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "gallery images resolved through itemImageUrl; delete cleans up uploaded files"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "image manager can upload from disk; save cleans up replaced uploads"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "image manager can upload from disk; save cleans up replaced uploads"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "image manager can upload from disk; save cleans up replaced uploads"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "image manager can upload from disk; save cleans up replaced uploads"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "image manager can upload from disk; save cleans up replaced uploads"
+    },
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "sure",
+      "note": "live preview through itemImageUrl; image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "sure",
+      "note": "live preview through itemImageUrl; image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "sure",
+      "note": "live preview through itemImageUrl; image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "sure",
+      "note": "live preview through itemImageUrl; image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "sure",
+      "note": "live preview through itemImageUrl; image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:add-books-manual",
+      "confidence": "sure",
+      "note": "renders confirm view: same as confirm"
+    },
+    {
+      "flow": "node:add-dvd-manual",
+      "confidence": "sure",
+      "note": "renders confirm view: same as confirm"
+    },
+    {
+      "flow": "node:add-games-manual",
+      "confidence": "sure",
+      "note": "renders confirm view: same as confirm"
+    },
+    {
+      "flow": "node:add-lego-manual",
+      "confidence": "sure",
+      "note": "renders confirm view: same as confirm"
+    },
+    {
+      "flow": "node:add-music-manual",
+      "confidence": "sure",
+      "note": "renders confirm view: same as confirm"
+    },
+    {
+      "flow": "node:manual-add",
+      "confidence": "sure",
+      "note": "image manager upload; save cleanup"
+    },
+    {
+      "flow": "node:admin",
+      "confidence": "sure",
+      "note": "visibility list covers (admin-visibility partial); bulk delete and collection import clean up files"
+    },
+    {
+      "flow": "node:admin-instance",
+      "confidence": "sure",
+      "note": "collection delete cleans up its uploaded images"
+    },
+    {
+      "flow": "node:setup",
+      "confidence": "sure",
+      "note": "instance restore (POST /backup/import) cleans up replaced images"
+    }
+  ],
+  "not_flows": [
+    "app.ts boot-time cleanup of abandoned uploads",
+    "POST /api/item-images/upload is new (no flow at the parent)"
+  ]
+}

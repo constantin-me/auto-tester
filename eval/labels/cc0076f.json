@@ -1,0 +1,124 @@
+{
+  "commit": "cc0076f",
+  "summary": "feat: add ordered image galleries to items",
+  "split": "heldout3",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-69"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "new ordered gallery with lightbox"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "new ordered gallery with lightbox"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "new ordered gallery with lightbox"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "new ordered gallery with lightbox"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "new ordered gallery with lightbox"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "image manager replaces the two-image form; save stores the ordered list"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "image manager replaces the two-image form; save stores the ordered list"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "image manager replaces the two-image form; save stores the ordered list"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "image manager replaces the two-image form; save stores the ordered list"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "image manager replaces the two-image form; save stores the ordered list"
+    },
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:add-books-manual",
+      "confidence": "sure",
+      "note": "renders confirm view"
+    },
+    {
+      "flow": "node:add-dvd-manual",
+      "confidence": "sure",
+      "note": "renders confirm view"
+    },
+    {
+      "flow": "node:add-games-manual",
+      "confidence": "sure",
+      "note": "renders confirm view"
+    },
+    {
+      "flow": "node:add-lego-manual",
+      "confidence": "sure",
+      "note": "renders confirm view"
+    },
+    {
+      "flow": "node:add-music-manual",
+      "confidence": "sure",
+      "note": "renders confirm view"
+    },
+    {
+      "flow": "node:manual-add",
+      "confidence": "sure",
+      "note": "includes item-images; save stores the ordered list"
+    },
+    {
+      "flow": "node:create-plugin",
+      "confidence": "sure",
+      "note": "secondary-image toggle removed from the plugin builder"
+    }
+  ]
+}
