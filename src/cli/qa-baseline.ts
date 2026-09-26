@@ -85,6 +85,8 @@ async function main() {
         httpStatus: s.http,
         path: s.path,
         note: s.reason,
+        errors: byId.get(n.id)?.ev.observation.consoleErrors,
+        failedRequests: byId.get(n.id)?.ev.observation.failedRequests,
       };
       const r = byId.get(n.id);
       const updated = r && r.status === "ok" ? withObserved(n, observedAssertions(n, r.ev, r.v.path!, kept.get(n.id) ?? [])) : n;

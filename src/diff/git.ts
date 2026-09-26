@@ -112,3 +112,8 @@ export function readRange(repoDir: string, base: string, head: string, summary =
   assertRef(head);
   return { summary, files: splitPatch(git(repoDir, ["diff", `${base}...${head}`, "--"])) };
 }
+
+/** Uncommitted changes (staged and unstaged) against HEAD: a local "check my work" run. */
+export function readWorkingTree(repoDir: string): ChangeContext {
+  return { summary: "uncommitted working-tree changes", files: splitPatch(git(repoDir, ["diff", "HEAD", "--"])) };
+}

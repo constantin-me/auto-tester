@@ -111,11 +111,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/wishlist",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -668,11 +670,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/collection",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -742,23 +746,6 @@
           }
         },
         {
-          "id": "qa:node:root:heading:3b3290c7",
-          "expectation": "The page shows the heading \"Discovery\".",
-          "check": {
-            "kind": "text-present",
-            "value": "Discovery"
-          },
-          "severityIfBroken": 2,
-          "pinned": false,
-          "provenance": {
-            "sourceFiles": [
-              "core/routes/dashboardRoute.ts"
-            ],
-            "origin": "qa-observed",
-            "confidence": 0.7
-          }
-        },
-        {
           "id": "qa:node:root:heading:6ff33102",
           "expectation": "The page shows the heading \"Wishlist\".",
           "check": {
@@ -781,6 +768,23 @@
           "check": {
             "kind": "text-present",
             "value": "Collection Status"
+          },
+          "severityIfBroken": 2,
+          "pinned": false,
+          "provenance": {
+            "sourceFiles": [
+              "core/routes/dashboardRoute.ts"
+            ],
+            "origin": "qa-observed",
+            "confidence": 0.7
+          }
+        },
+        {
+          "id": "qa:node:root:heading:2a96c451",
+          "expectation": "The page shows the heading \"Columbia\".",
+          "check": {
+            "kind": "text-present",
+            "value": "Columbia"
           },
           "severityIfBroken": 2,
           "pinned": false,
@@ -886,11 +890,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -916,11 +922,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-books",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -946,11 +956,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-dvd",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -976,11 +990,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-games",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -1006,11 +1024,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-lego",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -1326,11 +1348,13 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/add-music",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -1357,7 +1381,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1386,7 +1410,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1415,7 +1439,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1444,7 +1468,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1473,7 +1497,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1501,11 +1525,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-books/manual",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -1531,11 +1559,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-dvd/manual",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -1561,11 +1593,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-games/manual",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -1591,11 +1627,15 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-lego/manual",
-        "note": "404 on this instance"
+        "note": "404 on this instance",
+        "errors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": []
       }
     },
     {
@@ -2336,11 +2376,13 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/add-music/manual",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -2366,7 +2408,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2394,7 +2436,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2422,7 +2464,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2450,7 +2492,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2478,7 +2520,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2505,7 +2547,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2532,7 +2574,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2559,7 +2601,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2586,7 +2628,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2886,11 +2928,13 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/album/6ab8006b372c2aa1592cd4e5",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -2916,7 +2960,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2944,7 +2988,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2972,7 +3016,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3000,7 +3044,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3028,7 +3072,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3771,11 +3815,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/manual-add",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -3869,11 +3915,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/search",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -3895,7 +3943,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3917,7 +3965,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3939,7 +3987,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3961,7 +4009,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3983,7 +4031,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -4007,7 +4055,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -5464,11 +5512,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -5852,11 +5902,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin/instance",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -6342,11 +6394,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin/personnalisation",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -6369,7 +6423,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6394,7 +6448,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6416,7 +6470,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6561,11 +6615,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/login",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -6585,7 +6641,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6610,7 +6666,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6635,7 +6691,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6660,7 +6716,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6685,7 +6741,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6710,7 +6766,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6732,7 +6788,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6754,7 +6810,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6778,7 +6834,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6800,7 +6856,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -7645,11 +7701,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/create-plugin",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -7920,6 +7978,23 @@
             "origin": "qa-observed",
             "confidence": 0.7
           }
+        },
+        {
+          "id": "qa:node:settings:field:d48b5268",
+          "expectation": "The page has a field labelled \"New username\".",
+          "check": {
+            "kind": "text-present",
+            "value": "New username"
+          },
+          "severityIfBroken": 3,
+          "pinned": false,
+          "provenance": {
+            "sourceFiles": [
+              "routes/settingsRoutes.ts"
+            ],
+            "origin": "qa-observed",
+            "confidence": 0.7
+          }
         }
       ],
       "provenance": {
@@ -7930,11 +8005,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/settings",
-        "note": "loaded"
+        "note": "loaded",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -7975,11 +8052,13 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/setup",
-        "note": "redirects to the login page"
+        "note": "redirects to the login page",
+        "errors": [],
+        "failedRequests": []
       }
     },
     {
@@ -7999,7 +8078,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:05:37.031Z",
+        "at": "2026-09-26T18:08:27.467Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }

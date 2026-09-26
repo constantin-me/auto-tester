@@ -10,7 +10,8 @@
     "jev:smoke": "tsx --env-file-if-exists=.env src/cli/jev-smoke.ts",
     "eval:prepare": "tsx src/cli/eval-prepare.ts",
     "eval": "tsx --env-file-if-exists=.env src/cli/eval.ts",
-    "qa:baseline": "tsx --env-file-if-exists=.env src/cli/qa-baseline.ts"
+    "qa:baseline": "tsx --env-file-if-exists=.env src/cli/qa-baseline.ts",
+    "qa:check": "tsx --env-file-if-exists=.env src/cli/qa-check.ts"
   },
   "author": "",
   "license": "MIT",

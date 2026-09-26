@@ -78,6 +78,9 @@ export const FlowNode = z.object({
       /** concrete path actually visited (params resolved) */
       path: z.string().optional(),
       note: z.string().optional(),
+      /** console errors and failed same-origin requests seen at baseline, so a check can tell new ones apart */
+      errors: z.array(z.string()).optional(),
+      failedRequests: z.array(z.string()).optional(),
     })
     .optional(),
 });
