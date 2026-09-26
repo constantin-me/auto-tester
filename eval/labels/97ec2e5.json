@@ -1,0 +1,219 @@
+{
+  "commit": "97ec2e5",
+  "summary": "fix(security): guard POST /setup against existing installs and reject default secrets at boot",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:setup",
+      "confidence": "sure",
+      "note": "POST /setup redirects to /login once users exist and validates required fields"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:collection",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:root",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-books",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-dvd",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-games",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-lego",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-music",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-books-manual",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-dvd-manual",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-games-manual",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-lego-manual",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:add-music-manual",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:manual-add",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:search",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:admin",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:admin-instance",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:admin-personnalisation",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:admin-api-search-collection",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:admin-api-search-image-universal",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:backup-export",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:backup-collection-export",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:backup-collection-export-csv",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:settings-oidc-link",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    },
+    {
+      "flow": "node:settings",
+      "confidence": "unsure",
+      "note": "global checkUser middleware now rejects tokens issued before the user's last password change"
+    }
+  ],
+  "not_flows": [
+    "boot-time secret checks in app.ts: no user flow"
+  ],
+  "expected_detector_gaps": [
+    "app-level middleware (app.use(checkUser)) is not attributed to routes by the detector"
+  ]
+}

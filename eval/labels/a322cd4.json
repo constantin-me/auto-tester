@@ -1,0 +1,64 @@
+{
+  "commit": "a322cd4",
+  "summary": "fix(errors): say which provider failed instead of always Discogs, fix MONGODB_URL typo",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:add-books",
+      "confidence": "sure",
+      "note": "search error (POST /search-X renders add) names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:add-dvd",
+      "confidence": "sure",
+      "note": "search error (POST /search-X renders add) names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:add-games",
+      "confidence": "sure",
+      "note": "search error (POST /search-X renders add) names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:add-lego",
+      "confidence": "sure",
+      "note": "search error (POST /search-X renders add) names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:add-music",
+      "confidence": "sure",
+      "note": "search error (POST /search-X renders add) names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "sure",
+      "note": "details fetch error names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "sure",
+      "note": "details fetch error names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "sure",
+      "note": "details fetch error names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "sure",
+      "note": "details fetch error names the real provider; only on provider failure"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "sure",
+      "note": "details fetch error names the real provider; only on provider failure"
+    }
+  ],
+  "not_flows": [
+    "config/db.ts: startup error text, no user flow"
+  ],
+  "expected_detector_gaps": [
+    "the visible text lives in locales/*.json, which the detector does not read; the itemRoutes hunks still point at the right handlers"
+  ]
+}

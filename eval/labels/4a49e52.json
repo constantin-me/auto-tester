@@ -1,0 +1,63 @@
+{
+  "commit": "4a49e52",
+  "summary": "fix: come back to the item you just edited, and from there to the page you came from",
+  "split": "heldout",
+  "reviewed": true,
+  "labelled_before_detection": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "save edit branch now redirects to the item page; edit form carries return_to"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "save edit branch now redirects to the item page; edit form carries return_to"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "save edit branch now redirects to the item page; edit form carries return_to"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "save edit branch now redirects to the item page; edit form carries return_to"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "save edit branch now redirects to the item page; edit form carries return_to"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail page computes backUrl from ?from / Referer; detail.ejs back/edit links changed"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail page computes backUrl from ?from / Referer; detail.ejs back/edit links changed"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail page computes backUrl from ?from / Referer; detail.ejs back/edit links changed"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail page computes backUrl from ?from / Referer; detail.ejs back/edit links changed"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail page computes backUrl from ?from / Referer; detail.ejs back/edit links changed"
+    }
+  ],
+  "not_affected_notes": [
+    "confirm-X, add-X/manual, manual-add POST save-X on the create path, whose redirects are unchanged"
+  ]
+}

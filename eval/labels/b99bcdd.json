@@ -1,0 +1,33 @@
+{
+  "commit": "b99bcdd",
+  "summary": "fix(cards): only send catalogue-shaped strings through t()",
+  "split": "heldout",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "renders albums-grid -> item-card-body / item-cover -> cover-badge"
+    },
+    {
+      "flow": "node:root",
+      "confidence": "sure",
+      "note": "dashboard index.ejs renders albums-grid"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "renders albums-grid"
+    },
+    {
+      "flow": "node:search",
+      "confidence": "sure",
+      "note": "search.ejs renders item-card-body and item-cover"
+    }
+  ],
+  "not_flows": [
+    "app.ts: registers isTranslationKey as a view local"
+  ]
+}

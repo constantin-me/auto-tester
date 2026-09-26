@@ -1,0 +1,4652 @@
+{
+  "schemaVersion": 1,
+  "repo": "Kyonew/DVinyl",
+  "generatedAt": "2026-09-25T19:27:46.580Z",
+  "nodes": [
+    {
+      "id": "node:wishlist",
+      "label": "Wishlist",
+      "route": "/wishlist",
+      "view": "wishlist",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/collectionRoute.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:collection",
+      "label": "Collection",
+      "route": "/collection",
+      "view": "collection",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/collectionRoute.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:root",
+      "label": "Home",
+      "route": "/",
+      "view": "no-collection",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/dashboardRoute.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:add-books",
+      "label": "Add books",
+      "route": "/add-books",
+      "view": "add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-dvd",
+      "label": "Add dvd",
+      "route": "/add-dvd",
+      "view": "add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-games",
+      "label": "Add games",
+      "route": "/add-games",
+      "view": "add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-lego",
+      "label": "Add lego",
+      "route": "/add-lego",
+      "view": "add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-music",
+      "label": "Add music",
+      "route": "/add-music",
+      "view": "add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:confirm-books-id",
+      "label": "Confirm books {id}",
+      "route": "/confirm-books/:id",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:confirm-dvd-id",
+      "label": "Confirm dvd {id}",
+      "route": "/confirm-dvd/:id",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:confirm-games-id",
+      "label": "Confirm games {id}",
+      "route": "/confirm-games/:id",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:confirm-lego-id",
+      "label": "Confirm lego {id}",
+      "route": "/confirm-lego/:id",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:confirm-music-id",
+      "label": "Confirm music {id}",
+      "route": "/confirm-music/:id",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-books-manual",
+      "label": "Add books manual",
+      "route": "/add-books/manual",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-dvd-manual",
+      "label": "Add dvd manual",
+      "route": "/add-dvd/manual",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-games-manual",
+      "label": "Add games manual",
+      "route": "/add-games/manual",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-lego-manual",
+      "label": "Add lego manual",
+      "route": "/add-lego/manual",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:add-music-manual",
+      "label": "Add music manual",
+      "route": "/add-music/manual",
+      "view": "confirm",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:book-edit-id",
+      "label": "Book edit {id}",
+      "route": "/book/edit/:id",
+      "view": "edit",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:dvd-edit-id",
+      "label": "Dvd edit {id}",
+      "route": "/dvd/edit/:id",
+      "view": "edit",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:game-edit-id",
+      "label": "Game edit {id}",
+      "route": "/game/edit/:id",
+      "view": "edit",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:lego-edit-id",
+      "label": "Lego edit {id}",
+      "route": "/lego/edit/:id",
+      "view": "edit",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:album-edit-id",
+      "label": "Album edit {id}",
+      "route": "/album/edit/:id",
+      "view": "edit",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:book-id",
+      "label": "Book {id}",
+      "route": "/book/:id",
+      "view": "detail",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:dvd-id",
+      "label": "Dvd {id}",
+      "route": "/dvd/:id",
+      "view": "detail",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:game-id",
+      "label": "Game {id}",
+      "route": "/game/:id",
+      "view": "detail",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:lego-id",
+      "label": "Lego {id}",
+      "route": "/lego/:id",
+      "view": "detail",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:album-id",
+      "label": "Album {id}",
+      "route": "/album/:id",
+      "view": "detail",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuthOrShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:book-id-label",
+      "label": "Book {id} label",
+      "route": "/book/:id/label",
+      "view": "label",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:dvd-id-label",
+      "label": "Dvd {id} label",
+      "route": "/dvd/:id/label",
+      "view": "label",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:game-id-label",
+      "label": "Game {id} label",
+      "route": "/game/:id/label",
+      "view": "label",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:lego-id-label",
+      "label": "Lego {id} label",
+      "route": "/lego/:id/label",
+      "view": "label",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:album-id-label",
+      "label": "Album {id} label",
+      "route": "/album/:id/label",
+      "view": "label",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/itemRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.4
+      }
+    },
+    {
+      "id": "node:manual-add",
+      "label": "Manual add",
+      "route": "/manual-add",
+      "view": "manual-add",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/manualAddRoute.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:search",
+      "label": "Search",
+      "route": "/search",
+      "view": "search",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/routes/searchRoute.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:api-collection-ids",
+      "label": "Api collection ids",
+      "route": "/api/collection/ids",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:api-album-id-track-trackId-lyrics",
+      "label": "Api album {id} track {trackId} lyrics",
+      "route": "/api/album/:id/track/:trackId/lyrics",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:api-estimate-history",
+      "label": "Api estimate history",
+      "route": "/api/estimate/history",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:api-estimate-discogsId",
+      "label": "Api estimate {discogsId}",
+      "route": "/api/estimate/:discogsId",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:api-search-discogs-gallery",
+      "label": "Api search discogs gallery",
+      "route": "/api/search-discogs-gallery",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [
+        "requireAdmin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin",
+      "label": "Admin",
+      "route": "/admin",
+      "view": "admin",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin-instance",
+      "label": "Admin instance",
+      "route": "/admin/instance",
+      "view": "admin-instance",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireAdmin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin-personnalisation",
+      "label": "Admin personnalisation",
+      "route": "/admin/personnalisation",
+      "view": "personnalisation",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin-api-search-collection",
+      "label": "Admin api search collection",
+      "route": "/admin/api/search-collection",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin-api-search-image-universal",
+      "label": "Admin api search image universal",
+      "route": "/admin/api/search-image-universal",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:editor"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:admin-io",
+      "label": "Admin io",
+      "route": "/admin/io",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:login",
+      "label": "Login",
+      "route": "/login",
+      "view": "login",
+      "kind": "page",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/authRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:logout",
+      "label": "Logout",
+      "route": "/logout",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/authRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:backup-export",
+      "label": "Backup export",
+      "route": "/backup/export",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireAdmin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/backupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:backup-export-archive",
+      "label": "Backup export archive",
+      "route": "/backup/export-archive",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireAdmin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/backupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:backup-collection-export",
+      "label": "Backup collection export",
+      "route": "/backup/collection/export",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/backupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:backup-collection-export-archive",
+      "label": "Backup collection export archive",
+      "route": "/backup/collection/export-archive",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/backupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:backup-collection-export-csv",
+      "label": "Backup collection export csv",
+      "route": "/backup/collection/export-csv",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/backupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:login-oidc",
+      "label": "Login oidc",
+      "route": "/login/oidc",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/oidcRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:login-oidc-callback",
+      "label": "Login oidc callback",
+      "route": "/login/oidc/callback",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/oidcRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:settings-oidc-link",
+      "label": "Settings oidc link",
+      "route": "/settings/oidc/link",
+      "kind": "endpoint",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/oidcRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:plugin-assets-pluginId-file",
+      "label": "Plugin assets {pluginId} {file}",
+      "route": "/plugin-assets/:pluginId/:file",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/pluginAssetRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:create-plugin",
+      "label": "Create plugin",
+      "route": "/create-plugin",
+      "view": "create-plugin",
+      "kind": "page",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/pluginBuilderRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:settings",
+      "label": "Settings",
+      "route": "/settings",
+      "view": "settings",
+      "kind": "page",
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/settingsRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:setup",
+      "label": "Setup",
+      "route": "/setup",
+      "view": "setup",
+      "kind": "page",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/setupRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:share-token",
+      "label": "Share {token}",
+      "route": "/share/:token",
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/shareRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "node:global-nav",
+      "label": "Global navigation (header, footer)",
+      "kind": "synthetic",
+      "requiresAuth": false,
+      "guards": [],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs",
+          "views/partials/footer.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /import/:importer_id",
+      "backing": {
+        "method": "POST",
+        "path": "/import/:importer_id"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /import/:importer_id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/wishlist.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/book/:id/move-to-collection"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /api/book/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/dvd/:id/move-to-collection"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /api/dvd/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/game/:id/move-to-collection"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /api/game/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/lego/:id/move-to-collection"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /api/lego/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:wishlist",
+      "to": "node:wishlist",
+      "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/album/:id/move-to-collection"
+      },
+      "id": "api:node:wishlist->node:wishlist|POST /api/album/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:collection",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /collection/labels",
+      "backing": {
+        "method": "POST",
+        "path": "/collection/labels"
+      },
+      "id": "submit:node:collection->node:collection|POST /collection/labels",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:collection",
+      "to": "node:collection",
+      "kind": "api",
+      "action": "fetch POST /import/:importer_id",
+      "backing": {
+        "method": "POST",
+        "path": "/import/:importer_id"
+      },
+      "id": "api:node:collection->node:collection|POST /import/:importer_id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:collection",
+      "to": "node:collection",
+      "kind": "api",
+      "action": "fetch POST /api/estimate/snapshot",
+      "backing": {
+        "method": "POST",
+        "path": "/api/estimate/snapshot"
+      },
+      "id": "api:node:collection->node:collection|POST /api/estimate/snapshot",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:collection",
+      "to": "node:collection",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/history",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/history"
+      },
+      "id": "api:node:collection->node:collection|GET /api/estimate/history",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "submit",
+      "action": "submit form -> POST /collection/create",
+      "backing": {
+        "method": "POST",
+        "path": "/collection/create"
+      },
+      "id": "submit:node:root->node:root|POST /collection/create",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/no-collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-books",
+      "to": "node:add-books-manual",
+      "kind": "navigate",
+      "action": "open /add-books/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-books/manual"
+      },
+      "id": "navigate:node:add-books->node:add-books-manual|GET /add-books/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-books",
+      "to": "node:confirm-books-id",
+      "kind": "navigate",
+      "action": "open /confirm-books/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/confirm-books/:id"
+      },
+      "id": "navigate:node:add-books->node:confirm-books-id|GET /confirm-books/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-books",
+      "to": "node:add-books",
+      "kind": "submit",
+      "action": "submit form -> POST /search-books",
+      "backing": {
+        "method": "POST",
+        "path": "/search-books"
+      },
+      "id": "submit:node:add-books->node:add-books|POST /search-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-dvd",
+      "to": "node:add-dvd-manual",
+      "kind": "navigate",
+      "action": "open /add-dvd/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-dvd/manual"
+      },
+      "id": "navigate:node:add-dvd->node:add-dvd-manual|GET /add-dvd/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-dvd",
+      "to": "node:confirm-dvd-id",
+      "kind": "navigate",
+      "action": "open /confirm-dvd/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/confirm-dvd/:id"
+      },
+      "id": "navigate:node:add-dvd->node:confirm-dvd-id|GET /confirm-dvd/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-dvd",
+      "to": "node:add-dvd",
+      "kind": "submit",
+      "action": "submit form -> POST /search-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/search-dvd"
+      },
+      "id": "submit:node:add-dvd->node:add-dvd|POST /search-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-games",
+      "to": "node:add-games-manual",
+      "kind": "navigate",
+      "action": "open /add-games/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-games/manual"
+      },
+      "id": "navigate:node:add-games->node:add-games-manual|GET /add-games/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-games",
+      "to": "node:confirm-games-id",
+      "kind": "navigate",
+      "action": "open /confirm-games/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/confirm-games/:id"
+      },
+      "id": "navigate:node:add-games->node:confirm-games-id|GET /confirm-games/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-games",
+      "to": "node:add-games",
+      "kind": "submit",
+      "action": "submit form -> POST /search-games",
+      "backing": {
+        "method": "POST",
+        "path": "/search-games"
+      },
+      "id": "submit:node:add-games->node:add-games|POST /search-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-lego",
+      "to": "node:add-lego-manual",
+      "kind": "navigate",
+      "action": "open /add-lego/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-lego/manual"
+      },
+      "id": "navigate:node:add-lego->node:add-lego-manual|GET /add-lego/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-lego",
+      "to": "node:confirm-lego-id",
+      "kind": "navigate",
+      "action": "open /confirm-lego/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/confirm-lego/:id"
+      },
+      "id": "navigate:node:add-lego->node:confirm-lego-id|GET /confirm-lego/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-lego",
+      "to": "node:add-lego",
+      "kind": "submit",
+      "action": "submit form -> POST /search-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/search-lego"
+      },
+      "id": "submit:node:add-lego->node:add-lego|POST /search-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-music",
+      "to": "node:add-music-manual",
+      "kind": "navigate",
+      "action": "open /add-music/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-music/manual"
+      },
+      "id": "navigate:node:add-music->node:add-music-manual|GET /add-music/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-music",
+      "to": "node:confirm-music-id",
+      "kind": "navigate",
+      "action": "open /confirm-music/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/confirm-music/:id"
+      },
+      "id": "navigate:node:add-music->node:confirm-music-id|GET /confirm-music/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-music",
+      "to": "node:add-music",
+      "kind": "submit",
+      "action": "submit form -> POST /search-music",
+      "backing": {
+        "method": "POST",
+        "path": "/search-music"
+      },
+      "id": "submit:node:add-music->node:add-music|POST /search-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-books-id",
+      "to": "node:add-books",
+      "kind": "navigate",
+      "action": "open /add-books",
+      "backing": {
+        "method": "GET",
+        "path": "/add-books"
+      },
+      "id": "navigate:node:confirm-books-id->node:add-books|GET /add-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-books-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:confirm-books-id->node:wishlist|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-books-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:confirm-books-id->node:collection|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-dvd-id",
+      "to": "node:add-dvd",
+      "kind": "navigate",
+      "action": "open /add-dvd",
+      "backing": {
+        "method": "GET",
+        "path": "/add-dvd"
+      },
+      "id": "navigate:node:confirm-dvd-id->node:add-dvd|GET /add-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-dvd-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:confirm-dvd-id->node:wishlist|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-dvd-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:confirm-dvd-id->node:collection|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-games-id",
+      "to": "node:add-games",
+      "kind": "navigate",
+      "action": "open /add-games",
+      "backing": {
+        "method": "GET",
+        "path": "/add-games"
+      },
+      "id": "navigate:node:confirm-games-id->node:add-games|GET /add-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-games-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:confirm-games-id->node:wishlist|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-games-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:confirm-games-id->node:collection|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-lego-id",
+      "to": "node:add-lego",
+      "kind": "navigate",
+      "action": "open /add-lego",
+      "backing": {
+        "method": "GET",
+        "path": "/add-lego"
+      },
+      "id": "navigate:node:confirm-lego-id->node:add-lego|GET /add-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-lego-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:confirm-lego-id->node:wishlist|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-lego-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:confirm-lego-id->node:collection|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-music-id",
+      "to": "node:add-music",
+      "kind": "navigate",
+      "action": "open /add-music",
+      "backing": {
+        "method": "GET",
+        "path": "/add-music"
+      },
+      "id": "navigate:node:confirm-music-id->node:add-music|GET /add-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-music-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:confirm-music-id->node:wishlist|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-music-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:confirm-music-id->node:collection|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-books-manual",
+      "to": "node:add-books",
+      "kind": "navigate",
+      "action": "open /add-books",
+      "backing": {
+        "method": "GET",
+        "path": "/add-books"
+      },
+      "id": "navigate:node:add-books-manual->node:add-books|GET /add-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-books-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:add-books-manual->node:wishlist|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-books-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:add-books-manual->node:collection|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-dvd-manual",
+      "to": "node:add-dvd",
+      "kind": "navigate",
+      "action": "open /add-dvd",
+      "backing": {
+        "method": "GET",
+        "path": "/add-dvd"
+      },
+      "id": "navigate:node:add-dvd-manual->node:add-dvd|GET /add-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-dvd-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:add-dvd-manual->node:wishlist|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-dvd-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:add-dvd-manual->node:collection|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-games-manual",
+      "to": "node:add-games",
+      "kind": "navigate",
+      "action": "open /add-games",
+      "backing": {
+        "method": "GET",
+        "path": "/add-games"
+      },
+      "id": "navigate:node:add-games-manual->node:add-games|GET /add-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-games-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:add-games-manual->node:wishlist|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-games-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:add-games-manual->node:collection|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-lego-manual",
+      "to": "node:add-lego",
+      "kind": "navigate",
+      "action": "open /add-lego",
+      "backing": {
+        "method": "GET",
+        "path": "/add-lego"
+      },
+      "id": "navigate:node:add-lego-manual->node:add-lego|GET /add-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-lego-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:add-lego-manual->node:wishlist|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-lego-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:add-lego-manual->node:collection|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-music-manual",
+      "to": "node:add-music",
+      "kind": "navigate",
+      "action": "open /add-music",
+      "backing": {
+        "method": "GET",
+        "path": "/add-music"
+      },
+      "id": "navigate:node:add-music-manual->node:add-music|GET /add-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:add-music-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:add-music-manual->node:wishlist|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:add-music-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:add-music-manual->node:collection|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:book-edit-id->node:wishlist|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:book-edit-id->node:collection|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:dvd-edit-id->node:wishlist|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:dvd-edit-id->node:collection|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:game-edit-id->node:wishlist|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:game-edit-id->node:collection|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:lego-edit-id->node:wishlist|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:lego-edit-id->node:collection|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:album-edit-id->node:wishlist|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:album-edit-id->node:collection|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/edit.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-id",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:book-id->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:book-id",
+      "to": "node:book-id",
+      "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-wishlist",
+      "backing": {
+        "method": "POST",
+        "path": "/api/book/:id/move-to-wishlist"
+      },
+      "id": "api:node:book-id->node:book-id|POST /api/book/:id/move-to-wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-id",
+      "to": "node:book-id",
+      "kind": "api",
+      "action": "fetch DELETE /api/book/:id",
+      "backing": {
+        "method": "DELETE",
+        "path": "/api/book/:id"
+      },
+      "id": "api:node:book-id->node:book-id|DELETE /api/book/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-id",
+      "to": "node:book-id",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/:discogsId"
+      },
+      "id": "api:node:book-id->node:book-id|GET /api/estimate/:discogsId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:book-id",
+      "to": "node:book-id",
+      "kind": "api",
+      "action": "fetch POST /api/book/:id/refresh-info",
+      "backing": {
+        "method": "POST",
+        "path": "/api/book/:id/refresh-info"
+      },
+      "id": "api:node:book-id->node:book-id|POST /api/book/:id/refresh-info",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-id",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:dvd-id->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:dvd-id",
+      "to": "node:dvd-id",
+      "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-wishlist",
+      "backing": {
+        "method": "POST",
+        "path": "/api/dvd/:id/move-to-wishlist"
+      },
+      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/move-to-wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-id",
+      "to": "node:dvd-id",
+      "kind": "api",
+      "action": "fetch DELETE /api/dvd/:id",
+      "backing": {
+        "method": "DELETE",
+        "path": "/api/dvd/:id"
+      },
+      "id": "api:node:dvd-id->node:dvd-id|DELETE /api/dvd/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-id",
+      "to": "node:dvd-id",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/:discogsId"
+      },
+      "id": "api:node:dvd-id->node:dvd-id|GET /api/estimate/:discogsId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:dvd-id",
+      "to": "node:dvd-id",
+      "kind": "api",
+      "action": "fetch POST /api/dvd/:id/refresh-info",
+      "backing": {
+        "method": "POST",
+        "path": "/api/dvd/:id/refresh-info"
+      },
+      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/refresh-info",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-id",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:game-id->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:game-id",
+      "to": "node:game-id",
+      "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-wishlist",
+      "backing": {
+        "method": "POST",
+        "path": "/api/game/:id/move-to-wishlist"
+      },
+      "id": "api:node:game-id->node:game-id|POST /api/game/:id/move-to-wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-id",
+      "to": "node:game-id",
+      "kind": "api",
+      "action": "fetch DELETE /api/game/:id",
+      "backing": {
+        "method": "DELETE",
+        "path": "/api/game/:id"
+      },
+      "id": "api:node:game-id->node:game-id|DELETE /api/game/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-id",
+      "to": "node:game-id",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/:discogsId"
+      },
+      "id": "api:node:game-id->node:game-id|GET /api/estimate/:discogsId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:game-id",
+      "to": "node:game-id",
+      "kind": "api",
+      "action": "fetch POST /api/game/:id/refresh-info",
+      "backing": {
+        "method": "POST",
+        "path": "/api/game/:id/refresh-info"
+      },
+      "id": "api:node:game-id->node:game-id|POST /api/game/:id/refresh-info",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-id",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:lego-id->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:lego-id",
+      "to": "node:lego-id",
+      "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-wishlist",
+      "backing": {
+        "method": "POST",
+        "path": "/api/lego/:id/move-to-wishlist"
+      },
+      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/move-to-wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-id",
+      "to": "node:lego-id",
+      "kind": "api",
+      "action": "fetch DELETE /api/lego/:id",
+      "backing": {
+        "method": "DELETE",
+        "path": "/api/lego/:id"
+      },
+      "id": "api:node:lego-id->node:lego-id|DELETE /api/lego/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-id",
+      "to": "node:lego-id",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/:discogsId"
+      },
+      "id": "api:node:lego-id->node:lego-id|GET /api/estimate/:discogsId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:lego-id",
+      "to": "node:lego-id",
+      "kind": "api",
+      "action": "fetch POST /api/lego/:id/refresh-info",
+      "backing": {
+        "method": "POST",
+        "path": "/api/lego/:id/refresh-info"
+      },
+      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/refresh-info",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-id",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:album-id->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:album-id",
+      "to": "node:album-id",
+      "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-wishlist",
+      "backing": {
+        "method": "POST",
+        "path": "/api/album/:id/move-to-wishlist"
+      },
+      "id": "api:node:album-id->node:album-id|POST /api/album/:id/move-to-wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-id",
+      "to": "node:album-id",
+      "kind": "api",
+      "action": "fetch DELETE /api/album/:id",
+      "backing": {
+        "method": "DELETE",
+        "path": "/api/album/:id"
+      },
+      "id": "api:node:album-id->node:album-id|DELETE /api/album/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-id",
+      "to": "node:album-id",
+      "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
+      "backing": {
+        "method": "GET",
+        "path": "/api/estimate/:discogsId"
+      },
+      "id": "api:node:album-id->node:album-id|GET /api/estimate/:discogsId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:album-id",
+      "to": "node:album-id",
+      "kind": "api",
+      "action": "fetch POST /api/album/:id/refresh-info",
+      "backing": {
+        "method": "POST",
+        "path": "/api/album/:id/refresh-info"
+      },
+      "id": "api:node:album-id->node:album-id|POST /api/album/:id/refresh-info",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/detail.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "navigate",
+      "action": "open /collection",
+      "backing": {
+        "method": "GET",
+        "path": "/collection"
+      },
+      "id": "navigate:node:manual-add->node:collection|GET /collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
+      "id": "submit:node:manual-add->node:collection|POST /save-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
+      "id": "submit:node:manual-add->node:collection|POST /save-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
+      "id": "submit:node:manual-add->node:collection|POST /save-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
+      "id": "submit:node:manual-add->node:collection|POST /save-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
+      "id": "submit:node:manual-add->node:collection|POST /save-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/manual-add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:search",
+      "to": "node:search",
+      "kind": "submit",
+      "action": "submit form -> POST /collection/switch",
+      "backing": {
+        "method": "POST",
+        "path": "/collection/switch"
+      },
+      "id": "submit:node:search->node:search|POST /collection/switch",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/search.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin-instance",
+      "kind": "navigate",
+      "action": "open /admin/instance",
+      "backing": {
+        "method": "GET",
+        "path": "/admin/instance"
+      },
+      "id": "navigate:node:admin->node:admin-instance|GET /admin/instance",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:create-plugin",
+      "kind": "navigate",
+      "action": "open /create-plugin",
+      "backing": {
+        "method": "GET",
+        "path": "/create-plugin"
+      },
+      "id": "navigate:node:admin->node:create-plugin|GET /create-plugin",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:backup-collection-export-archive",
+      "kind": "navigate",
+      "action": "open /backup/collection/export-archive",
+      "backing": {
+        "method": "GET",
+        "path": "/backup/collection/export-archive"
+      },
+      "id": "navigate:node:admin->node:backup-collection-export-archive|GET /backup/collection/export-archive",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:backup-collection-export",
+      "kind": "navigate",
+      "action": "open /backup/collection/export",
+      "backing": {
+        "method": "GET",
+        "path": "/backup/collection/export"
+      },
+      "id": "navigate:node:admin->node:backup-collection-export|GET /backup/collection/export",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:backup-collection-export-csv",
+      "kind": "navigate",
+      "action": "open /backup/collection/export-csv",
+      "backing": {
+        "method": "GET",
+        "path": "/backup/collection/export-csv"
+      },
+      "id": "navigate:node:admin->node:backup-collection-export-csv|GET /backup/collection/export-csv",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/modules/save",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/modules/save"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/modules/save",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/members/invite",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/members/invite"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/members/invite",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/members/role",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/members/role"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/members/role",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/members/reset-password",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/members/reset-password"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/members/reset-password",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/members/remove",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/members/remove"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/members/remove",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/rename",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/collections/:id/rename"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/collections/:id/rename",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/toggle",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/share/:token/toggle"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/toggle",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/regenerate",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/share/:token/regenerate"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/regenerate",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/delete",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/share/:token/delete"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/delete",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/scope",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/share/:token/scope"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/scope",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/share/create",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/share/create"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/share/create",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/members/create",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/members/create"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/members/create",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /backup/collection/import-archive",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/collection/import-archive"
+      },
+      "id": "api:node:admin->node:admin|POST /backup/collection/import-archive",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /backup/collection/import",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/collection/import"
+      },
+      "id": "api:node:admin->node:admin|POST /backup/collection/import",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /admin/delete-last-items",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/delete-last-items"
+      },
+      "id": "api:node:admin->node:admin|POST /admin/delete-last-items",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/visibility/save",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/visibility/save"
+      },
+      "id": "submit:node:admin->node:admin|POST /admin/visibility/save",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/admin-visibility.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch GET /admin/api/search-collection",
+      "backing": {
+        "method": "GET",
+        "path": "/admin/api/search-collection"
+      },
+      "id": "api:node:admin->node:admin|GET /admin/api/search-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/admin-visibility.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /import/csv/preview",
+      "backing": {
+        "method": "POST",
+        "path": "/import/csv/preview"
+      },
+      "id": "api:node:admin->node:admin|POST /import/csv/preview",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/admin-csv-import.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /import/csv",
+      "backing": {
+        "method": "POST",
+        "path": "/import/csv"
+      },
+      "id": "api:node:admin->node:admin|POST /import/csv",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/admin-csv-import.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "api",
+      "action": "fetch POST /import/:importer_id",
+      "backing": {
+        "method": "POST",
+        "path": "/import/:importer_id"
+      },
+      "id": "api:node:admin->node:admin|POST /import/:importer_id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/admin-imports.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:backup-export-archive",
+      "kind": "navigate",
+      "action": "open /backup/export-archive",
+      "backing": {
+        "method": "GET",
+        "path": "/backup/export-archive"
+      },
+      "id": "navigate:node:admin-instance->node:backup-export-archive|GET /backup/export-archive",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:backup-export",
+      "kind": "navigate",
+      "action": "open /backup/export",
+      "backing": {
+        "method": "GET",
+        "path": "/backup/export"
+      },
+      "id": "navigate:node:admin-instance->node:backup-export|GET /backup/export",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/delete",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/collections/:id/delete"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/:id/delete",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/instance/settings",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/instance/settings"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/settings",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/reset-password",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/reset-password"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/reset-password",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/reset-password",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/reset-password"
+      },
+      "id": "submit:node:admin-instance->node:admin|POST /admin/reset-password",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/delete-user",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/delete-user"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/delete-user",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/unblock-ip",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/unblock-ip"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/unblock-ip",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/block-ip",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/block-ip"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/block-ip",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/collections/create",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/collections/create"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/create",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/rename",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/collections/:id/rename"
+      },
+      "id": "submit:node:admin-instance->node:admin|POST /admin/collections/:id/rename",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/role",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/instance/collections/:id/members/role"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/role",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/remove",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/instance/collections/:id/members/remove"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/remove",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/add",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/instance/collections/:id/members/add"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/add",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/add-user",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/add-user"
+      },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/add-user",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:login",
+      "kind": "navigate",
+      "action": "open /login",
+      "backing": {
+        "method": "GET",
+        "path": "/login"
+      },
+      "id": "navigate:node:admin-instance->node:login|GET /login",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "api",
+      "action": "fetch POST /admin/delete-last-logs",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/delete-last-logs"
+      },
+      "id": "api:node:admin-instance->node:admin-instance|POST /admin/delete-last-logs",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "api",
+      "action": "fetch POST /backup/import-archive",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/import-archive"
+      },
+      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import-archive",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-instance",
+      "to": "node:admin-instance",
+      "kind": "api",
+      "action": "fetch POST /backup/import",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/import"
+      },
+      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/admin-instance.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:admin-personnalisation",
+      "to": "node:admin-personnalisation",
+      "kind": "submit",
+      "action": "submit form -> POST /admin/personnalisation/save",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/personnalisation/save"
+      },
+      "id": "submit:node:admin-personnalisation->node:admin-personnalisation|POST /admin/personnalisation/save",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/personnalisation.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:login",
+      "to": "node:login-oidc",
+      "kind": "navigate",
+      "action": "open /login/oidc",
+      "backing": {
+        "method": "GET",
+        "path": "/login/oidc"
+      },
+      "id": "navigate:node:login->node:login-oidc|GET /login/oidc",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/login.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:login",
+      "to": "node:login",
+      "kind": "api",
+      "action": "fetch POST /login",
+      "backing": {
+        "method": "POST",
+        "path": "/login"
+      },
+      "id": "api:node:login->node:login|POST /login",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/login.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:create-plugin",
+      "to": "node:admin",
+      "kind": "navigate",
+      "action": "open /admin",
+      "backing": {
+        "method": "GET",
+        "path": "/admin"
+      },
+      "id": "navigate:node:create-plugin->node:admin|GET /admin",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/create-plugin.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings-oidc-link",
+      "kind": "navigate",
+      "action": "open /settings/oidc/link",
+      "backing": {
+        "method": "GET",
+        "path": "/settings/oidc/link"
+      },
+      "id": "navigate:node:settings->node:settings-oidc-link|GET /settings/oidc/link",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "submit",
+      "action": "submit form -> POST /settings/update-language",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/update-language"
+      },
+      "id": "submit:node:settings->node:settings|POST /settings/update-language",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "submit",
+      "action": "submit form -> POST /settings/update-currency",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/update-currency"
+      },
+      "id": "submit:node:settings->node:settings|POST /settings/update-currency",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "submit",
+      "action": "submit form -> POST /settings/update-username",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/update-username"
+      },
+      "id": "submit:node:settings->node:settings|POST /settings/update-username",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:logout",
+      "kind": "navigate",
+      "action": "open /logout",
+      "backing": {
+        "method": "GET",
+        "path": "/logout"
+      },
+      "id": "navigate:node:settings->node:logout|GET /logout",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/oidc/unlink",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/oidc/unlink"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/oidc/unlink",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/check-username",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/check-username"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/check-username",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/upload-avatar",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/upload-avatar"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/upload-avatar",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/import-gravatar",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/import-gravatar"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/import-gravatar",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/remove-avatar",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/remove-avatar"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/remove-avatar",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:settings",
+      "to": "node:settings",
+      "kind": "api",
+      "action": "fetch POST /settings/update-password",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/update-password"
+      },
+      "id": "api:node:settings->node:settings|POST /settings/update-password",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/settings.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:setup",
+      "to": "node:login",
+      "kind": "submit",
+      "action": "submit form -> POST /setup",
+      "backing": {
+        "method": "POST",
+        "path": "/setup"
+      },
+      "id": "submit:node:setup->node:login|POST /setup",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/setup.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:setup",
+      "to": "node:login",
+      "kind": "navigate",
+      "action": "open /login",
+      "backing": {
+        "method": "GET",
+        "path": "/login"
+      },
+      "id": "navigate:node:setup->node:login|GET /login",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/setup.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:setup",
+      "to": "node:setup",
+      "kind": "api",
+      "action": "fetch POST /backup/import-archive",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/import-archive"
+      },
+      "id": "api:node:setup->node:setup|POST /backup/import-archive",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/setup.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:setup",
+      "to": "node:setup",
+      "kind": "api",
+      "action": "fetch POST /backup/import",
+      "backing": {
+        "method": "POST",
+        "path": "/backup/import"
+      },
+      "id": "api:node:setup->node:setup|POST /backup/import",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/setup.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:search",
+      "kind": "navigate",
+      "action": "open /search",
+      "backing": {
+        "method": "GET",
+        "path": "/search"
+      },
+      "id": "navigate:node:global-nav->node:search|GET /search",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:admin-instance",
+      "kind": "navigate",
+      "action": "open /admin/instance",
+      "backing": {
+        "method": "GET",
+        "path": "/admin/instance"
+      },
+      "id": "navigate:node:global-nav->node:admin-instance|GET /admin/instance",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:admin",
+      "kind": "navigate",
+      "action": "open /admin",
+      "backing": {
+        "method": "GET",
+        "path": "/admin"
+      },
+      "id": "navigate:node:global-nav->node:admin|GET /admin",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:admin-personnalisation",
+      "kind": "navigate",
+      "action": "open /admin/personnalisation",
+      "backing": {
+        "method": "GET",
+        "path": "/admin/personnalisation"
+      },
+      "id": "navigate:node:global-nav->node:admin-personnalisation|GET /admin/personnalisation",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:settings",
+      "kind": "navigate",
+      "action": "open /settings",
+      "backing": {
+        "method": "GET",
+        "path": "/settings"
+      },
+      "id": "navigate:node:global-nav->node:settings|GET /settings",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:logout",
+      "kind": "navigate",
+      "action": "open /logout",
+      "backing": {
+        "method": "GET",
+        "path": "/logout"
+      },
+      "id": "navigate:node:global-nav->node:logout|GET /logout",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:login",
+      "kind": "navigate",
+      "action": "open /login",
+      "backing": {
+        "method": "GET",
+        "path": "/login"
+      },
+      "id": "navigate:node:global-nav->node:login|GET /login",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:global-nav",
+      "kind": "submit",
+      "action": "submit form -> POST /collection/switch",
+      "backing": {
+        "method": "POST",
+        "path": "/collection/switch"
+      },
+      "id": "submit:node:global-nav->node:global-nav|POST /collection/switch",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:global-nav",
+      "kind": "submit",
+      "action": "submit form -> POST /collection/create",
+      "backing": {
+        "method": "POST",
+        "path": "/collection/create"
+      },
+      "id": "submit:node:global-nav->node:global-nav|POST /collection/create",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:global-nav",
+      "to": "node:global-nav",
+      "kind": "api",
+      "action": "fetch POST /settings/update-theme",
+      "backing": {
+        "method": "POST",
+        "path": "/settings/update-theme"
+      },
+      "id": "api:node:global-nav->node:global-nav|POST /settings/update-theme",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/header.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "unlinked",
+      "action": "POST /api/album/:id/track/:trackId/meta",
+      "backing": {
+        "method": "POST",
+        "path": "/api/album/:id/track/:trackId/meta"
+      },
+      "id": "unlinked:node:root->node:root|POST /api/album/:id/track/:trackId/meta",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "unlinked",
+      "action": "POST /api/batch-update-barcodes",
+      "backing": {
+        "method": "POST",
+        "path": "/api/batch-update-barcodes"
+      },
+      "id": "unlinked:node:root->node:root|POST /api/batch-update-barcodes",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/music/apiRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:admin",
+      "to": "node:admin",
+      "kind": "unlinked",
+      "action": "POST /admin/refresh-all/:pluginId",
+      "backing": {
+        "method": "POST",
+        "path": "/admin/refresh-all/:pluginId"
+      },
+      "id": "unlinked:node:admin->node:admin|POST /admin/refresh-all/:pluginId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/adminRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "unlinked",
+      "action": "POST /api/item-images/upload",
+      "backing": {
+        "method": "POST",
+        "path": "/api/item-images/upload"
+      },
+      "id": "unlinked:node:root->node:root|POST /api/item-images/upload",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/itemImageRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:create-plugin",
+      "to": "node:create-plugin",
+      "kind": "unlinked",
+      "action": "POST /create-plugin/customize/:pluginId",
+      "backing": {
+        "method": "POST",
+        "path": "/create-plugin/customize/:pluginId"
+      },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/customize/:pluginId",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/pluginBuilderRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:create-plugin",
+      "to": "node:create-plugin",
+      "kind": "unlinked",
+      "action": "POST /create-plugin/save",
+      "backing": {
+        "method": "POST",
+        "path": "/create-plugin/save"
+      },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/save",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/pluginBuilderRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    },
+    {
+      "from": "node:create-plugin",
+      "to": "node:create-plugin",
+      "kind": "unlinked",
+      "action": "POST /create-plugin/delete/:id",
+      "backing": {
+        "method": "POST",
+        "path": "/create-plugin/delete/:id"
+      },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/delete/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "routes/pluginBuilderRoutes.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
+      }
+    }
+  ]
+}

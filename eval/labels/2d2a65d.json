@@ -1,0 +1,71 @@
+{
+  "commit": "2d2a65d",
+  "summary": "fix(routing): match plugin paths by segment so random ids stop triggering the module 404",
+  "split": "heldout",
+  "reviewed": true,
+  "labelled_before_detection": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "hex item id containing \"cd\" no longer read as the music module (404 when music is off)"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "hex item id containing \"cd\" no longer read as the music module (404 when music is off)"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "hex item id containing \"cd\" no longer read as the music module (404 when music is off)"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "hex item id containing \"cd\" no longer read as the music module (404 when music is off)"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "hex item id containing \"cd\" no longer read as the music module (404 when music is off)"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "same, id in path"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "same, id in path"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "same, id in path"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "same, id in path"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "same, id in path"
+    },
+    {
+      "flow": "node:share-token",
+      "confidence": "sure",
+      "note": "share tokens are hex; same"
+    }
+  ],
+  "expected_detector_gaps": [
+    "settingsMiddleware is app-level middleware (app.use), not attributed to routes (PER-62)"
+  ],
+  "corrections": [
+    "removed node:*-id-label (5): the label routes were added later (7510c3f is not an ancestor); caught by id validation after eval:prepare, before any detection ran"
+  ]
+}

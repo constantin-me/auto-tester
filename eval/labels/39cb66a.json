@@ -1,0 +1,38 @@
+{
+  "commit": "39cb66a",
+  "summary": "fix: stop the item page from printing where a thing is kept to a share link",
+  "split": "heldout",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail field grid hides location in share view"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail field grid hides location in share view"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail field grid hides location in share view"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail field grid hides location in share view"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail field grid hides location in share view"
+    }
+  ],
+  "not_flows": [
+    "app.ts: registers SHARE_HIDDEN_FIELDS as a view local"
+  ]
+}

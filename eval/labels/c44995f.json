@@ -1,0 +1,92 @@
+{
+  "commit": "c44995f",
+  "summary": "fix(routes): answer 404 when an item id is handed to another plugin's route",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail handler now filters by plugin kind"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail handler now filters by plugin kind"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail handler now filters by plugin kind"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail handler now filters by plugin kind"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail handler now filters by plugin kind"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "edit form GET + save edit branch filter by kind"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "edit form GET + save edit branch filter by kind"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "edit form GET + save edit branch filter by kind"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "edit form GET + save edit branch filter by kind"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "edit form GET + save edit branch filter by kind"
+    },
+    {
+      "flow": "node:book-id-label",
+      "confidence": "sure",
+      "note": "label handler filters by kind"
+    },
+    {
+      "flow": "node:dvd-id-label",
+      "confidence": "sure",
+      "note": "label handler filters by kind"
+    },
+    {
+      "flow": "node:game-id-label",
+      "confidence": "sure",
+      "note": "label handler filters by kind"
+    },
+    {
+      "flow": "node:lego-id-label",
+      "confidence": "sure",
+      "note": "label handler filters by kind"
+    },
+    {
+      "flow": "node:album-id-label",
+      "confidence": "sure",
+      "note": "label handler filters by kind"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "move-to-collection / move-to-wishlist APIs called from the wishlist filter by kind"
+    }
+  ],
+  "not_affected_notes": [
+    "add-X search + /collection: applyShareScopeFilter change is a pure refactor (pluginKindCondition returns the same condition)",
+    "confirm-X, add-X/manual, manual-add: they POST save-X without mongo_id; only the edit branch changed"
+  ]
+}

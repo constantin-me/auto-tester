@@ -1,0 +1,18 @@
+{
+  "commit": "39557d0",
+  "summary": "fix(oidc): land a sign-out on the login page instead of bouncing it back through the provider",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:logout",
+      "confidence": "sure",
+      "note": "redirects to /login?logged_out=1 and destroys the session"
+    },
+    {
+      "flow": "node:login",
+      "confidence": "sure",
+      "note": "SSO-only instance no longer bounces to the provider when logged_out is set"
+    }
+  ]
+}

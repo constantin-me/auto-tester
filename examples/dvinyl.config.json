@@ -1,0 +1,26 @@
+{
+  "repo": "Kyonew/DVinyl",
+  "appRoot": "../DVinyl",
+  "framework": "express-ejs",
+  "crawler": {
+    "entry": "app.ts",
+    "expansions": [
+      { "var": "plugin", "from": "plugins/*/index.ts", "fields": ["id", "routePrefix"] }
+    ]
+  },
+  "env": {
+    "baseUrl": "http://localhost:3099"
+  },
+  "auth": {
+    "kind": "form",
+    "loginPath": "/login",
+    "fields": {
+      "input[name=email]": "${DVINYL_USER}",
+      "input[name=password]": "${DVINYL_PASS}"
+    },
+    "submitSelector": "button[type=submit]"
+  },
+  "budget": { "maxTokens": 200000 },
+  "flakiness": { "retryCount": 2 },
+  "store": { "backend": "local-disk", "dir": ".autotester/mindmap/dvinyl" }
+}

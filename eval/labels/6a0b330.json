@@ -1,0 +1,18 @@
+{
+  "commit": "6a0b330",
+  "summary": "fix(security): stop an artist name from breaking out of the filter script",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "includes albums-filters; artist autocomplete escaping/DOM building changed (observable with crafted names)"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "includes albums-filters; same"
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+%% Kyonew/DVinyl — generated 2026-09-25T19:27:46.580Z. Do not edit; regenerate with bootstrap.
+%% nodes=62 edges=183 (folded: 49 api, 7 unlinked)
+flowchart LR
+  n_root["Home<br/>/<br/>(3 unlinked)"]
+  n_global_nav{{"Global navigation (header, footer)<br/>(1 api)"}}
+  subgraph n_g_add_books["add-books"]
+    n_add_books["Add books<br/>/add-books"]
+    n_add_books_manual["Add books manual<br/>/add-books/manual"]
+  end
+  subgraph n_g_add_dvd["add-dvd"]
+    n_add_dvd["Add dvd<br/>/add-dvd"]
+    n_add_dvd_manual["Add dvd manual<br/>/add-dvd/manual"]
+  end
+  subgraph n_g_add_games["add-games"]
+    n_add_games["Add games<br/>/add-games"]
+    n_add_games_manual["Add games manual<br/>/add-games/manual"]
+  end
+  subgraph n_g_add_lego["add-lego"]
+    n_add_lego["Add lego<br/>/add-lego"]
+    n_add_lego_manual["Add lego manual<br/>/add-lego/manual"]
+  end
+  subgraph n_g_add_music["add-music"]
+    n_add_music["Add music<br/>/add-music"]
+    n_add_music_manual["Add music manual<br/>/add-music/manual"]
+  end
+  subgraph n_g_admin["admin"]
+    n_admin["Admin<br/>/admin<br/>(7 api, 1 unlinked)"]
+    n_admin_instance["Admin instance<br/>/admin/instance<br/>(3 api)"]
+    n_admin_personnalisation["Admin personnalisation<br/>/admin/personnalisation"]
+    n_admin_api_search_collection(["Admin api search collection<br/>/admin/api/search-collection"])
+    n_admin_api_search_image_universal(["Admin api search image universal<br/>/admin/api/search-image-universal"])
+    n_admin_io(["Admin io<br/>/admin/io"])
+  end
+  subgraph n_g_album["album"]
+    n_album_edit_id["Album edit #123;id#125;<br/>/album/edit/:id"]
+    n_album_id["Album #123;id#125;<br/>/album/:id<br/>(4 api)"]
+    n_album_id_label["Album #123;id#125; label<br/>/album/:id/label"]
+  end
+  subgraph n_g_api["api"]
+    n_api_collection_ids(["Api collection ids<br/>/api/collection/ids"])
+    n_api_album_id_track_trackId_lyrics(["Api album #123;id#125; track #123;trackId#125; lyrics<br/>/api/album/:id/track/:trackId/lyrics"])
+    n_api_estimate_history(["Api estimate history<br/>/api/estimate/history"])
+    n_api_estimate_discogsId(["Api estimate #123;discogsId#125;<br/>/api/estimate/:discogsId"])
+    n_api_search_discogs_gallery(["Api search discogs gallery<br/>/api/search-discogs-gallery"])
+  end
+  subgraph n_g_backup["backup"]
+    n_backup_export(["Backup export<br/>/backup/export"])
+    n_backup_export_archive(["Backup export archive<br/>/backup/export-archive"])
+    n_backup_collection_export(["Backup collection export<br/>/backup/collection/export"])
+    n_backup_collection_export_archive(["Backup collection export archive<br/>/backup/collection/export-archive"])
+    n_backup_collection_export_csv(["Backup collection export csv<br/>/backup/collection/export-csv"])
+  end
+  subgraph n_g_book["book"]
+    n_book_edit_id["Book edit #123;id#125;<br/>/book/edit/:id"]
+    n_book_id["Book #123;id#125;<br/>/book/:id<br/>(4 api)"]
+    n_book_id_label["Book #123;id#125; label<br/>/book/:id/label"]
+  end
+  n_collection["Collection<br/>/collection<br/>(3 api)"]
+  n_confirm_books_id["Confirm books #123;id#125;<br/>/confirm-books/:id"]
+  n_confirm_dvd_id["Confirm dvd #123;id#125;<br/>/confirm-dvd/:id"]
+  n_confirm_games_id["Confirm games #123;id#125;<br/>/confirm-games/:id"]
+  n_confirm_lego_id["Confirm lego #123;id#125;<br/>/confirm-lego/:id"]
+  n_confirm_music_id["Confirm music #123;id#125;<br/>/confirm-music/:id"]
+  n_create_plugin["Create plugin<br/>/create-plugin<br/>(3 unlinked)"]
+  subgraph n_g_dvd["dvd"]
+    n_dvd_edit_id["Dvd edit #123;id#125;<br/>/dvd/edit/:id"]
+    n_dvd_id["Dvd #123;id#125;<br/>/dvd/:id<br/>(4 api)"]
+    n_dvd_id_label["Dvd #123;id#125; label<br/>/dvd/:id/label"]
+  end
+  subgraph n_g_game["game"]
+    n_game_edit_id["Game edit #123;id#125;<br/>/game/edit/:id"]
+    n_game_id["Game #123;id#125;<br/>/game/:id<br/>(4 api)"]
+    n_game_id_label["Game #123;id#125; label<br/>/game/:id/label"]
+  end
+  subgraph n_g_lego["lego"]
+    n_lego_edit_id["Lego edit #123;id#125;<br/>/lego/edit/:id"]
+    n_lego_id["Lego #123;id#125;<br/>/lego/:id<br/>(4 api)"]
+    n_lego_id_label["Lego #123;id#125; label<br/>/lego/:id/label"]
+  end
+  subgraph n_g_login["login"]
+    n_login["Login<br/>/login<br/>(1 api)"]
+    n_login_oidc(["Login oidc<br/>/login/oidc"])
+    n_login_oidc_callback(["Login oidc callback<br/>/login/oidc/callback"])
+  end
+  n_logout(["Logout<br/>/logout"])
+  n_manual_add["Manual add<br/>/manual-add"]
+  n_plugin_assets_pluginId_file(["Plugin assets #123;pluginId#125; #123;file#125;<br/>/plugin-assets/:pluginId/:file"])
+  n_search["Search<br/>/search"]
+  subgraph n_g_settings["settings"]
+    n_settings_oidc_link(["Settings oidc link<br/>/settings/oidc/link"])
+    n_settings["Settings<br/>/settings<br/>(6 api)"]
+  end
+  n_setup["Setup<br/>/setup<br/>(2 api)"]
+  n_share_token(["Share #123;token#125;<br/>/share/:token"])
+  n_wishlist["Wishlist<br/>/wishlist<br/>(6 api)"]
+  n_collection ==>|"POST /collection/labels"| n_collection
+  n_root ==>|"POST /collection/create"| n_root
+  n_add_books --> n_add_books_manual
+  n_add_books --> n_confirm_books_id
+  n_add_books ==>|"POST /search-books"| n_add_books
+  n_add_dvd --> n_add_dvd_manual
+  n_add_dvd --> n_confirm_dvd_id
+  n_add_dvd ==>|"POST /search-dvd"| n_add_dvd
+  n_add_games --> n_add_games_manual
+  n_add_games --> n_confirm_games_id
+  n_add_games ==>|"POST /search-games"| n_add_games
+  n_add_lego --> n_add_lego_manual
+  n_add_lego --> n_confirm_lego_id
+  n_add_lego ==>|"POST /search-lego"| n_add_lego
+  n_add_music --> n_add_music_manual
+  n_add_music --> n_confirm_music_id
+  n_add_music ==>|"POST /search-music"| n_add_music
+  n_confirm_books_id --> n_add_books
+  n_confirm_books_id ==>|"POST /save-books"| n_wishlist
+  n_confirm_books_id ==>|"POST /save-books"| n_collection
+  n_confirm_dvd_id --> n_add_dvd
+  n_confirm_dvd_id ==>|"POST /save-dvd"| n_wishlist
+  n_confirm_dvd_id ==>|"POST /save-dvd"| n_collection
+  n_confirm_games_id --> n_add_games
+  n_confirm_games_id ==>|"POST /save-games"| n_wishlist
+  n_confirm_games_id ==>|"POST /save-games"| n_collection
+  n_confirm_lego_id --> n_add_lego
+  n_confirm_lego_id ==>|"POST /save-lego"| n_wishlist
+  n_confirm_lego_id ==>|"POST /save-lego"| n_collection
+  n_confirm_music_id --> n_add_music
+  n_confirm_music_id ==>|"POST /save-music"| n_wishlist
+  n_confirm_music_id ==>|"POST /save-music"| n_collection
+  n_add_books_manual --> n_add_books
+  n_add_books_manual ==>|"POST /save-books"| n_wishlist
+  n_add_books_manual ==>|"POST /save-books"| n_collection
+  n_add_dvd_manual --> n_add_dvd
+  n_add_dvd_manual ==>|"POST /save-dvd"| n_wishlist
+  n_add_dvd_manual ==>|"POST /save-dvd"| n_collection
+  n_add_games_manual --> n_add_games
+  n_add_games_manual ==>|"POST /save-games"| n_wishlist
+  n_add_games_manual ==>|"POST /save-games"| n_collection
+  n_add_lego_manual --> n_add_lego
+  n_add_lego_manual ==>|"POST /save-lego"| n_wishlist
+  n_add_lego_manual ==>|"POST /save-lego"| n_collection
+  n_add_music_manual --> n_add_music
+  n_add_music_manual ==>|"POST /save-music"| n_wishlist
+  n_add_music_manual ==>|"POST /save-music"| n_collection
+  n_book_edit_id ==>|"POST /save-books"| n_wishlist
+  n_book_edit_id ==>|"POST /save-books"| n_collection
+  n_dvd_edit_id ==>|"POST /save-dvd"| n_wishlist
+  n_dvd_edit_id ==>|"POST /save-dvd"| n_collection
+  n_game_edit_id ==>|"POST /save-games"| n_wishlist
+  n_game_edit_id ==>|"POST /save-games"| n_collection
+  n_lego_edit_id ==>|"POST /save-lego"| n_wishlist
+  n_lego_edit_id ==>|"POST /save-lego"| n_collection
+  n_album_edit_id ==>|"POST /save-music"| n_wishlist
+  n_album_edit_id ==>|"POST /save-music"| n_collection
+  n_book_id --> n_wishlist
+  n_dvd_id --> n_wishlist
+  n_game_id --> n_wishlist
+  n_lego_id --> n_wishlist
+  n_album_id --> n_wishlist
+  n_manual_add --> n_collection
+  n_manual_add ==>|"POST /save-books"| n_wishlist
+  n_manual_add ==>|"POST /save-books"| n_collection
+  n_manual_add ==>|"POST /save-dvd"| n_wishlist
+  n_manual_add ==>|"POST /save-dvd"| n_collection
+  n_manual_add ==>|"POST /save-games"| n_wishlist
+  n_manual_add ==>|"POST /save-games"| n_collection
+  n_manual_add ==>|"POST /save-lego"| n_wishlist
+  n_manual_add ==>|"POST /save-lego"| n_collection
+  n_manual_add ==>|"POST /save-music"| n_wishlist
+  n_manual_add ==>|"POST /save-music"| n_collection
+  n_search ==>|"POST /collection/switch"| n_search
+  n_admin --> n_admin_instance
+  n_admin --> n_create_plugin
+  n_admin --> n_backup_collection_export_archive
+  n_admin --> n_backup_collection_export
+  n_admin --> n_backup_collection_export_csv
+  n_admin ==>|"POST /admin/modules/save"| n_admin
+  n_admin ==>|"POST /admin/members/invite"| n_admin
+  n_admin ==>|"POST /admin/members/role"| n_admin
+  n_admin ==>|"POST /admin/members/reset-password"| n_admin
+  n_admin ==>|"POST /admin/members/remove"| n_admin
+  n_admin ==>|"POST /admin/collections/:id/rename"| n_admin
+  n_admin ==>|"POST /admin/share/:token/toggle"| n_admin
+  n_admin ==>|"POST /admin/share/:token/regenerate"| n_admin
+  n_admin ==>|"POST /admin/share/:token/delete"| n_admin
+  n_admin ==>|"POST /admin/share/:token/scope"| n_admin
+  n_admin ==>|"POST /admin/share/create"| n_admin
+  n_admin ==>|"POST /admin/members/create"| n_admin
+  n_admin ==>|"POST /admin/visibility/save"| n_admin
+  n_admin_instance --> n_backup_export_archive
+  n_admin_instance --> n_backup_export
+  n_admin_instance ==>|"POST /admin/collections/:id/delete"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/instance/settings"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/reset-password"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/reset-password"| n_admin
+  n_admin_instance ==>|"POST /admin/delete-user"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/unblock-ip"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/block-ip"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/collections/create"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/collections/:id/rename"| n_admin
+  n_admin_instance ==>|"POST /admin/instance/collections/:id/members/role"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/instance/collections/:id/members/remove"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/instance/collections/:id/members/add"| n_admin_instance
+  n_admin_instance ==>|"POST /admin/add-user"| n_admin_instance
+  n_admin_instance --> n_login
+  n_admin_personnalisation ==>|"POST /admin/personnalisation/save"| n_admin_personnalisation
+  n_login --> n_login_oidc
+  n_create_plugin --> n_admin
+  n_settings --> n_settings_oidc_link
+  n_settings ==>|"POST /settings/update-language"| n_settings
+  n_settings ==>|"POST /settings/update-currency"| n_settings
+  n_settings ==>|"POST /settings/update-username"| n_settings
+  n_settings --> n_logout
+  n_setup ==>|"POST /setup"| n_login
+  n_setup --> n_login
+  n_global_nav --> n_search
+  n_global_nav --> n_admin_instance
+  n_global_nav --> n_admin
+  n_global_nav --> n_admin_personnalisation
+  n_global_nav --> n_settings
+  n_global_nav --> n_logout
+  n_global_nav --> n_login
+  n_global_nav ==>|"POST /collection/switch"| n_global_nav
+  n_global_nav ==>|"POST /collection/create"| n_global_nav
+  classDef page fill:#eef4ff,stroke:#3b6fd8,color:#111
+  classDef endpoint fill:#f4f4f4,stroke:#888,color:#111
+  classDef synthetic fill:#fff6e0,stroke:#c98a00,color:#111
+  classDef auth stroke-width:3px
+  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_login,n_create_plugin,n_settings,n_setup page
+  class n_api_collection_ids,n_api_album_id_track_trackId_lyrics,n_api_estimate_history,n_api_estimate_discogsId,n_api_search_discogs_gallery,n_admin_api_search_collection,n_admin_api_search_image_universal,n_admin_io,n_logout,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_login_oidc,n_login_oidc_callback,n_settings_oidc_link,n_plugin_assets_pluginId_file,n_share_token endpoint
+  class n_global_nav synthetic
+  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_admin_api_search_collection,n_admin_api_search_image_universal,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_settings_oidc_link,n_settings auth

@@ -1,0 +1,21 @@
+{
+  "commit": "2140863",
+  "summary": "fix(ui): serve Poppins and Plus Jakarta Sans from the instance",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:login",
+      "confidence": "sure",
+      "note": "fonts now loaded from the instance, external font requests gone"
+    },
+    {
+      "flow": "node:setup",
+      "confidence": "sure",
+      "note": "same for Plus Jakarta Sans"
+    }
+  ],
+  "expected_detector_gaps": [
+    "new public/vendor/fonts/*.css and .woff2 are not read by the detector (the two .ejs changes are)"
+  ]
+}

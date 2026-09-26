@@ -1,0 +1,87 @@
+{
+  "repo": "Kyonew/DVinyl",
+  "appRoot": "../DVinyl",
+  "config": "../examples/dvinyl.config.json",
+  "commits": [
+    {
+      "sha": "c44995f",
+      "split": "train",
+      "why": "routes + helper; detector and refactor question were tuned on it"
+    },
+    {
+      "sha": "75a47ed",
+      "split": "dev",
+      "why": "single route file, download endpoint (CSV export)"
+    },
+    {
+      "sha": "6a0b330",
+      "split": "dev",
+      "why": "template partial only (filter script)"
+    },
+    {
+      "sha": "39557d0",
+      "split": "dev",
+      "why": "auth / OIDC sign-out flow"
+    },
+    {
+      "sha": "f3b2d6d",
+      "split": "dev",
+      "why": "item form image handling"
+    },
+    {
+      "sha": "a322cd4",
+      "split": "dev",
+      "why": "provider error messages"
+    },
+    {
+      "sha": "72a2b3c",
+      "split": "dev",
+      "why": "wishlist filters"
+    },
+    {
+      "sha": "00f8f51",
+      "split": "dev",
+      "why": "cosmetic mobile layout of the detail template"
+    },
+    {
+      "sha": "2140863",
+      "split": "dev",
+      "why": "global: fonts served from the instance (shared header)"
+    },
+    {
+      "sha": "77859d1",
+      "split": "dev",
+      "why": "near-zero: drops an unreachable locale key"
+    },
+    {
+      "sha": "97ec2e5",
+      "split": "dev",
+      "why": "security guard on POST /setup"
+    },
+    {
+      "sha": "4a49e52",
+      "split": "heldout",
+      "why": "held-out, labelled blind after the design was frozen"
+    },
+    {
+      "sha": "3005b51",
+      "split": "heldout",
+      "why": "held-out, labelled blind after the design was frozen"
+    },
+    {
+      "sha": "b99bcdd",
+      "split": "heldout",
+      "why": "held-out, labelled blind after the design was frozen"
+    },
+    {
+      "sha": "39cb66a",
+      "split": "heldout",
+      "why": "held-out, labelled blind after the design was frozen"
+    },
+    {
+      "sha": "2d2a65d",
+      "split": "heldout",
+      "why": "held-out, labelled blind after the design was frozen"
+    }
+  ]
+}

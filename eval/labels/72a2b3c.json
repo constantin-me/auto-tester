@@ -1,0 +1,16 @@
+{
+  "commit": "72a2b3c",
+  "summary": "fix(wishlist): count the selected type as an active filter",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "hasActiveFilters changes the empty-by-type state (only wishlist.ejs reads it)"
+    }
+  ],
+  "not_affected_notes": [
+    "/collection runs buildShelfView too but collection.ejs never reads hasActiveFilters"
+  ]
+}

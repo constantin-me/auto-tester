@@ -1,0 +1,88 @@
+{
+  "commit": "f3b2d6d",
+  "summary": "fix(images): stop a rejected image URL from blocking the whole item form",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "sure",
+      "note": "confirm view includes item-images; URL box no longer blocks submit"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "sure",
+      "note": "confirm view includes item-images; URL box no longer blocks submit"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "sure",
+      "note": "confirm view includes item-images; URL box no longer blocks submit"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "sure",
+      "note": "confirm view includes item-images; URL box no longer blocks submit"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "sure",
+      "note": "confirm view includes item-images; URL box no longer blocks submit"
+    },
+    {
+      "flow": "node:add-books-manual",
+      "confidence": "sure",
+      "note": "renders confirm view with item-images"
+    },
+    {
+      "flow": "node:add-dvd-manual",
+      "confidence": "sure",
+      "note": "renders confirm view with item-images"
+    },
+    {
+      "flow": "node:add-games-manual",
+      "confidence": "sure",
+      "note": "renders confirm view with item-images"
+    },
+    {
+      "flow": "node:add-lego-manual",
+      "confidence": "sure",
+      "note": "renders confirm view with item-images"
+    },
+    {
+      "flow": "node:add-music-manual",
+      "confidence": "sure",
+      "note": "renders confirm view with item-images"
+    },
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "edit view includes item-images"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "edit view includes item-images"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "edit view includes item-images"
+    },
+    {
+      "flow": "node:lego-edit-id",
+      "confidence": "sure",
+      "note": "edit view includes item-images"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "edit view includes item-images"
+    },
+    {
+      "flow": "node:manual-add",
+      "confidence": "sure",
+      "note": "manual-add view includes item-images"
+    }
+  ]
+}

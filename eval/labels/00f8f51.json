@@ -1,0 +1,33 @@
+{
+  "commit": "00f8f51",
+  "summary": "chore: update UI details.ejs for mobile devices",
+  "reviewed": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail action row layout changed (visual, mobile)"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail action row layout changed (visual, mobile)"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail action row layout changed (visual, mobile)"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail action row layout changed (visual, mobile)"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail action row layout changed (visual, mobile)"
+    }
+  ]
+}

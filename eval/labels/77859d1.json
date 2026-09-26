@@ -1,0 +1,13 @@
+{
+  "commit": "77859d1",
+  "summary": "chore(i18n): drop the unreachable confirm_vinyl.api_error key",
+  "reviewed": false,
+  "definition": "labels/_definition.md",
+  "affected": [],
+  "not_affected_notes": [
+    "the removed key is referenced nowhere; only errors.api_error is used"
+  ],
+  "expected_detector_gaps": [
+    "locales/*.json is not read, which is correct here"
+  ]
+}

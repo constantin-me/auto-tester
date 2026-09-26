@@ -1,0 +1,58 @@
+{
+  "commit": "3005b51",
+  "summary": "fix: keep an item the collection hides off its own page, not just off the grid",
+  "split": "heldout",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:root",
+      "confidence": "sure",
+      "note": "dashboard shelves go through resolveShelfItems, which now drops hidden contained items"
+    },
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "same, via resolveShelfItems"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "same, via resolveShelfItems"
+    },
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "detail page 404s on a hidden item; variants, contents and holder filtered"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "detail page 404s on a hidden item; variants, contents and holder filtered"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "detail page 404s on a hidden item; variants, contents and holder filtered"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "detail page 404s on a hidden item; variants, contents and holder filtered"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "detail page 404s on a hidden item; variants, contents and holder filtered"
+    },
+    {
+      "flow": "node:dvd-id-episodes",
+      "confidence": "sure",
+      "note": "share-view guard now applies the visibility filter"
+    }
+  ],
+  "expected_detector_gaps": [
+    "/dvd/:id/episodes is declared in a route table with an inline handler method; the crawler does not map it"
+  ]
+}
