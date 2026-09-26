@@ -9,12 +9,14 @@
     "test": "tsx --test \"src/**/*.test.ts\"",
     "jev:smoke": "tsx --env-file-if-exists=.env src/cli/jev-smoke.ts",
     "eval:prepare": "tsx src/cli/eval-prepare.ts",
-    "eval": "tsx --env-file-if-exists=.env src/cli/eval.ts"
+    "eval": "tsx --env-file-if-exists=.env src/cli/eval.ts",
+    "qa:baseline": "tsx --env-file-if-exists=.env src/cli/qa-baseline.ts"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@typesafe-ai/sdk": "^0.6.0",
+    "puppeteer": "^25.12.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

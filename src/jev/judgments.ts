@@ -240,6 +240,59 @@ export function dropByExecution(pDiffers: number, links: { kind: string }[], pol
   return indirectOnly && pDiffers < policy.execution.dropBelow;
 }
 
+// ---- 1c. interface text vs content (baseline assertions, M4) ----------------
+
+// a type alias (not an interface) so it is assignable to the SDK's JSON state type
+export type UiText = {
+  kind: "heading" | "control" | "field";
+  text: string;
+};
+
+/**
+ * Which texts seen on a page are the app's fixed interface (safe to assert on) and which
+ * are data (item titles, names, notes: they change whenever the data does). One request
+ * per page, one Choice per text, asked in parallel over the same state.
+ */
+const UI_TEXT_CHUNK = 40;
+
+export async function classifyUiTexts(
+  judge: Judge,
+  page: { route: string; title: string; hasParams: boolean },
+  items: UiText[],
+  minConfidence = 0.6,
+): Promise<{ interface: boolean; confidence: number }[]> {
+  if (!items.length) return [];
+  // at most CHUNK questions per request; every text is judged
+  if (items.length > UI_TEXT_CHUNK) {
+    const out: { interface: boolean; confidence: number }[] = [];
+    for (let i = 0; i < items.length; i += UI_TEXT_CHUNK) out.push(...(await classifyUiTexts(judge, page, items.slice(i, i + UI_TEXT_CHUNK), minConfidence)));
+    return out;
+  }
+  const questions = Object.fromEntries(
+    items.map((it, i) => [
+      `t${i}`,
+      choice(
+        {
+          question: `Is \`texts[${i}].text\` part of this page's fixed interface, or content that depends on the data in the app?`,
+          notes: [
+            "`texts[i].kind` says where it appeared: a heading, a control (button), or a field label/placeholder.",
+            "Fixed interface is written by the app's developers and reads the same for every user and every collection.",
+          ],
+        },
+        {
+          interface: "Fixed interface: a section title, button label, field label, placeholder, or menu entry.",
+          content: "Data: an item's title, an artist, a person's or collection's name, a note, a genre value, or anything a user entered or imported.",
+        },
+      ),
+    ]),
+  );
+  const a = await judge.ask("ui-text", { page, texts: items }, questions);
+  return items.map((_, i) => {
+    const r = (a as Record<string, { choice: string; confidence: number }>)[`t${i}`]!;
+    return { interface: r.choice === "interface" && r.confidence >= minConfidence, confidence: r.confidence };
+  });
+}
+
 // ---- 2. observation vs expectation (comparator core) -----------------------
 
 export interface Observation {

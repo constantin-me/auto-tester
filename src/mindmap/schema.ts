@@ -69,6 +69,17 @@ export const FlowNode = z.object({
   guards: z.array(z.string()).default([]),
   assertions: z.array(Assertion).default([]),
   provenance: Provenance,
+  /** last live observation by the QA driver (origin qa-observed) */
+  observed: z
+    .object({
+      at: z.string(),
+      status: z.enum(["reachable", "unreachable-here", "untestable-no-data", "skipped"]),
+      httpStatus: z.number().optional(),
+      /** concrete path actually visited (params resolved) */
+      path: z.string().optional(),
+      note: z.string().optional(),
+    })
+    .optional(),
 });
 export type FlowNode = z.infer<typeof FlowNode>;
 

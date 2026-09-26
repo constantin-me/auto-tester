@@ -72,6 +72,22 @@ export const Config = z.object({
       concurrency: z.number().int().positive().default(8),
     })
     .default({}),
+  /** browser QA (M4). Read-only unless allowWrites: it runs against a real instance. */
+  qa: z
+    .object({
+      /** pages whose links are harvested to resolve :id params */
+      seedPaths: z.array(z.string()).default(["/", "/collection", "/wishlist"]),
+      /** never visited, whatever the map says (substring match on the route) */
+      denyPaths: z.array(z.string()).default(["/logout", "/login/oidc", "/backup/", "/api/", "/socket.io"]),
+      /** endpoints (redirects, downloads, JSON) are skipped unless enabled */
+      visitEndpoints: z.boolean().default(false),
+      /** submitting forms / non-GET actions; off by default */
+      allowWrites: z.boolean().default(false),
+      concurrency: z.number().int().positive().default(4),
+      /** where run evidence (screenshots, observations) is written, relative to the config */
+      runsDir: z.string().default("../.autotester/runs"),
+    })
+    .default({}),
   store: z.object({
     /** where the mind-map lives (plan Q11) */
     backend: z.enum(["committed-file", "ci-artifact", "local-disk"]).default("committed-file"),
