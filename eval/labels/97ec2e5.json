@@ -1,7 +1,7 @@
 {
   "commit": "97ec2e5",
   "summary": "fix(security): guard POST /setup against existing installs and reject default secrets at boot",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -215,5 +215,6 @@
   ],
   "expected_detector_gaps": [
     "app-level middleware (app.use(checkUser)) is not attributed to routes by the detector"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

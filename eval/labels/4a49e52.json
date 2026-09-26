@@ -59,5 +59,6 @@
   ],
   "not_affected_notes": [
     "confirm-X, add-X/manual, manual-add POST save-X on the create path, whose redirects are unchanged"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

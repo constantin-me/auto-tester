@@ -29,5 +29,6 @@
       "confidence": "sure",
       "note": "detail action row layout changed (visual, mobile)"
     }
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

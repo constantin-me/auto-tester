@@ -2,7 +2,7 @@
   "commit": "a589636",
   "summary": "fix(ui): give the label pages a favicon and silence the PriceHistory schema warning",
   "split": "heldout2",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "labelled_before_fixes": [
     "PER-62",
@@ -44,5 +44,6 @@
   ],
   "not_flows": [
     "models/PriceHistory.ts: schema warning at boot"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

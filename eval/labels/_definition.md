@@ -14,3 +14,9 @@ or scenario (e.g. a crafted value, a provider failure, a password change elsewhe
 - `sure` / `unsure` is the labeller's confidence. `unsure` labels are scored both ways.
 - Labels were written from the diff and templates BEFORE running the detector.
 - `reviewed: false` until a human has checked them; results are marked UNREVIEWED until then.
+
+## Rule decided by the user (2026-09-26)
+
+Changes that are only observable on an error path, with a crafted input, or in a specific
+scenario (module disabled, password changed elsewhere, provider failing) **count as affected**.
+Labels were reviewed at this rule level, not one by one.

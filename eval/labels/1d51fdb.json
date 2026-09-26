@@ -2,7 +2,7 @@
   "commit": "1d51fdb",
   "summary": "fix(scanner): decode the native camera frame with ZXing instead of a 250px thumbnail",
   "split": "heldout2",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "labelled_before_fixes": [
     "PER-62",
@@ -35,9 +35,35 @@
       "flow": "node:add-music",
       "confidence": "sure",
       "note": "add.ejs barcode scanner decoding changed"
+    },
+    {
+      "flow": "node:confirm-books-id",
+      "confidence": "sure",
+      "note": "confirm renders add.ejs (with the changed scanner) on its provider-error path"
+    },
+    {
+      "flow": "node:confirm-dvd-id",
+      "confidence": "sure",
+      "note": "confirm renders add.ejs (with the changed scanner) on its provider-error path"
+    },
+    {
+      "flow": "node:confirm-games-id",
+      "confidence": "sure",
+      "note": "confirm renders add.ejs (with the changed scanner) on its provider-error path"
+    },
+    {
+      "flow": "node:confirm-lego-id",
+      "confidence": "sure",
+      "note": "confirm renders add.ejs (with the changed scanner) on its provider-error path"
+    },
+    {
+      "flow": "node:confirm-music-id",
+      "confidence": "sure",
+      "note": "confirm renders add.ejs (with the changed scanner) on its provider-error path"
     }
   ],
-  "not_affected_notes": [
-    "confirm-X renders add.ejs only on a provider error; not labelled"
-  ]
+  "corrections": [
+    "2026-09-26: added confirm-X ×5 after the user ruled that error-path changes count as affected (resolving the inconsistency with a322cd4). Applied after detection, but decided by the rule, not by the detector output."
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

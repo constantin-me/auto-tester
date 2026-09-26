@@ -2,7 +2,7 @@
   "commit": "a67e7a7",
   "summary": "fix(images): keep a metadata refresh from growing the gallery, sweep orphans on a timer, and send nosniff",
   "split": "heldout2",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "labelled_before_fixes": [
     "PER-62",
@@ -41,5 +41,6 @@
       "confidence": "sure",
       "note": "bulk refresh (POST /admin/refresh-all/:pluginId from admin.ejs) realigns galleries; backup subtitle text changed"
     }
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

@@ -1,7 +1,7 @@
 {
   "commit": "77859d1",
   "summary": "chore(i18n): drop the unreachable confirm_vinyl.api_error key",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [],
   "not_affected_notes": [
@@ -9,5 +9,6 @@
   ],
   "expected_detector_gaps": [
     "locales/*.json is not read, which is correct here"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

@@ -67,5 +67,6 @@
   ],
   "corrections": [
     "removed node:*-id-label (5): the label routes were added later (7510c3f is not an ancestor); caught by id validation after eval:prepare, before any detection ran"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

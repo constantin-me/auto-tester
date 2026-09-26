@@ -2,7 +2,7 @@
   "commit": "b8e58f7",
   "summary": "fix(ui): serve Tailwind from the instance so a blocked CDN stops flattening every page",
   "split": "heldout2",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "labelled_before_fixes": [
     "PER-62",
@@ -201,5 +201,6 @@
       "confidence": "sure",
       "note": "own Tailwind link changed"
     }
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

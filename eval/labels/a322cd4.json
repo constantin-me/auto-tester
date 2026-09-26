@@ -1,7 +1,7 @@
 {
   "commit": "a322cd4",
   "summary": "fix(errors): say which provider failed instead of always Discogs, fix MONGODB_URL typo",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -60,5 +60,6 @@
   ],
   "expected_detector_gaps": [
     "the visible text lives in locales/*.json, which the detector does not read; the itemRoutes hunks still point at the right handlers"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

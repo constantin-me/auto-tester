@@ -2,7 +2,7 @@
   "commit": "3005b51",
   "summary": "fix: keep an item the collection hides off its own page, not just off the grid",
   "split": "heldout",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "definition": "labels/_definition.md",
   "affected": [
@@ -54,5 +54,6 @@
   ],
   "expected_detector_gaps": [
     "/dvd/:id/episodes is declared in a route table with an inline handler method; the crawler does not map it"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

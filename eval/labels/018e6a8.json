@@ -2,7 +2,7 @@
   "commit": "018e6a8",
   "summary": "feat(backup): add portable ZIP archives for item images",
   "split": "heldout2",
-  "reviewed": false,
+  "reviewed": true,
   "labelled_before_detection": true,
   "labelled_before_fixes": [
     "PER-62",
@@ -30,5 +30,6 @@
   "not_affected_notes": [
     "/backup/export and /backup/collection/export were refactored into builders, same output",
     "new /…/export-archive routes do not exist at the parent revision"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

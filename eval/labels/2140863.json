@@ -1,7 +1,7 @@
 {
   "commit": "2140863",
   "summary": "fix(ui): serve Poppins and Plus Jakarta Sans from the instance",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -17,5 +17,6 @@
   ],
   "expected_detector_gaps": [
     "new public/vendor/fonts/*.css and .woff2 are not read by the detector (the two .ejs changes are)"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

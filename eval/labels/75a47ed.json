@@ -1,7 +1,7 @@
 {
   "commit": "75a47ed",
   "summary": "fix(csv): export a locally uploaded cover as a URL that resolves outside the app",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -12,5 +12,6 @@
   ],
   "not_affected_notes": [
     "settings page that links to the export renders the same"
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

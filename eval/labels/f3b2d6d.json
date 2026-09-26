@@ -1,7 +1,7 @@
 {
   "commit": "f3b2d6d",
   "summary": "fix(images): stop a rejected image URL from blocking the whole item form",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -84,5 +84,6 @@
       "confidence": "sure",
       "note": "manual-add view includes item-images"
     }
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

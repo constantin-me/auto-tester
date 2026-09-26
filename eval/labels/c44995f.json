@@ -1,7 +1,7 @@
 {
   "commit": "c44995f",
   "summary": "fix(routes): answer 404 when an item id is handed to another plugin's route",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -96,5 +96,6 @@
   ],
   "corrections": [
     "2026-09-26: added node:root. Found because the detector flagged it after PER-65; verified in index.ejs at c44995f~1. Corrections found this way can only favour the detector."
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }

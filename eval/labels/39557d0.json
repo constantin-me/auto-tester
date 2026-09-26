@@ -1,7 +1,7 @@
 {
   "commit": "39557d0",
   "summary": "fix(oidc): land a sign-out on the login page instead of bouncing it back through the provider",
-  "reviewed": false,
+  "reviewed": true,
   "definition": "labels/_definition.md",
   "affected": [
     {
@@ -14,5 +14,6 @@
       "confidence": "sure",
       "note": "SSO-only instance no longer bounces to the provider when logged_out is set"
     }
-  ]
+  ],
+  "review": "rule-level, by the user on 2026-09-26: changes seen only on an error path, with a crafted input, or in a specific scenario count as affected. Individual labels were not re-checked one by one."
 }
