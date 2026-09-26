@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { EVAL_DIR, loadSpec, mapStore, treeDir } from "../eval/trees.js";
+import { EVAL_DIR, loadSpec, mapStore, splitsArg, treeDir } from "../eval/trees.js";
 import { score, dedupeByTemplate, summarize, type FlowRow, type LabelConfidence, type Metrics } from "../eval/score.js";
 import { detectCandidates } from "../detect/impact.js";
 import { loadBindings } from "../bootstrap/express.js";
@@ -22,8 +22,9 @@ import { DEFAULT_POLICY, type Policy } from "../jev/policy.js";
  * was sent: changing either (a question's wording, what flowState includes, the
  * hunks) invalidates it instead of silently scoring stale answers.
  *
- * Splits: train (tuned on), dev (looked at while designing), heldout (labelled blind,
- * scored after the design was frozen). Only heldout numbers are unbiased.
+ * Splits: train (tuned on), dev (looked at while designing), heldout* (labelled blind,
+ * scored once after the design was frozen). Only a held-out batch scored once is unbiased.
+ * `--splits train,dev` keeps a held-out batch untouched while the design still changes.
  */
 
 const TOKENS_PER_REQUEST_ESTIMATE = 1600; // measured: 111,666 tokens over 69 triage requests
@@ -38,12 +39,13 @@ const args = process.argv.slice(2);
 const live = args.includes("--live");
 const policyPath = args.includes("--policy") ? args[args.indexOf("--policy") + 1] : undefined;
 const policy: Policy = policyPath ? JSON.parse(readFileSync(policyPath, "utf8")) : DEFAULT_POLICY;
+const SPLITS = ["heldout2", "heldout", "dev", "train"] as const;
 const QUESTIONS_JSON = JSON.stringify(TRIAGE_QUESTIONS);
 const QUESTIONS_HASH = createHash("sha256").update(QUESTIONS_JSON).digest("hex").slice(0, 12);
 const cacheKey = (state: unknown) => createHash("sha256").update(QUESTIONS_JSON).update(JSON.stringify(state)).digest("hex");
 
 async function main() {
-  const spec = loadSpec();
+  const spec = loadSpec(splitsArg(args));
   const rows: FlowRow[] = [];
   const raws: { row: FlowRow; raw: TriageRaw }[] = [];
   const usage: UsageRecord[] = [];
@@ -68,7 +70,7 @@ async function main() {
       const flow: FlowContext = {
         node,
         edges: map.edges.filter((e) => e.from === k.nodeId),
-        templates: node.view ? views.chain(node.view) : [],
+        templates: views.chainAll(node.views.length ? node.views : node.view ? [node.view] : []),
       };
       const focus = { reasons: k.reasons, hunks: k.hunks };
       return { nodeId: k.nodeId, flow, focus, key: cacheKey(triageState(change, flow, focus)) };
@@ -97,6 +99,9 @@ async function main() {
     const labelOf = new Map(w.labels.affected.map((a) => [a.flow, a.confidence]));
     const judged = new Map(w.requests.filter((r) => valid(w, r)).map((r) => [r.nodeId, w.cache.entries[r.nodeId]!.raw]));
     const candidates = new Set(w.requests.map((r) => r.nodeId));
+    const viaMiddlewareOnly = new Set(
+      w.detection.candidates.filter((k) => k.reasons.every((r) => r.includes("runs for every request after"))).map((k) => k.nodeId),
+    );
     for (const n of w.map.nodes) {
       if (n.kind === "synthetic") continue;
       const raw = judged.get(n.id);
@@ -106,6 +111,7 @@ async function main() {
         flow: n.id,
         label: labelOf.get(n.id) ?? null,
         candidate: candidates.has(n.id),
+        middlewareOnly: viaMiddlewareOnly.has(n.id),
         predicted: raw ? decideTriage(raw, policy).affected : undefined,
       };
       rows.push(row);
@@ -130,16 +136,16 @@ async function main() {
   console.log(allReviewed ? "LABELS: reviewed" : "LABELS: UNREVIEWED (drafted by the assistant, not yet checked by a human)");
   console.log(`questions=${QUESTIONS_HASH}  policy=${policyPath ?? "default"}  unjudged candidates=${unjudged}`);
   console.log("");
-  console.log(pad("commit", 10) + pad("split", 8) + pad("labels", 8) + pad("cands", 7) + pad("det R", 7) + pad("det P", 7) + pad("sys R", 7) + pad("sys P", 7) + "  (sure labels; unsure excluded)");
+  console.log(pad("commit", 10) + pad("split", 10) + pad("labels", 8) + pad("cands", 7) + pad("det R", 7) + pad("det P", 7) + pad("sys R", 7) + pad("sys P", 7) + "  (sure labels; unsure excluded)");
   for (const w of work) {
     const r = rows.filter((x) => x.commit === w.c.sha);
     const d = score(r, "sure", "detector");
     const s = score(r, "sure", "system");
     const pos = r.filter((x) => x.label === "sure").length;
-    console.log(pad(w.c.sha, 10) + pad(w.c.split, 8) + pad(String(pos), 8) + pad(String(w.requests.length), 7) + fmt(d.recall) + fmt(d.precision) + fmt(s.recall) + fmt(s.precision));
+    console.log(pad(w.c.sha, 10) + pad(w.c.split, 10) + pad(String(pos), 8) + pad(String(w.requests.length), 7) + fmt(d.recall) + fmt(d.precision) + (unjudgedIn(r) ? pad("n/a", 7) + pad("n/a", 7) : fmt(s.recall) + fmt(s.precision)));
   }
   console.log("");
-  for (const split of ["heldout", "dev", "train"] as const) {
+  for (const split of SPLITS) {
     const subset = rows.filter((r) => r.split === split);
     if (!subset.length) continue;
     for (const [variant, data] of [
@@ -149,12 +155,15 @@ async function main() {
       for (const mode of ["sure", "all"] as const) {
         const d = score(data, mode, "detector");
         const s = score(data, mode, "system");
-        console.log(`${pad(`${split.toUpperCase()} ${variant}`, 16)}${pad(mode === "sure" ? "sure" : "+unsure", 9)} detector ${line(d)}   system ${line(s)}`);
+        console.log(`${pad(`${split.toUpperCase()} ${variant}`, 16)}${pad(mode === "sure" ? "sure" : "+unsure", 9)} detector ${line(d)}   system ${unjudgedIn(data) ? `n/a (${unjudgedIn(data)} unjudged)` : line(s)}`);
       }
     }
+    const noMw = subset.map((r) => (r.middlewareOnly ? { ...r, candidate: false } : r));
+    const mwCands = subset.filter((r) => r.middlewareOnly).length;
+    console.log(`${pad(`${split.toUpperCase()} w/o mw`, 16)}${pad("sure", 9)} detector ${line(score(noMw, "sure", "detector"))}   (${mwCands} middleware-only candidates)`);
   }
 
-  for (const split of ["heldout", "dev", "train"] as const) {
+  for (const split of SPLITS) {
     const sel = raws.filter((x) => x.row.split === split && x.row.label !== "unsure");
     if (!sel.length) continue;
     console.log(`\nJev answers on detector candidates, ${split}, sure labels:`);
@@ -176,6 +185,8 @@ async function main() {
   writeFileSync(join(EVAL_DIR, "results", "latest.json"), JSON.stringify({ questions: QUESTIONS_HASH, policy, reviewed: allReviewed, rows }, null, 2) + "\n");
 }
 
+// a candidate without a valid Jev answer cannot be scored as kept or dropped
+const unjudgedIn = (rows: FlowRow[]) => rows.filter((r) => r.candidate && r.predicted === undefined).length;
 const pad = (s: string, w: number) => (s.length >= w ? s.slice(0, w - 1) + " " : s + " ".repeat(w - s.length));
 const fmt = (v: number | null) => pad(v === null ? "-" : v.toFixed(2), 7);
 const line = (m: Metrics) => `R=${m.recall === null ? "-" : m.recall.toFixed(2)} P=${m.precision === null ? "-" : m.precision.toFixed(2)} (tp${m.tp} fp${m.fp} fn${m.fn})`;

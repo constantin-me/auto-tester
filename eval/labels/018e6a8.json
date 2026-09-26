@@ -1,0 +1,34 @@
+{
+  "commit": "018e6a8",
+  "summary": "feat(backup): add portable ZIP archives for item images",
+  "split": "heldout2",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "labelled_before_fixes": [
+    "PER-62",
+    "PER-65",
+    "PER-66"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:admin",
+      "confidence": "sure",
+      "note": "collection backup UI offers ZIP; POST /backup/collection/import accepts ZIP"
+    },
+    {
+      "flow": "node:admin-instance",
+      "confidence": "sure",
+      "note": "instance backup UI offers ZIP"
+    },
+    {
+      "flow": "node:setup",
+      "confidence": "sure",
+      "note": "restore accepts .zip; upload path rewritten"
+    }
+  ],
+  "not_affected_notes": [
+    "/backup/export and /backup/collection/export were refactored into builders, same output",
+    "new /…/export-archive routes do not exist at the parent revision"
+  ]
+}

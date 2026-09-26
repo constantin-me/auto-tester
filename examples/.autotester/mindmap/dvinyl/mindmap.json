@@ -1,13 +1,16 @@
 {
   "schemaVersion": 1,
   "repo": "Kyonew/DVinyl",
-  "generatedAt": "2026-09-25T19:27:46.580Z",
+  "generatedAt": "2026-09-26T16:14:53.783Z",
   "nodes": [
     {
       "id": "node:wishlist",
       "label": "Wishlist",
       "route": "/wishlist",
       "view": "wishlist",
+      "views": [
+        "wishlist"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -27,6 +30,9 @@
       "label": "Collection",
       "route": "/collection",
       "view": "collection",
+      "views": [
+        "collection"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -46,6 +52,10 @@
       "label": "Home",
       "route": "/",
       "view": "no-collection",
+      "views": [
+        "no-collection",
+        "index"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -65,6 +75,9 @@
       "label": "Add books",
       "route": "/add-books",
       "view": "add",
+      "views": [
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -85,6 +98,9 @@
       "label": "Add dvd",
       "route": "/add-dvd",
       "view": "add",
+      "views": [
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -105,6 +121,9 @@
       "label": "Add games",
       "route": "/add-games",
       "view": "add",
+      "views": [
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -125,6 +144,9 @@
       "label": "Add lego",
       "route": "/add-lego",
       "view": "add",
+      "views": [
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -145,6 +167,9 @@
       "label": "Add music",
       "route": "/add-music",
       "view": "add",
+      "views": [
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -165,6 +190,10 @@
       "label": "Confirm books {id}",
       "route": "/confirm-books/:id",
       "view": "confirm",
+      "views": [
+        "confirm",
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -185,6 +214,10 @@
       "label": "Confirm dvd {id}",
       "route": "/confirm-dvd/:id",
       "view": "confirm",
+      "views": [
+        "confirm",
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -205,6 +238,10 @@
       "label": "Confirm games {id}",
       "route": "/confirm-games/:id",
       "view": "confirm",
+      "views": [
+        "confirm",
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -225,6 +262,10 @@
       "label": "Confirm lego {id}",
       "route": "/confirm-lego/:id",
       "view": "confirm",
+      "views": [
+        "confirm",
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -245,6 +286,10 @@
       "label": "Confirm music {id}",
       "route": "/confirm-music/:id",
       "view": "confirm",
+      "views": [
+        "confirm",
+        "add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -265,6 +310,9 @@
       "label": "Add books manual",
       "route": "/add-books/manual",
       "view": "confirm",
+      "views": [
+        "confirm"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -285,6 +333,9 @@
       "label": "Add dvd manual",
       "route": "/add-dvd/manual",
       "view": "confirm",
+      "views": [
+        "confirm"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -305,6 +356,9 @@
       "label": "Add games manual",
       "route": "/add-games/manual",
       "view": "confirm",
+      "views": [
+        "confirm"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -325,6 +379,9 @@
       "label": "Add lego manual",
       "route": "/add-lego/manual",
       "view": "confirm",
+      "views": [
+        "confirm"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -345,6 +402,9 @@
       "label": "Add music manual",
       "route": "/add-music/manual",
       "view": "confirm",
+      "views": [
+        "confirm"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -365,6 +425,9 @@
       "label": "Book edit {id}",
       "route": "/book/edit/:id",
       "view": "edit",
+      "views": [
+        "edit"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -385,6 +448,9 @@
       "label": "Dvd edit {id}",
       "route": "/dvd/edit/:id",
       "view": "edit",
+      "views": [
+        "edit"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -405,6 +471,9 @@
       "label": "Game edit {id}",
       "route": "/game/edit/:id",
       "view": "edit",
+      "views": [
+        "edit"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -425,6 +494,9 @@
       "label": "Lego edit {id}",
       "route": "/lego/edit/:id",
       "view": "edit",
+      "views": [
+        "edit"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -445,6 +517,9 @@
       "label": "Album edit {id}",
       "route": "/album/edit/:id",
       "view": "edit",
+      "views": [
+        "edit"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -465,6 +540,9 @@
       "label": "Book {id}",
       "route": "/book/:id",
       "view": "detail",
+      "views": [
+        "detail"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -484,6 +562,9 @@
       "label": "Dvd {id}",
       "route": "/dvd/:id",
       "view": "detail",
+      "views": [
+        "detail"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -503,6 +584,9 @@
       "label": "Game {id}",
       "route": "/game/:id",
       "view": "detail",
+      "views": [
+        "detail"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -522,6 +606,9 @@
       "label": "Lego {id}",
       "route": "/lego/:id",
       "view": "detail",
+      "views": [
+        "detail"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -541,6 +628,9 @@
       "label": "Album {id}",
       "route": "/album/:id",
       "view": "detail",
+      "views": [
+        "detail"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -560,6 +650,9 @@
       "label": "Book {id} label",
       "route": "/book/:id/label",
       "view": "label",
+      "views": [
+        "label"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -580,6 +673,9 @@
       "label": "Dvd {id} label",
       "route": "/dvd/:id/label",
       "view": "label",
+      "views": [
+        "label"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -600,6 +696,9 @@
       "label": "Game {id} label",
       "route": "/game/:id/label",
       "view": "label",
+      "views": [
+        "label"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -620,6 +719,9 @@
       "label": "Lego {id} label",
       "route": "/lego/:id/label",
       "view": "label",
+      "views": [
+        "label"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -640,6 +742,9 @@
       "label": "Album {id} label",
       "route": "/album/:id/label",
       "view": "label",
+      "views": [
+        "label"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -660,6 +765,9 @@
       "label": "Manual add",
       "route": "/manual-add",
       "view": "manual-add",
+      "views": [
+        "manual-add"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -680,6 +788,9 @@
       "label": "Search",
       "route": "/search",
       "view": "search",
+      "views": [
+        "search"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -695,9 +806,29 @@
       }
     },
     {
+      "id": "node:dvd-id-episodes",
+      "label": "Dvd {id} episodes",
+      "route": "/dvd/:id/episodes",
+      "views": [],
+      "kind": "endpoint",
+      "requiresAuth": false,
+      "guards": [
+        "allowShareView"
+      ],
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/dvds/index.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
       "id": "node:api-collection-ids",
       "label": "Api collection ids",
       "route": "/api/collection/ids",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -714,6 +845,7 @@
       "id": "node:api-album-id-track-trackId-lyrics",
       "label": "Api album {id} track {trackId} lyrics",
       "route": "/api/album/:id/track/:trackId/lyrics",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -730,6 +862,7 @@
       "id": "node:api-estimate-history",
       "label": "Api estimate history",
       "route": "/api/estimate/history",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -746,6 +879,7 @@
       "id": "node:api-estimate-discogsId",
       "label": "Api estimate {discogsId}",
       "route": "/api/estimate/:discogsId",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -762,6 +896,7 @@
       "id": "node:api-search-discogs-gallery",
       "label": "Api search discogs gallery",
       "route": "/api/search-discogs-gallery",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [
@@ -781,6 +916,9 @@
       "label": "Admin",
       "route": "/admin",
       "view": "admin",
+      "views": [
+        "admin"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -801,6 +939,9 @@
       "label": "Admin instance",
       "route": "/admin/instance",
       "view": "admin-instance",
+      "views": [
+        "admin-instance"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -821,6 +962,9 @@
       "label": "Admin personnalisation",
       "route": "/admin/personnalisation",
       "view": "personnalisation",
+      "views": [
+        "personnalisation"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -840,6 +984,7 @@
       "id": "node:admin-api-search-collection",
       "label": "Admin api search collection",
       "route": "/admin/api/search-collection",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -859,6 +1004,7 @@
       "id": "node:admin-api-search-image-universal",
       "label": "Admin api search image universal",
       "route": "/admin/api/search-image-universal",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -878,6 +1024,7 @@
       "id": "node:admin-io",
       "label": "Admin io",
       "route": "/admin/io",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -895,6 +1042,9 @@
       "label": "Login",
       "route": "/login",
       "view": "login",
+      "views": [
+        "login"
+      ],
       "kind": "page",
       "requiresAuth": false,
       "guards": [],
@@ -911,6 +1061,7 @@
       "id": "node:logout",
       "label": "Logout",
       "route": "/logout",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -927,6 +1078,7 @@
       "id": "node:backup-export",
       "label": "Backup export",
       "route": "/backup/export",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -946,6 +1098,7 @@
       "id": "node:backup-export-archive",
       "label": "Backup export archive",
       "route": "/backup/export-archive",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -965,6 +1118,7 @@
       "id": "node:backup-collection-export",
       "label": "Backup collection export",
       "route": "/backup/collection/export",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -984,6 +1138,7 @@
       "id": "node:backup-collection-export-archive",
       "label": "Backup collection export archive",
       "route": "/backup/collection/export-archive",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -1003,6 +1158,7 @@
       "id": "node:backup-collection-export-csv",
       "label": "Backup collection export csv",
       "route": "/backup/collection/export-csv",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -1022,6 +1178,7 @@
       "id": "node:login-oidc",
       "label": "Login oidc",
       "route": "/login/oidc",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -1038,6 +1195,7 @@
       "id": "node:login-oidc-callback",
       "label": "Login oidc callback",
       "route": "/login/oidc/callback",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -1054,6 +1212,7 @@
       "id": "node:settings-oidc-link",
       "label": "Settings oidc link",
       "route": "/settings/oidc/link",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": true,
       "guards": [
@@ -1072,6 +1231,7 @@
       "id": "node:plugin-assets-pluginId-file",
       "label": "Plugin assets {pluginId} {file}",
       "route": "/plugin-assets/:pluginId/:file",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -1089,9 +1249,15 @@
       "label": "Create plugin",
       "route": "/create-plugin",
       "view": "create-plugin",
+      "views": [
+        "create-plugin"
+      ],
       "kind": "page",
-      "requiresAuth": false,
-      "guards": [],
+      "requiresAuth": true,
+      "guards": [
+        "requireAuth",
+        "requireCollectionRole:admin"
+      ],
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -1106,6 +1272,9 @@
       "label": "Settings",
       "route": "/settings",
       "view": "settings",
+      "views": [
+        "settings"
+      ],
       "kind": "page",
       "requiresAuth": true,
       "guards": [
@@ -1125,6 +1294,9 @@
       "label": "Setup",
       "route": "/setup",
       "view": "setup",
+      "views": [
+        "setup"
+      ],
       "kind": "page",
       "requiresAuth": false,
       "guards": [],
@@ -1141,6 +1313,7 @@
       "id": "node:share-token",
       "label": "Share {token}",
       "route": "/share/:token",
+      "views": [],
       "kind": "endpoint",
       "requiresAuth": false,
       "guards": [],
@@ -1157,6 +1330,7 @@
       "id": "node:global-nav",
       "label": "Global navigation (header, footer)",
       "kind": "synthetic",
+      "views": [],
       "requiresAuth": false,
       "guards": [],
       "assertions": [],
@@ -1375,6 +1549,139 @@
       "provenance": {
         "sourceFiles": [
           "views/no-collection.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:collection",
+      "kind": "navigate",
+      "action": "open /collection",
+      "backing": {
+        "method": "GET",
+        "path": "/collection"
+      },
+      "id": "navigate:node:root->node:collection|GET /collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/index.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:wishlist",
+      "kind": "navigate",
+      "action": "open /wishlist",
+      "backing": {
+        "method": "GET",
+        "path": "/wishlist"
+      },
+      "id": "navigate:node:root->node:wishlist|GET /wishlist",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/index.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/book/:id/move-to-collection"
+      },
+      "id": "api:node:root->node:root|POST /api/book/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/dvd/:id/move-to-collection"
+      },
+      "id": "api:node:root->node:root|POST /api/dvd/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/game/:id/move-to-collection"
+      },
+      "id": "api:node:root->node:root|POST /api/game/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/lego/:id/move-to-collection"
+      },
+      "id": "api:node:root->node:root|POST /api/lego/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-collection",
+      "backing": {
+        "method": "POST",
+        "path": "/api/album/:id/move-to-collection"
+      },
+      "id": "api:node:root->node:root|POST /api/album/:id/move-to-collection",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "views/partials/wishlist-move-script.ejs"
         ],
         "origin": "static-crawl",
         "confidence": 0.5
@@ -1723,6 +2030,44 @@
       }
     },
     {
+      "from": "node:confirm-books-id",
+      "to": "node:add-books-manual",
+      "kind": "navigate",
+      "action": "open /add-books/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-books/manual"
+      },
+      "id": "navigate:node:confirm-books-id->node:add-books-manual|GET /add-books/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-books-id",
+      "to": "node:confirm-books-id",
+      "kind": "submit",
+      "action": "submit form -> POST /search-books",
+      "backing": {
+        "method": "POST",
+        "path": "/search-books"
+      },
+      "id": "submit:node:confirm-books-id->node:confirm-books-id|POST /search-books",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
       "from": "node:confirm-dvd-id",
       "to": "node:add-dvd",
       "kind": "navigate",
@@ -1774,6 +2119,44 @@
       "provenance": {
         "sourceFiles": [
           "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-dvd-id",
+      "to": "node:add-dvd-manual",
+      "kind": "navigate",
+      "action": "open /add-dvd/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-dvd/manual"
+      },
+      "id": "navigate:node:confirm-dvd-id->node:add-dvd-manual|GET /add-dvd/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-dvd-id",
+      "to": "node:confirm-dvd-id",
+      "kind": "submit",
+      "action": "submit form -> POST /search-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/search-dvd"
+      },
+      "id": "submit:node:confirm-dvd-id->node:confirm-dvd-id|POST /search-dvd",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
         ],
         "origin": "static-crawl",
         "confidence": 0.5
@@ -1837,6 +2220,44 @@
       }
     },
     {
+      "from": "node:confirm-games-id",
+      "to": "node:add-games-manual",
+      "kind": "navigate",
+      "action": "open /add-games/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-games/manual"
+      },
+      "id": "navigate:node:confirm-games-id->node:add-games-manual|GET /add-games/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-games-id",
+      "to": "node:confirm-games-id",
+      "kind": "submit",
+      "action": "submit form -> POST /search-games",
+      "backing": {
+        "method": "POST",
+        "path": "/search-games"
+      },
+      "id": "submit:node:confirm-games-id->node:confirm-games-id|POST /search-games",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
       "from": "node:confirm-lego-id",
       "to": "node:add-lego",
       "kind": "navigate",
@@ -1894,6 +2315,44 @@
       }
     },
     {
+      "from": "node:confirm-lego-id",
+      "to": "node:add-lego-manual",
+      "kind": "navigate",
+      "action": "open /add-lego/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-lego/manual"
+      },
+      "id": "navigate:node:confirm-lego-id->node:add-lego-manual|GET /add-lego/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-lego-id",
+      "to": "node:confirm-lego-id",
+      "kind": "submit",
+      "action": "submit form -> POST /search-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/search-lego"
+      },
+      "id": "submit:node:confirm-lego-id->node:confirm-lego-id|POST /search-lego",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
       "from": "node:confirm-music-id",
       "to": "node:add-music",
       "kind": "navigate",
@@ -1945,6 +2404,44 @@
       "provenance": {
         "sourceFiles": [
           "core/views/confirm.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:confirm-music-id",
+      "to": "node:add-music-manual",
+      "kind": "navigate",
+      "action": "open /add-music/manual",
+      "backing": {
+        "method": "GET",
+        "path": "/add-music/manual"
+      },
+      "id": "navigate:node:confirm-music-id->node:add-music-manual|GET /add-music/manual",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
+      "from": "node:confirm-music-id",
+      "to": "node:confirm-music-id",
+      "kind": "submit",
+      "action": "submit form -> POST /search-music",
+      "backing": {
+        "method": "POST",
+        "path": "/search-music"
+      },
+      "id": "submit:node:confirm-music-id->node:confirm-music-id|POST /search-music",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "core/views/add.ejs"
         ],
         "origin": "static-crawl",
         "confidence": 0.5
@@ -4513,6 +5010,25 @@
         ],
         "origin": "static-crawl",
         "confidence": 0.5
+      }
+    },
+    {
+      "from": "node:root",
+      "to": "node:root",
+      "kind": "unlinked",
+      "action": "POST /api/dvd/:id/episode/:number/meta",
+      "backing": {
+        "method": "POST",
+        "path": "/api/dvd/:id/episode/:number/meta"
+      },
+      "id": "unlinked:node:root->node:root|POST /api/dvd/:id/episode/:number/meta",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/dvds/index.ts"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.3
       }
     },
     {

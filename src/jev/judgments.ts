@@ -71,7 +71,7 @@ function flowState({ node, edges, templates }: FlowContext) {
     name: node.label,
     route: node.route ?? null,
     kind: node.kind,
-    view: node.view ?? null,
+    views: node.views.length ? node.views : node.view ? [node.view] : [],
     // without this Jev cannot see that a page renders a changed partial
     templates: templates ?? [],
     requires_auth: node.requiresAuth,

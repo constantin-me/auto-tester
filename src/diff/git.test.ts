@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { readCommit, splitPatch } from "./git.js";
 
-const DVINYL = resolve(import.meta.dirname, "../../DVinyl");
+const DVINYL = resolve(import.meta.dirname, "../../test-projects/DVinyl");
 
 test("splitPatch yields one patch per file", () => {
   const diff = ["diff --git a/x.ts b/x.ts", "@@ -1 +1 @@", "-a", "+b", "diff --git a/y/z.ejs b/y/z.ejs", "@@ -1 +1 @@", "-c", "+d", ""].join("\n");

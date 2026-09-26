@@ -9,13 +9,15 @@ export type LabelConfidence = "sure" | "unsure";
 
 export interface FlowRow {
   commit: string;
-  split: "train" | "dev" | "heldout";
+  split: "train" | "dev" | "heldout" | "heldout2";
   flow: string;
   /** null = labelled not affected */
   label: LabelConfidence | null;
   candidate: boolean;
   /** undefined = candidate not judged (no cached Jev answer) or not a candidate */
   predicted?: boolean;
+  /** candidate reached only through app-level middleware (PER-62), reported separately */
+  middlewareOnly?: boolean;
 }
 
 /** How `unsure` labels count: excluded from scoring, or counted as affected. */

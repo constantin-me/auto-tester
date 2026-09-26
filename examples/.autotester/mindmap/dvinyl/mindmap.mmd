@@ -1,7 +1,7 @@
-%% Kyonew/DVinyl — generated 2026-09-25T19:27:46.580Z. Do not edit; regenerate with bootstrap.
-%% nodes=62 edges=183 (folded: 49 api, 7 unlinked)
+%% Kyonew/DVinyl — generated 2026-09-26T16:14:53.783Z. Do not edit; regenerate with bootstrap.
+%% nodes=63 edges=201 (folded: 54 api, 8 unlinked)
 flowchart LR
-  n_root["Home<br/>/<br/>(3 unlinked)"]
+  n_root["Home<br/>/<br/>(5 api, 4 unlinked)"]
   n_global_nav{{"Global navigation (header, footer)<br/>(1 api)"}}
   subgraph n_g_add_books["add-books"]
     n_add_books["Add books<br/>/add-books"]
@@ -66,6 +66,7 @@ flowchart LR
     n_dvd_edit_id["Dvd edit #123;id#125;<br/>/dvd/edit/:id"]
     n_dvd_id["Dvd #123;id#125;<br/>/dvd/:id<br/>(4 api)"]
     n_dvd_id_label["Dvd #123;id#125; label<br/>/dvd/:id/label"]
+    n_dvd_id_episodes(["Dvd #123;id#125; episodes<br/>/dvd/:id/episodes"])
   end
   subgraph n_g_game["game"]
     n_game_edit_id["Game edit #123;id#125;<br/>/game/edit/:id"]
@@ -95,6 +96,8 @@ flowchart LR
   n_wishlist["Wishlist<br/>/wishlist<br/>(6 api)"]
   n_collection ==>|"POST /collection/labels"| n_collection
   n_root ==>|"POST /collection/create"| n_root
+  n_root --> n_collection
+  n_root --> n_wishlist
   n_add_books --> n_add_books_manual
   n_add_books --> n_confirm_books_id
   n_add_books ==>|"POST /search-books"| n_add_books
@@ -113,18 +116,28 @@ flowchart LR
   n_confirm_books_id --> n_add_books
   n_confirm_books_id ==>|"POST /save-books"| n_wishlist
   n_confirm_books_id ==>|"POST /save-books"| n_collection
+  n_confirm_books_id --> n_add_books_manual
+  n_confirm_books_id ==>|"POST /search-books"| n_confirm_books_id
   n_confirm_dvd_id --> n_add_dvd
   n_confirm_dvd_id ==>|"POST /save-dvd"| n_wishlist
   n_confirm_dvd_id ==>|"POST /save-dvd"| n_collection
+  n_confirm_dvd_id --> n_add_dvd_manual
+  n_confirm_dvd_id ==>|"POST /search-dvd"| n_confirm_dvd_id
   n_confirm_games_id --> n_add_games
   n_confirm_games_id ==>|"POST /save-games"| n_wishlist
   n_confirm_games_id ==>|"POST /save-games"| n_collection
+  n_confirm_games_id --> n_add_games_manual
+  n_confirm_games_id ==>|"POST /search-games"| n_confirm_games_id
   n_confirm_lego_id --> n_add_lego
   n_confirm_lego_id ==>|"POST /save-lego"| n_wishlist
   n_confirm_lego_id ==>|"POST /save-lego"| n_collection
+  n_confirm_lego_id --> n_add_lego_manual
+  n_confirm_lego_id ==>|"POST /search-lego"| n_confirm_lego_id
   n_confirm_music_id --> n_add_music
   n_confirm_music_id ==>|"POST /save-music"| n_wishlist
   n_confirm_music_id ==>|"POST /save-music"| n_collection
+  n_confirm_music_id --> n_add_music_manual
+  n_confirm_music_id ==>|"POST /search-music"| n_confirm_music_id
   n_add_books_manual --> n_add_books
   n_add_books_manual ==>|"POST /save-books"| n_wishlist
   n_add_books_manual ==>|"POST /save-books"| n_collection
@@ -225,6 +238,6 @@ flowchart LR
   classDef synthetic fill:#fff6e0,stroke:#c98a00,color:#111
   classDef auth stroke-width:3px
   class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_login,n_create_plugin,n_settings,n_setup page
-  class n_api_collection_ids,n_api_album_id_track_trackId_lyrics,n_api_estimate_history,n_api_estimate_discogsId,n_api_search_discogs_gallery,n_admin_api_search_collection,n_admin_api_search_image_universal,n_admin_io,n_logout,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_login_oidc,n_login_oidc_callback,n_settings_oidc_link,n_plugin_assets_pluginId_file,n_share_token endpoint
+  class n_dvd_id_episodes,n_api_collection_ids,n_api_album_id_track_trackId_lyrics,n_api_estimate_history,n_api_estimate_discogsId,n_api_search_discogs_gallery,n_admin_api_search_collection,n_admin_api_search_image_universal,n_admin_io,n_logout,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_login_oidc,n_login_oidc_callback,n_settings_oidc_link,n_plugin_assets_pluginId_file,n_share_token endpoint
   class n_global_nav synthetic
-  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_admin_api_search_collection,n_admin_api_search_image_universal,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_settings_oidc_link,n_settings auth
+  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_admin_api_search_collection,n_admin_api_search_image_universal,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_settings_oidc_link,n_create_plugin,n_settings auth

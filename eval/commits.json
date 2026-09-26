@@ -1,6 +1,6 @@
 {
   "repo": "Kyonew/DVinyl",
-  "appRoot": "../DVinyl",
+  "appRoot": "../test-projects/DVinyl",
   "config": "../examples/dvinyl.config.json",
   "commits": [
     {
@@ -60,28 +60,58 @@
     },
     {
       "sha": "4a49e52",
-      "split": "heldout",
-      "why": "held-out, labelled blind after the design was frozen"
+      "split": "dev",
+      "why": "was held-out batch 1 (PER-61); dev since the PER-62/65/66 fixes were built from its misses"
     },
     {
       "sha": "3005b51",
-      "split": "heldout",
-      "why": "held-out, labelled blind after the design was frozen"
+      "split": "dev",
+      "why": "was held-out batch 1 (PER-61); dev since the PER-62/65/66 fixes were built from its misses"
     },
     {
       "sha": "b99bcdd",
-      "split": "heldout",
-      "why": "held-out, labelled blind after the design was frozen"
+      "split": "dev",
+      "why": "was held-out batch 1 (PER-61); dev since the PER-62/65/66 fixes were built from its misses"
     },
     {
       "sha": "39cb66a",
-      "split": "heldout",
-      "why": "held-out, labelled blind after the design was frozen"
+      "split": "dev",
+      "why": "was held-out batch 1 (PER-61); dev since the PER-62/65/66 fixes were built from its misses"
     },
     {
       "sha": "2d2a65d",
-      "split": "heldout",
-      "why": "held-out, labelled blind after the design was frozen"
+      "split": "dev",
+      "why": "was held-out batch 1 (PER-61); dev since the PER-62/65/66 fixes were built from its misses"
+    },
+    {
+      "sha": "a589636",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "0484f06",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "a67e7a7",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "b8e58f7",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "1d51fdb",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
+    },
+    {
+      "sha": "018e6a8",
+      "split": "heldout2",
+      "why": "rule-selected (6 newest unused app-code commits), labelled before the recall fixes"
     }
   ]
 }

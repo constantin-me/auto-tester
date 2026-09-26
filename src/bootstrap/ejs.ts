@@ -81,6 +81,11 @@ export class ViewIndex {
     return [abs, ...this.closure(abs)].map((p) => relative(this.appRoot, p));
   }
 
+  /** Union of `chain` over every view a flow can render, in first-seen order. */
+  chainAll(views: string[]): string[] {
+    return [...new Set(views.flatMap((v) => this.chain(v)))];
+  }
+
   /** Links found directly in one template file. */
   linksIn(abs: string): ViewLink[] {
     const raw = readText(abs);

@@ -19,7 +19,7 @@ export const EVAL_DIR = resolve(import.meta.dirname, "../../eval");
 
 export interface EvalCommit {
   sha: string;
-  split: "train" | "dev" | "heldout";
+  split: "train" | "dev" | "heldout" | "heldout2";
   why: string;
 }
 
@@ -30,10 +30,21 @@ export interface EvalSpec {
   commits: EvalCommit[];
 }
 
-export function loadSpec(): EvalSpec {
+/**
+ * `splits` limits which commits are loaded, e.g. ["train", "dev"] while a held-out
+ * batch must stay untouched until the design is frozen.
+ */
+export function loadSpec(splits?: string[]): EvalSpec {
   const raw = JSON.parse(readFileSync(join(EVAL_DIR, "commits.json"), "utf8"));
   const { config } = loadConfig(resolve(EVAL_DIR, raw.config));
-  return { repo: raw.repo, appRoot: resolve(EVAL_DIR, raw.appRoot), config, commits: raw.commits };
+  const commits: EvalCommit[] = raw.commits.filter((c: EvalCommit) => !splits || splits.includes(c.split));
+  return { repo: raw.repo, appRoot: resolve(EVAL_DIR, raw.appRoot), config, commits };
+}
+
+/** `--splits a,b` from argv, or undefined for all. */
+export function splitsArg(argv: string[]): string[] | undefined {
+  const i = argv.indexOf("--splits");
+  return i >= 0 && argv[i + 1] ? argv[i + 1]!.split(",") : undefined;
 }
 
 const SHA = /^[0-9a-f]{7,40}$/;

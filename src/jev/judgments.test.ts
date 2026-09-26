@@ -32,6 +32,7 @@ const flow: FlowContext = {
     label: "Book {id}",
     route: "/book/:id",
     view: "detail",
+    views: ["detail"],
     kind: "page",
     requiresAuth: true,
     guards: ["requireAuthOrShareView"],

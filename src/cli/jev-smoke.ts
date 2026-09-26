@@ -95,7 +95,7 @@ async function main() {
 }
 
 function contextFor(map: MindMap, node: FlowNode, views: ViewIndex): FlowContext {
-  return { node, edges: map.edges.filter((e) => e.from === node.id), templates: node.view ? views.chain(node.view) : [] };
+  return { node, edges: map.edges.filter((e) => e.from === node.id), templates: views.chainAll(node.views.length ? node.views : node.view ? [node.view] : []) };
 }
 
 const pad = (s: string, w: number) => (s.length >= w ? s.slice(0, w - 1) + " " : s + " ".repeat(w - s.length));

@@ -46,6 +46,43 @@ test("an apostrophe in a comment does not cut a handler's span short", () => {
   assert.deepEqual(other!.span, { start: 6, end: 6 });
 });
 
+test("PER-65: a handler keeps every view it renders, fallback first", () => {
+  const src = [
+    "router.get('/collection', async (req, res) => {", // 1
+    "  if (!res.locals.activeCollectionId) return res.render('no-collection');", // 2
+    "  res.render('collection', { albums });", // 3
+    "});", // 4
+  ].join("\n");
+  const [r] = routesInText(src, "/x/r.ts", "r.ts", [""], []);
+  assert.equal(r!.view, "no-collection");
+  assert.deepEqual(r!.views, ["no-collection", "collection"]);
+});
+
+test("PER-66: route-table entries with an inline handler method are mapped, span covers the object", () => {
+  const src = [
+    "export default {", //                                         1
+    "  apiRoutes: [", //                                           2
+    "    { method: 'get', path: '/api/x', handler: getX },", //    3
+    "    {", //                                                    4
+    "      method: 'get',", //                                     5
+    "      path: '/dvd/:id/episodes',", //                        6
+    "      allowShareView: true,", //                              7
+    "      async handler(req, res) {", //                          8
+    "        if (!req.params.id) { return res.redirect('/'); }", // 9
+    "        res.render('episodes', { item });", //               10
+    "      },", //                                                 11
+    "    },", //                                                   12
+    "  ],", //                                                     13
+    "};", //                                                       14
+  ].join("\n");
+  const routes = routesInText(src, "/x/p.ts", "p.ts", [""], []);
+  assert.deepEqual(routes.map((r) => r.path), ["/api/x", "/dvd/:id/episodes"]);
+  const ep = routes[1]!;
+  assert.deepEqual(ep.span, { start: 4, end: 12 });
+  assert.deepEqual(ep.guards, ["allowShareView"]);
+  assert.equal(ep.view, "episodes");
+});
+
 test("touchedBaseLines ignores context lines; pure additions are insertion points", () => {
   const [h] = parseHunks(["@@ -10,4 +10,5 @@", " ctx10", "-old11", "+new11", "+new12", " ctx12", " ctx13"].join("\n"));
   const t = touchedBaseLines(h!);
@@ -58,7 +95,7 @@ test("touchedBaseLines ignores context lines; pure additions are insertion point
   assert.equal(spanTouched({ start: 20, end: 24 }, ta), true);
 });
 
-const DVINYL = resolve(import.meta.dirname, "../../DVinyl");
+const DVINYL = resolve(import.meta.dirname, "../../test-projects/DVinyl");
 const CONFIG = resolve(import.meta.dirname, "../../examples/dvinyl.config.json");
 
 test("c44995f: detects the changed item handlers, not unrelated flows", { skip: !existsSync(resolve(DVINYL, ".git")) }, () => {

@@ -28,6 +28,8 @@ export interface RouteDef {
   file: string; // repo-relative
   guards: string[];
   view?: string;
+  /** every view the handler renders, `view` first */
+  views: string[];
   redirects: string[];
   /** set when the path came from template expansion */
   binding?: Binding;
@@ -37,12 +39,17 @@ export interface RouteDef {
 
 const ROUTE_RE =
   /\b(app|router|\w*[Rr]outer)\.(get|post|put|delete|patch)\s*\(\s*(?:[A-Za-z_$][\w.$]*\s*\+\s*)?(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
-const RENDER_RE = /\bres\.render\s*\(\s*['"`]([^'"`]+)['"`]/;
+const RENDER_RE = /\bres\.render\s*\(\s*['"`]([^'"`]+)['"`]/g;
 const REDIRECT_RE = /\bres\.redirect\s*\(\s*(?:\d+\s*,\s*)?(?:[A-Za-z_$][\w.$]*\s*\+\s*)?(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
 const HANDLER_START = /\basync\b|\(\s*_?req\b|\bfunction\b|\b_?req\s*=>/;
 const GUARD_TOKEN = /(\.\.\.)?\b([A-Za-z_$][\w$.]*)(?:\(\s*['"]([^'"]*)['"]\s*\))?/g;
-/** declarative route tables: `{ method: 'get', path: '/api/x', requireEditor: true, handler: fn }` */
-const ROUTE_TABLE_RE = /\{\s*method\s*:\s*['"](\w+)['"]\s*,\s*path\s*:\s*(?:'([^']*)'|"([^"]*)"|`([^`]*)`)([^{}]*)\}/g;
+/**
+ * Start of a declarative route-table entry: `{ method: 'get', path: '/api/x', …`. The rest
+ * of the object (flags, and a handler given by reference, as an arrow/function value, or as
+ * an `async handler() {}` method) is taken by brace matching, so a handler body with braces
+ * in it no longer hides the route.
+ */
+const ROUTE_TABLE_START = /\{\s*method\s*:\s*['"](\w+)['"]\s*,\s*path\s*:\s*(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
 const IGNORED_TOKENS = new Set(["req", "res", "next", "any", "async", "await"]);
 
 export const ENTRY_CANDIDATES = ["app.ts", "app.js", "server.ts", "server.js", "index.ts", "index.js", "src/app.ts", "src/server.ts", "src/index.ts"];
@@ -120,8 +127,8 @@ function expand(templated: string, bindings: Binding[]): { path: string; binding
   return out;
 }
 
-/** Index of the `)` closing a call whose opening paren is just before `s`; s.length if unbalanced. */
-function closingParen(s: string): number {
+/** Index of the `close` matching an `open` just before `s` (default: parens); s.length if unbalanced. */
+function closingParen(s: string, open = "(", close = ")"): number {
   let depth = 1;
   let quote: string | undefined;
   for (let i = 0; i < s.length; i++) {
@@ -132,8 +139,8 @@ function closingParen(s: string): number {
       continue;
     }
     if (c === "'" || c === '"' || c === "`") quote = c;
-    else if (c === "(") depth++;
-    else if (c === ")" && --depth === 0) return i;
+    else if (c === open) depth++;
+    else if (c === close && --depth === 0) return i;
   }
   return s.length;
 }
@@ -190,8 +197,18 @@ function referencedHandler(ref: string, fileAbs: string, text: string): { body: 
   return body ? { body, file: fileAbs } : undefined;
 }
 
-function viewAndRedirects(body: string): { view?: string; redirects: string[] } {
-  const view = body.match(RENDER_RE)?.[1];
+/** What a handler renders and where it redirects. */
+interface HandlerFacts {
+  /** first rendered view */
+  view?: string;
+  /** every rendered view, in source order */
+  views: string[];
+  redirects: string[];
+}
+const NO_FACTS: HandlerFacts = { views: [], redirects: [] };
+
+function viewAndRedirects(body: string): HandlerFacts {
+  const views = [...new Set([...body.matchAll(RENDER_RE)].map((m) => m[1]!))];
   const redirects = [
     ...new Set(
       [...body.matchAll(REDIRECT_RE)]
@@ -199,7 +216,7 @@ function viewAndRedirects(body: string): { view?: string; redirects: string[] } 
         .filter((p): p is string => !!p && !p.includes(PARAM)),
     ),
   ];
-  return { view, redirects };
+  return { view: views[0], views, redirects };
 }
 
 function guardsOf(argSegment: string): string[] {
@@ -242,14 +259,20 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
   const text = stripComments(source);
   const routes: RouteDef[] = [];
   const matches = [...text.matchAll(ROUTE_RE)];
+  // `router.use(requireAuth, …)` guards every route the router declares after it
+  const routerUses = [...text.matchAll(/\b(\w*[Rr]outer)\.use\s*\(/g)].map((u) => {
+    const argsAt = u.index! + u[0].length;
+    return { line: lineAt(text, u.index!), guards: guardsOf(text.slice(argsAt, argsAt + closingParen(text.slice(argsAt)))) };
+  });
 
   const emit = (
     method: string,
     rawPath: string,
-    guards: string[],
-    facts: { view?: string; redirects: string[] },
+    ownGuards: string[],
+    facts: HandlerFacts,
     span: { start: number; end: number },
   ) => {
+    const guards = [...routerUses.filter((u) => u.line < span.start).flatMap((u) => u.guards), ...ownGuards];
     for (const { path, binding } of expand(rawPath, bindings)) {
       for (const prefix of filePrefixes) {
         const full = normalizePath(prefix + (path.startsWith("/") ? path : "/" + path));
@@ -276,16 +299,27 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
     const tokens = guardsOf(afterPath.slice(0, callEnd));
     const ref = tokens.pop();
     const handler = ref && !ref.startsWith("...") ? referencedHandler(ref, abs, text) : undefined;
-    emit(m[2]!, rawPath, tokens, handler ? viewAndRedirects(handler.body) : { redirects: [] }, span);
+    emit(m[2]!, rawPath, tokens, handler ? viewAndRedirects(handler.body) : NO_FACTS, span);
   });
 
-  for (const t of text.matchAll(ROUTE_TABLE_RE)) {
-    const rest = t[5] ?? "";
-    const guards = [...rest.matchAll(/\b(\w+)\s*:\s*true\b/g)].map((g) => g[1]!);
-    const handlerName = rest.match(/\bhandler\s*:\s*([A-Za-z_$][\w$.]*)/)?.[1];
-    const handler = handlerName ? referencedHandler(handlerName, abs, text) : undefined;
-    const span = { start: lineAt(text, t.index!), end: lineAt(text, t.index! + t[0].length) };
-    emit(t[1]!, t[2] ?? t[3] ?? t[4] ?? "", guards, handler ? viewAndRedirects(handler.body) : { redirects: [] }, span);
+  for (const t of text.matchAll(ROUTE_TABLE_START)) {
+    const afterBrace = t.index! + 1;
+    const objectEnd = afterBrace + closingParen(text.slice(afterBrace), "{", "}");
+    const rest = text.slice(t.index! + t[0].length, objectEnd);
+    // keys before the handler are the entry's own flags; the handler body may hold anything
+    const handlerAt = rest.search(/\b(?:async\s+)?handler\s*[:(]/);
+    const head = handlerAt >= 0 ? rest.slice(0, handlerAt) : rest;
+    const guards = [...head.matchAll(/\b(\w+)\s*:\s*true\b/g)].map((g) => g[1]!);
+    const ref = rest.match(/\bhandler\s*:\s*([A-Za-z_$][\w$.]*)\s*(?:[,}\n]|$)/)?.[1];
+    let facts = NO_FACTS;
+    if (ref && ref !== "async" && ref !== "function") {
+      const handler = referencedHandler(ref, abs, text);
+      if (handler) facts = viewAndRedirects(handler.body);
+    } else if (handlerAt >= 0) {
+      facts = viewAndRedirects(rest.slice(handlerAt)); // inline arrow, function value or method
+    }
+    const span = { start: lineAt(text, t.index!), end: lineAt(text, objectEnd) };
+    emit(t[1]!, t[2] ?? t[3] ?? t[4] ?? "", guards, facts, span);
   }
   return routes;
 }

@@ -47,6 +47,8 @@ export function staticCrawl(appRoot: string, repo: string, crawler: CrawlerConfi
     const existing = nodes.get(id);
     if (existing) {
       if (!existing.provenance.sourceFiles.includes(r.file)) existing.provenance.sourceFiles.push(r.file);
+      for (const v of r.views) if (!existing.views.includes(v)) existing.views.push(v);
+      if (existing.views.length) existing.kind = "page";
       continue;
     }
     nodes.set(id, {
@@ -54,7 +56,8 @@ export function staticCrawl(appRoot: string, repo: string, crawler: CrawlerConfi
       label: labelFor(r.path),
       route: r.path,
       view: r.view,
-      kind: r.view ? "page" : "endpoint",
+      views: [...r.views],
+      kind: r.views.length ? "page" : "endpoint",
       requiresAuth: r.guards.some((g) => /auth|role/i.test(g)),
       guards: r.guards,
       assertions: [],
@@ -65,13 +68,13 @@ export function staticCrawl(appRoot: string, repo: string, crawler: CrawlerConfi
   }
 
   // ---- which templates each page pulls in ---------------------------------
-  const pageFiles = new Map<string, string>(); // nodeId -> abs view file
+  const pageFiles = new Map<string, string[]>(); // nodeId -> abs files of every view it renders
   for (const n of nodes.values()) {
-    const abs = n.view ? views.resolveView(n.view) : undefined;
-    if (abs) pageFiles.set(n.id, abs);
+    const files = n.views.map((v) => views.resolveView(v)).filter((p): p is string => !!p);
+    if (files.length) pageFiles.set(n.id, files);
   }
   const closures = new Map<string, Set<string>>(); // abs view -> included partials
-  for (const abs of new Set(pageFiles.values())) closures.set(abs, views.closure(abs));
+  for (const abs of new Set([...pageFiles.values()].flat())) closures.set(abs, views.closure(abs));
 
   const includeCount = new Map<string, number>();
   for (const inc of closures.values()) for (const p of inc) includeCount.set(p, (includeCount.get(p) ?? 0) + 1);
@@ -81,8 +84,8 @@ export function staticCrawl(appRoot: string, repo: string, crawler: CrawlerConfi
 
   // ---- links per source node ----------------------------------------------
   const sources: { from: string; links: ViewLink[] }[] = [];
-  for (const [id, abs] of pageFiles) {
-    const files = [abs, ...[...closures.get(abs)!].filter((p) => !globalPartials.has(p))];
+  for (const [id, viewFiles] of pageFiles) {
+    const files = [...new Set(viewFiles.flatMap((abs) => [abs, ...[...closures.get(abs)!].filter((p) => !globalPartials.has(p))]))];
     sources.push({ from: id, links: files.flatMap((f) => views.linksIn(f)) });
   }
   const globalLinks = [...globalPartials].flatMap((p) => views.linksIn(p));
@@ -91,6 +94,7 @@ export function staticCrawl(appRoot: string, repo: string, crawler: CrawlerConfi
       id: GLOBAL_NAV_ID,
       label: `Global navigation (${[...globalPartials].map((p) => basename(p, ".ejs")).join(", ")})`,
       kind: "synthetic",
+      views: [],
       requiresAuth: false,
       guards: [],
       assertions: [],

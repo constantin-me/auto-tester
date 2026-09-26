@@ -8,6 +8,7 @@ import { viewIndexFor } from "../bootstrap/crawl.js";
 import { readText, resolveModule, walk } from "../bootstrap/source.js";
 import { nodeId } from "../bootstrap/crawl.js";
 import { declarations, stripComments, type Declaration } from "./declarations.js";
+import { appMounts, middlewareReason, mountOrderOf, type Mount } from "./middleware.js";
 
 /**
  * Diff -> candidate flows (plan Q6, static half; PER-46).
@@ -92,6 +93,28 @@ export function detectCandidates(
   const importers = importerIndex(appRoot);
   const queue: { abs: string; rel: string; text: string; name: string; origin: string; hunk: string; hops: number }[] = [];
 
+  // ---- app-level middleware (PER-62) -----------------------------------------
+  // a changed middleware reaches every flow mounted after it under its prefix
+  const routeFiles = new Set(map.nodes.flatMap((n) => n.provenance.sourceFiles.map((f) => join(appRoot, f))));
+  const mountsFor = (text: string) => (entry ? appMounts(entry, text, routeFiles) : []);
+  const mounts = mountsFor(entry ? readText(entry) ?? "" : "");
+  const flowOrder = new Map(
+    map.nodes.map((n) => {
+      const orders = n.provenance.sourceFiles.map((f) => mountOrderOf(join(appRoot, f), mounts, importers));
+      const best = orders.sort((a, b) => a.order - b.order)[0] ?? { order: Number.POSITIVE_INFINITY, assumed: true, prefix: "" };
+      return [n.id, best] as const;
+    }),
+  );
+  const hitMiddleware = (m: Mount, origin: string, hunk: string) => {
+    for (const n of map.nodes) {
+      if (n.kind === "synthetic") continue;
+      const at = flowOrder.get(n.id)!;
+      if (at.order <= m.order) continue; // mounted before the middleware: never runs through it
+      if (m.prefix && !(n.route ?? "").startsWith(m.prefix)) continue;
+      hit(n.id, `${origin}; ${middlewareReason(m, entry!, appRoot, at.assumed)}`, hunk);
+    }
+  };
+
   for (const file of change.files) {
     const abs = join(appRoot, file.path);
     const hunks = parseHunks(file.patch);
@@ -99,15 +122,19 @@ export function detectCandidates(
 
     if (ext === ".ejs") {
       for (const n of map.nodes) {
-        const viewAbs = n.view ? views.resolveView(n.view) : undefined;
-        if (!viewAbs) continue;
-        const reason =
-          viewAbs === abs
-            ? `renders ${file.path} (changed)`
-            : views.closure(viewAbs).has(abs)
-              ? `renders ${relative(appRoot, viewAbs)}, which includes ${file.path} (changed)`
-              : undefined;
-        if (reason) for (const h of hunks) hit(n.id, reason, h.text);
+        // every view the handler can render, not just the first (an early-return fallback
+        // page would otherwise hide the real one)
+        for (const view of n.views.length ? n.views : n.view ? [n.view] : []) {
+          const viewAbs = views.resolveView(view);
+          if (!viewAbs) continue;
+          const reason =
+            viewAbs === abs
+              ? `renders ${file.path} (changed)`
+              : views.closure(viewAbs).has(abs)
+                ? `renders ${relative(appRoot, viewAbs)}, which includes ${file.path} (changed)`
+                : undefined;
+          if (reason) for (const h of hunks) hit(n.id, reason, h.text);
+        }
       }
       continue;
     }
@@ -121,8 +148,13 @@ export function detectCandidates(
     const routes = routesOf(abs, file.path, baseText, `${baseRev ?? "tree"}:${file.path}`);
     const decls = declarations(baseText);
 
+    // hunks inside an inline `app.use((req, res, next) => …)` of the entry, as it was before
+    const inlineMounts = abs === entry ? mountsFor(baseText).filter((m) => m.kind === "inline") : [];
+
     for (const h of hunks) {
       const touched = touchedBaseLines(h);
+      const inInline = inlineMounts.filter((m) => spanTouched(m.span, touched));
+      for (const m of inInline) hitMiddleware(m, `${file.path}: inline middleware changed`, h.text);
       const owning = routes.filter((r) => spanTouched(r.span, touched));
       if (owning.length) {
         for (const r of owning) hitRoute(r, `handler of {route} changed`, h.text);
@@ -136,7 +168,9 @@ export function detectCandidates(
         if (d) changedFns.add(d);
       }
       if (!changedFns.size) {
-        unmapped.push({ file: file.path, header: header(h), why: "not inside a route or function (imports, new top-level declarations)" });
+        if (!inInline.length) {
+          unmapped.push({ file: file.path, header: header(h), why: "not inside a route or function (imports, new top-level declarations)" });
+        }
         continue;
       }
       for (const d of changedFns) {
@@ -162,7 +196,13 @@ export function detectCandidates(
     const decls = declarations(item.text);
     const own = decls.find((d) => d.name === item.name);
     for (const r of routes) {
-      if (uses.test(spanText(r.span))) hitRoute(r, `{route} uses ${item.origin}`, item.hunk);
+      // used in the handler, or applied as a guard (inline or via router.use)
+      const guarded = r.guards.some((g) => g.replace(/^\.\.\./, "").split(":")[0] === item.name);
+      if (guarded || uses.test(spanText(r.span))) hitRoute(r, `{route} uses ${item.origin}`, item.hunk);
+    }
+    // the entry registers it with app.use: every flow mounted after it runs through it
+    if (item.abs === entry) {
+      for (const m of mounts) if (m.kind === "middleware" && m.name === item.name) hitMiddleware(m, item.origin, item.hunk);
     }
     if (item.hops >= MAX_HOPS) continue;
     for (const d of decls) {

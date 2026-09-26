@@ -1,0 +1,48 @@
+{
+  "commit": "a589636",
+  "summary": "fix(ui): give the label pages a favicon and silence the PriceHistory schema warning",
+  "split": "heldout2",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "labelled_before_fixes": [
+    "PER-62",
+    "PER-65",
+    "PER-66"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id-label",
+      "confidence": "sure",
+      "note": "label.ejs gains a favicon"
+    },
+    {
+      "flow": "node:dvd-id-label",
+      "confidence": "sure",
+      "note": "label.ejs gains a favicon"
+    },
+    {
+      "flow": "node:game-id-label",
+      "confidence": "sure",
+      "note": "label.ejs gains a favicon"
+    },
+    {
+      "flow": "node:lego-id-label",
+      "confidence": "sure",
+      "note": "label.ejs gains a favicon"
+    },
+    {
+      "flow": "node:album-id-label",
+      "confidence": "sure",
+      "note": "label.ejs gains a favicon"
+    },
+    {
+      "flow": "node:collection",
+      "confidence": "unsure",
+      "note": "POST /collection/labels renders label-sheet.ejs, which gains a favicon (only visible in the tab of the printed sheet)"
+    }
+  ],
+  "not_flows": [
+    "models/PriceHistory.ts: schema warning at boot"
+  ]
+}

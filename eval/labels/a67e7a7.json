@@ -1,0 +1,45 @@
+{
+  "commit": "a67e7a7",
+  "summary": "fix(images): keep a metadata refresh from growing the gallery, sweep orphans on a timer, and send nosniff",
+  "split": "heldout2",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "labelled_before_fixes": [
+    "PER-62",
+    "PER-65",
+    "PER-66"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-id",
+      "confidence": "sure",
+      "note": "refresh button calls POST /api/<prefix>/:id/refresh-info, which now realigns the gallery"
+    },
+    {
+      "flow": "node:dvd-id",
+      "confidence": "sure",
+      "note": "refresh button calls POST /api/<prefix>/:id/refresh-info, which now realigns the gallery"
+    },
+    {
+      "flow": "node:game-id",
+      "confidence": "sure",
+      "note": "refresh button calls POST /api/<prefix>/:id/refresh-info, which now realigns the gallery"
+    },
+    {
+      "flow": "node:lego-id",
+      "confidence": "sure",
+      "note": "refresh button calls POST /api/<prefix>/:id/refresh-info, which now realigns the gallery"
+    },
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "refresh button calls POST /api/<prefix>/:id/refresh-info, which now realigns the gallery"
+    },
+    {
+      "flow": "node:admin",
+      "confidence": "sure",
+      "note": "bulk refresh (POST /admin/refresh-all/:pluginId from admin.ejs) realigns galleries; backup subtitle text changed"
+    }
+  ]
+}

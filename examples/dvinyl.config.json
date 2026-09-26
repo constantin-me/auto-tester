@@ -1,6 +1,6 @@
 {
   "repo": "Kyonew/DVinyl",
-  "appRoot": "../DVinyl",
+  "appRoot": "../test-projects/DVinyl",
   "framework": "express-ejs",
   "crawler": {
     "entry": "app.ts",

@@ -1,0 +1,43 @@
+{
+  "commit": "1d51fdb",
+  "summary": "fix(scanner): decode the native camera frame with ZXing instead of a 250px thumbnail",
+  "split": "heldout2",
+  "reviewed": false,
+  "labelled_before_detection": true,
+  "labelled_before_fixes": [
+    "PER-62",
+    "PER-65",
+    "PER-66"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:add-books",
+      "confidence": "sure",
+      "note": "add.ejs barcode scanner decoding changed"
+    },
+    {
+      "flow": "node:add-dvd",
+      "confidence": "sure",
+      "note": "add.ejs barcode scanner decoding changed"
+    },
+    {
+      "flow": "node:add-games",
+      "confidence": "sure",
+      "note": "add.ejs barcode scanner decoding changed"
+    },
+    {
+      "flow": "node:add-lego",
+      "confidence": "sure",
+      "note": "add.ejs barcode scanner decoding changed"
+    },
+    {
+      "flow": "node:add-music",
+      "confidence": "sure",
+      "note": "add.ejs barcode scanner decoding changed"
+    }
+  ],
+  "not_affected_notes": [
+    "confirm-X renders add.ejs only on a provider error; not labelled"
+  ]
+}

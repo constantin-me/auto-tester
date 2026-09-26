@@ -53,6 +53,11 @@ export const FlowNode = z.object({
   /** view/template that renders it, when known */
   view: z.string().optional(),
   /**
+   * every view the handler can render, `view` first. A handler that early-returns a
+   * fallback page (e.g. `no-collection`) renders its real page second.
+   */
+  views: z.array(z.string()).default([]),
+  /**
    * page      = renders a view (a real UI state)
    * endpoint  = GET that redirects / downloads / returns data, no view
    * synthetic = derived grouping, e.g. global navigation from a shared partial
