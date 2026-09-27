@@ -111,7 +111,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/wishlist",
@@ -670,7 +670,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/collection",
@@ -890,7 +890,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/",
@@ -922,7 +922,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-books",
@@ -956,7 +956,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-dvd",
@@ -990,7 +990,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-games",
@@ -1024,7 +1024,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-lego",
@@ -1348,7 +1348,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/add-music",
@@ -1381,7 +1381,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1410,7 +1410,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1439,7 +1439,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1468,7 +1468,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1497,7 +1497,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -1525,7 +1525,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-books/manual",
@@ -1559,7 +1559,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-dvd/manual",
@@ -1593,7 +1593,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-games/manual",
@@ -1627,7 +1627,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "unreachable-here",
         "httpStatus": 404,
         "path": "/add-lego/manual",
@@ -2376,7 +2376,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/add-music/manual",
@@ -2408,7 +2408,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2436,7 +2436,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2464,7 +2464,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2492,7 +2492,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2520,7 +2520,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2547,7 +2547,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2574,7 +2574,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2601,7 +2601,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2628,7 +2628,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2928,7 +2928,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/album/6ab8006b372c2aa1592cd4e5",
@@ -2960,7 +2960,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -2988,7 +2988,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3016,7 +3016,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3044,7 +3044,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3072,7 +3072,7 @@
         "confidence": 0.4
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "untestable-no-data",
         "note": "no live link matches the route's parameters"
       }
@@ -3815,7 +3815,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/manual-add",
@@ -3915,7 +3915,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/search",
@@ -3943,7 +3943,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3965,7 +3965,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -3987,7 +3987,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -4009,7 +4009,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -4031,7 +4031,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -4055,7 +4055,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -4858,23 +4858,6 @@
           }
         },
         {
-          "id": "qa:node:admin:field:f467e1f8",
-          "expectation": "The page has a field labelled \"Disco\".",
-          "check": {
-            "kind": "text-present",
-            "value": "Disco"
-          },
-          "severityIfBroken": 3,
-          "pinned": false,
-          "provenance": {
-            "sourceFiles": [
-              "routes/adminRoutes.ts"
-            ],
-            "origin": "qa-observed",
-            "confidence": 0.7
-          }
-        },
-        {
           "id": "qa:node:admin:field:39965d32",
           "expectation": "The page has a field labelled \"Electro\".",
           "check": {
@@ -5512,7 +5495,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin",
@@ -5902,7 +5885,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin/instance",
@@ -6394,7 +6377,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/admin/personnalisation",
@@ -6423,7 +6406,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6448,7 +6431,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6470,7 +6453,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6615,7 +6598,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/login",
@@ -6641,7 +6624,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6666,7 +6649,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6691,7 +6674,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6716,7 +6699,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6741,7 +6724,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6766,7 +6749,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6788,7 +6771,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6810,7 +6793,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6834,7 +6817,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -6856,7 +6839,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }
@@ -7701,7 +7684,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/create-plugin",
@@ -7963,11 +7946,11 @@
           }
         },
         {
-          "id": "qa:node:settings:control:fb91e24f",
-          "expectation": "The page offers a control labelled \"Update\".",
+          "id": "qa:node:settings:control:2ebb22b3",
+          "expectation": "The page offers a control labelled \"Remove picture\".",
           "check": {
             "kind": "text-present",
-            "value": "Update"
+            "value": "Remove picture"
           },
           "severityIfBroken": 3,
           "pinned": false,
@@ -7980,11 +7963,11 @@
           }
         },
         {
-          "id": "qa:node:settings:field:d48b5268",
-          "expectation": "The page has a field labelled \"New username\".",
+          "id": "qa:node:settings:control:fb91e24f",
+          "expectation": "The page offers a control labelled \"Update\".",
           "check": {
             "kind": "text-present",
-            "value": "New username"
+            "value": "Update"
           },
           "severityIfBroken": 3,
           "pinned": false,
@@ -8005,7 +7988,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 200,
         "path": "/settings",
@@ -8052,7 +8035,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "reachable",
         "httpStatus": 304,
         "path": "/setup",
@@ -8078,7 +8061,7 @@
         "confidence": 0.6
       },
       "observed": {
-        "at": "2026-09-26T18:08:27.467Z",
+        "at": "2026-09-27T14:24:14.047Z",
         "status": "skipped",
         "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
       }

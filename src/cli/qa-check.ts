@@ -24,9 +24,12 @@ import { checkFlow, type FlowCheck } from "../qa/check.js";
  * flows -> compare with the baseline -> Jev judges misses and rates severity.
  */
 async function main() {
-  const [configArg, target] = process.argv.slice(2);
+  const argv = process.argv.slice(2);
+  // --no-exec: skip the execution check (PER-69), e.g. to compare how many flows it saves
+  const useExec = !argv.includes("--no-exec");
+  const [configArg, target] = argv.filter((a) => a !== "--no-exec");
   if (!configArg || !target || !existsSync(configArg)) {
-    console.error("usage: npm run qa:check -- <config> (--working-tree | <commit> | <base>..<head>)");
+    console.error("usage: npm run qa:check -- <config> (--working-tree | <commit> | <base>..<head>) [--no-exec]");
     process.exit(2);
   }
   const { config, baseDir } = loadConfig(configArg);
@@ -65,12 +68,12 @@ async function main() {
     };
     const triage = decideTriage(await askTriage(judge, change, flow, { reasons: k.reasons, hunks: k.hunks }), DEFAULT_POLICY);
     let pDiffers: number | undefined;
-    if (triage.affected && k.links.every((l) => !isDirect(l))) pDiffers = await askExecution(judge, executionState(node, k, { appRoot, views }));
+    if (useExec && triage.affected && k.links.every((l) => !isDirect(l))) pDiffers = await askExecution(judge, executionState(node, k, { appRoot, views }));
     const affected = triage.affected && !(pDiffers !== undefined && dropByExecution(pDiffers, k.links, DEFAULT_POLICY));
     return { k, node, triage, pDiffers, affected };
   });
   const affected = judged.filter((j) => j.affected).sort((a, b) => b.triage.value - a.triage.value);
-  console.log(`[qa] ${detection.candidates.length} candidates -> ${affected.length} affected after Jev`);
+  console.log(`[qa] ${detection.candidates.length} candidates -> ${affected.length} affected after Jev (execution check ${useExec ? "on" : "off"})`);
   for (const j of judged.filter((x) => !x.affected)) console.log(`    not tested  ${j.node.route ?? j.node.id}  (Jev: P(runs)=${j.triage.pRuns.toFixed(2)}${j.pDiffers !== undefined ? `, P(differs)=${j.pDiffers.toFixed(2)}` : ""})`);
 
   // ---- visit and compare -----------------------------------------------------------
