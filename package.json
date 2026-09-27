@@ -11,7 +11,8 @@
     "eval:prepare": "tsx src/cli/eval-prepare.ts",
     "eval": "tsx --env-file-if-exists=.env src/cli/eval.ts",
     "qa:baseline": "tsx --env-file-if-exists=.env src/cli/qa-baseline.ts",
-    "qa:check": "tsx --env-file-if-exists=.env src/cli/qa-check.ts"
+    "qa:check": "tsx --env-file-if-exists=.env src/cli/qa-check.ts",
+    "qa:report": "tsx src/cli/qa-report.ts"
   },
   "author": "",
   "license": "MIT",

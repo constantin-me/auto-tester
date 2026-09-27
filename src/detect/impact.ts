@@ -44,6 +44,8 @@ export interface Candidate {
   /** hunk texts relevant to this flow */
   hunks: string[];
   links: Link[];
+  /** changed files whose hunks linked this flow: the likely origin of a finding */
+  files: string[];
 }
 
 export interface Detection {
@@ -108,6 +110,7 @@ export function detectCandidates(
     return routesCache.get(key)!;
   };
 
+  const hunkFile = new Map<string, string>(); // hunk text -> changed file it belongs to
   const importers = importerIndex(appRoot);
   const queue: { abs: string; rel: string; text: string; name: string; origin: string; hunk: string; hops: number }[] = [];
 
@@ -136,6 +139,7 @@ export function detectCandidates(
   for (const file of change.files) {
     const abs = join(appRoot, file.path);
     const hunks = parseHunks(file.patch);
+    for (const h of hunks) hunkFile.set(h.text, file.path);
     const ext = extname(file.path);
 
     if (ext === ".ejs") {
@@ -238,7 +242,13 @@ export function detectCandidates(
   }
 
   const candidates = [...hits]
-    .map(([id, h]) => ({ nodeId: id, reasons: [...h.reasons], hunks: [...h.hunks], links: [...h.links.values()] }))
+    .map(([id, h]) => ({
+      nodeId: id,
+      reasons: [...h.reasons],
+      hunks: [...h.hunks],
+      links: [...h.links.values()],
+      files: [...new Set([...h.hunks].map((x) => hunkFile.get(x)).filter((f): f is string => !!f))],
+    }))
     .sort((a, b) => b.reasons.length - a.reasons.length || a.nodeId.localeCompare(b.nodeId));
   return { candidates, unmapped, dropped: [...dropped] };
 }

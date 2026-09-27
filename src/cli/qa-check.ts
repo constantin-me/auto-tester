@@ -12,6 +12,8 @@ import { DEFAULT_POLICY } from "../jev/policy.js";
 import { QaSession } from "../qa/driver.js";
 import { planVisits } from "../qa/plan.js";
 import { checkFlow, type FlowCheck } from "../qa/check.js";
+import { buildReport, type NotVisited } from "../report/build.js";
+import { renderMarkdown } from "../report/markdown.js";
 
 /**
  * M4 slice 2: check a change against the baseline, in a real browser, read-only.
@@ -78,7 +80,7 @@ async function main() {
 
   // ---- visit and compare -----------------------------------------------------------
   const session = await QaSession.open({ baseUrl: config.env.baseUrl, auth: config.auth, allowWrites: config.qa.allowWrites });
-  const results: (FlowCheck | { flow: string; path?: string; status: string; reason: string })[] = [];
+  const results: (FlowCheck | NotVisited)[] = [];
   try {
     const links = await session.harvestLinks(config.qa.seedPaths);
     const plan = planVisits(
@@ -101,16 +103,26 @@ async function main() {
 
   // ---- report ----------------------------------------------------------------------
   mkdirSync(runDir, { recursive: true });
-  writeFileSync(join(runDir, "check.json"), JSON.stringify({ at, target, changedFiles: change.files.map((f) => f.path), triage: judged.map((j) => ({ flow: j.node.id, affected: j.affected, reasons: j.k.reasons, triage: j.triage, pDiffers: j.pDiffers })), results }, null, 2) + "\n");
-  for (const r of results) {
-    console.log(`    ${r.status.padEnd(17)} ${("path" in r && r.path) || r.flow}${"reason" in r ? `  (${r.reason})` : ""}`);
-    if ("findings" in r) {
-      for (const f of r.findings) console.log(`        [sev ${f.severity} ${f.confidence}] ${f.kind}: expected ${f.expectation} — ${f.actual}`);
-    }
-  }
-  const tok = usage.reduce((s, u) => s + u.inputTokens + u.outputTokens, 0);
-  console.log(`[qa] Jev: ${usage.length} requests, ${tok.toLocaleString()} tokens; evidence -> ${runDir}`);
-  if (results.some((r) => r.status === "failed")) process.exitCode = 1; // advisory: callers decide what to do with it
+  const report = buildReport({
+    repo: config.repo,
+    target,
+    generatedAt: at,
+    changedFiles: change.files.map((f) => f.path),
+    judged: judged.map((j) => ({ node: j.node, reasons: j.k.reasons, files: j.k.files, triage: j.triage, pDiffers: j.pDiffers, affected: j.affected })),
+    results,
+    executionCheck: useExec,
+    dropBelow: DEFAULT_POLICY.execution.dropBelow,
+    usage,
+    evidenceDir: runDir,
+  });
+  const markdown = renderMarkdown(report);
+  writeFileSync(join(runDir, "report.json"), JSON.stringify(report, null, 2) + "\n");
+  writeFileSync(join(runDir, "report.md"), markdown);
+  console.log("");
+  console.log(markdown);
+  console.log(`[qa] report -> ${join(runDir, "report.md")} (and report.json)`);
+  // advisory: the exit code only lets callers know; nothing here blocks a merge
+  if (report.verdict === "likely-regression") process.exitCode = 1;
 }
 
 main().catch((err) => {

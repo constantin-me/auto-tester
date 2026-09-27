@@ -32,6 +32,10 @@ export interface FlowCheck {
   path: string;
   status: "passed" | "failed" | "maybe";
   attempts: number;
+  /** expectations evaluated per visit: status, redirect, new errors, new failed requests, texts */
+  checksRun: number;
+  /** whether the last visit settled before the cap */
+  settled: boolean;
   findings: Finding[];
   screenshot?: string;
 }
@@ -108,5 +112,6 @@ export async function checkFlow(
   }
 
   const status: FlowCheck["status"] = findings.some((f) => f.confidence === "stable") ? "failed" : findings.length ? "maybe" : "passed";
-  return { flow: node.id, path, status, attempts, findings, screenshot: ev.screenshot };
+  const checksRun = 4 + node.assertions.filter((a) => a.check?.kind === "text-present").length;
+  return { flow: node.id, path, status, attempts, checksRun, settled: ev.settled, findings, screenshot: ev.screenshot };
 }
