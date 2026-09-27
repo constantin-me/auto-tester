@@ -1,0 +1,40 @@
+{
+  "commit": "5da97aa",
+  "summary": "Added personalization option to change the default aspect ratio of the album cards",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "card grid moved to albums-grid partial and sized by the plugin/collection aspect ratio"
+    },
+    {
+      "flow": "node:root",
+      "confidence": "sure",
+      "note": "card grid moved to albums-grid partial and sized by the plugin/collection aspect ratio"
+    },
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "card grid moved to albums-grid partial and sized by the plugin/collection aspect ratio"
+    },
+    {
+      "flow": "node:admin-personnalisation",
+      "confidence": "sure",
+      "note": "new aspect-ratio option"
+    },
+    {
+      "flow": "node:create-plugin",
+      "confidence": "sure",
+      "note": "aspect-ratio field in the plugin builder"
+    }
+  ]
+}

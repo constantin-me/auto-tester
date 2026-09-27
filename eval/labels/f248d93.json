@@ -1,0 +1,25 @@
+{
+  "commit": "f248d93",
+  "summary": "fix(shelf): make the shared partial the only copy of the filter script, and keep the wishlist filters and count when a filter empties the page",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:wishlist",
+      "confidence": "sure",
+      "note": "filters and item count stay when a filter empties the page"
+    },
+    {
+      "flow": "node:collection",
+      "confidence": "unsure",
+      "note": "its inline copy of the filter script removed in favour of the shared partial; behaviour probably unchanged"
+    }
+  ]
+}

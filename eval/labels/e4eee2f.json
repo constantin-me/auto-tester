@@ -1,0 +1,38 @@
+{
+  "commit": "e4eee2f",
+  "summary": "fix(edit): let any plugin's external id be set from the edit form",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:book-edit-id",
+      "confidence": "sure",
+      "note": "external id block now offered for every item, with plugin-specific wording (locale keys)"
+    },
+    {
+      "flow": "node:dvd-edit-id",
+      "confidence": "sure",
+      "note": "external id block now offered for every item, with plugin-specific wording (locale keys)"
+    },
+    {
+      "flow": "node:game-edit-id",
+      "confidence": "sure",
+      "note": "external id block now offered for every item, with plugin-specific wording (locale keys)"
+    },
+    {
+      "flow": "node:album-edit-id",
+      "confidence": "sure",
+      "note": "external id block now offered for every item, with plugin-specific wording (locale keys)"
+    }
+  ],
+  "not_affected_notes": [
+    "lego edit: set_num is already a form field, so the new block is skipped"
+  ]
+}

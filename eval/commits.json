@@ -142,6 +142,36 @@
       "sha": "7510c3f",
       "split": "heldout3",
       "why": "stratified rule: newest unused commits touching middleware/ or app.ts (3) and itemRoutes or utils/ (3)"
+    },
+    {
+      "sha": "e4eee2f",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
+    },
+    {
+      "sha": "bc459e8",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
+    },
+    {
+      "sha": "5da97aa",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
+    },
+    {
+      "sha": "3bc5f93",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
+    },
+    {
+      "sha": "4a4bd8b",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
+    },
+    {
+      "sha": "f248d93",
+      "split": "heldout4",
+      "why": "stratified rule: 2 newest unused per group (locales/css, middleware/app.ts, routes)"
     }
   ]
 }

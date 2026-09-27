@@ -1,0 +1,35 @@
+{
+  "commit": "4a4bd8b",
+  "summary": "fix(price-history): carry value snapshots through backup and collection deletion, and calm the chart grid",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "value chart grid restyled"
+    },
+    {
+      "flow": "node:admin-instance",
+      "confidence": "sure",
+      "note": "collection delete also removes its value snapshots; instance restore carries them"
+    },
+    {
+      "flow": "node:setup",
+      "confidence": "sure",
+      "note": "instance restore (POST /backup/import) carries value snapshots"
+    },
+    {
+      "flow": "node:backup-export",
+      "confidence": "sure",
+      "note": "instance export now includes value snapshots"
+    }
+  ]
+}

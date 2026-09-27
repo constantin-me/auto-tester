@@ -51,7 +51,7 @@ const args = process.argv.slice(2);
 const live = args.includes("--live");
 const policyPath = args.includes("--policy") ? args[args.indexOf("--policy") + 1] : undefined;
 const policy: Policy = policyPath ? JSON.parse(readFileSync(policyPath, "utf8")) : DEFAULT_POLICY;
-const SPLITS = ["heldout3", "heldout2", "heldout", "dev", "train"] as const;
+const SPLITS = ["heldout4", "heldout3", "heldout2", "heldout", "dev", "train"] as const;
 const QUESTIONS_JSON = JSON.stringify(TRIAGE_QUESTIONS);
 const QUESTIONS_HASH = createHash("sha256").update(QUESTIONS_JSON).digest("hex").slice(0, 12);
 const cacheKey = (state: unknown) => createHash("sha256").update(QUESTIONS_JSON).update(JSON.stringify(state)).digest("hex");

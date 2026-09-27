@@ -1,0 +1,25 @@
+{
+  "commit": "bc459e8",
+  "summary": "fix(price-history): stamp and scope value snapshots with the reader's own currency",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [
+    {
+      "flow": "node:album-id",
+      "confidence": "sure",
+      "note": "estimate modal calls GET /api/estimate/:discogsId, whose response changed"
+    },
+    {
+      "flow": "node:collection",
+      "confidence": "sure",
+      "note": "snapshot save/history scoped to the reader's currency; new other-currency notice (locale)"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ export type LabelConfidence = "sure" | "unsure";
 
 export interface FlowRow {
   commit: string;
-  split: "train" | "dev" | "heldout" | "heldout2" | "heldout3";
+  split: "train" | "dev" | "heldout" | "heldout2" | "heldout3" | "heldout4";
   flow: string;
   /** null = labelled not affected */
   label: LabelConfidence | null;

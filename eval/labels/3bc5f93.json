@@ -1,0 +1,17 @@
+{
+  "commit": "3bc5f93",
+  "summary": "feat: add cross-collection search route and view",
+  "split": "heldout4",
+  "reviewed": false,
+  "review_pending": "labels drafted by the assistant under the user rule; not yet seen by the user",
+  "labelled_before_detection": true,
+  "labelled_before_design": [
+    "PER-68",
+    "PER-63"
+  ],
+  "definition": "labels/_definition.md",
+  "affected": [],
+  "not_flows": [
+    "GET /search and views/search.ejs are new (no flow at the parent); app.ts only mounts the new router"
+  ]
+}
