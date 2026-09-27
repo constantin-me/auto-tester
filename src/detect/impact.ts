@@ -9,6 +9,7 @@ import { readText, resolveModule, walk } from "../bootstrap/source.js";
 import { nodeId } from "../bootstrap/crawl.js";
 import { declarations, stripComments, type Declaration } from "./declarations.js";
 import { appMounts, middlewareReason, mountOrderOf, type Mount } from "./middleware.js";
+import { assetReferences, changedKeys, isLocaleFile, isStaticAsset, keyUsageIndex, type KeyUsage } from "./locale.js";
 
 /**
  * Diff -> candidate flows (plan Q6, static half; PER-46).
@@ -30,13 +31,14 @@ import { appMounts, middlewareReason, mountOrderOf, type Mount } from "./middlew
  * How a change reached a flow. `handler` and `template` are direct (the flow's own code
  * changed); the rest are indirect and may not matter for this flow's requests.
  */
-export type LinkKind = "handler" | "template" | "action" | "helper" | "middleware";
+export type LinkKind = "handler" | "template" | "action" | "helper" | "middleware" | "locale" | "asset";
 export interface Link {
   kind: LinkKind;
   /** for `action`: the route the page calls */
   action?: { method: string; path: string };
 }
-export const isDirect = (l: Link) => l.kind === "handler" || l.kind === "template";
+// locale text and stylesheets/scripts show up on the page itself, so they count as direct
+export const isDirect = (l: Link) => ["handler", "template", "locale", "asset"].includes(l.kind);
 
 export interface Candidate {
   nodeId: string;
@@ -70,6 +72,13 @@ export function detectCandidates(
   const prefixes = entry ? mountPrefixes(entry) : new Map<string, string[]>();
   const bindings = loadBindings(appRoot, crawler.expansions);
   const views = viewIndexFor(appRoot, crawler);
+  // page flows whose template chain includes a given template (for locale / asset links)
+  let chains: Map<string, string[]> | undefined;
+  const pagesRendering = (tplRel: string) => {
+    chains ??= new Map(map.nodes.map((n) => [n.id, views.chainAll(n.views.length ? n.views : n.view ? [n.view] : [])]));
+    return map.nodes.filter((n) => chains!.get(n.id)!.includes(tplRel));
+  };
+  let keyUsage: Map<string, KeyUsage> | undefined;
   const nodeIds = new Set(map.nodes.map((n) => n.id));
 
   const hits = new Map<string, { reasons: Set<string>; hunks: Set<string>; links: Map<string, Link> }>();
@@ -87,17 +96,18 @@ export function detectCandidates(
     hits.set(id, h);
   };
   // `direct`: the hunk is inside this route's own handler (vs reached through a helper chain)
-  const hitRoute = (r: RouteDef, reason: string, hunk: string, direct: boolean) => {
+  // `kind` overrides the link kind (e.g. locale text a handler sends)
+  const hitRoute = (r: RouteDef, reason: string, hunk: string, direct: boolean, kind?: LinkKind) => {
     const label = `${r.method.toUpperCase()} ${r.path}`;
     if (r.method === "get") {
-      hit(nodeId(r.path), reason.replace("{route}", label), hunk, { kind: direct ? "handler" : "helper" });
+      hit(nodeId(r.path), reason.replace("{route}", label), hunk, { kind: kind ?? (direct ? "handler" : "helper") });
       return;
     }
     // a mutating route belongs to the flows whose pages trigger it
     for (const e of map.edges) {
       if (e.backing?.method === r.method.toUpperCase() && e.backing.path === r.path) {
         hit(e.from, reason.replace("{route}", label) + ` (action on this page)`, hunk, {
-          kind: "action",
+          kind: kind ?? "action",
           action: { method: r.method.toUpperCase(), path: r.path },
         });
       }
@@ -141,6 +151,56 @@ export function detectCandidates(
     const hunks = parseHunks(file.patch);
     for (const h of hunks) hunkFile.set(h.text, file.path);
     const ext = extname(file.path);
+
+    // ---- translation strings (PER-63) ----------------------------------------------
+    if (isLocaleFile(file.path)) {
+      const baseJson = (baseRev ? fileAt(appRoot, baseRev, file.path) : undefined) ?? readText(abs) ?? "";
+      keyUsage ??= keyUsageIndex(appRoot);
+      for (const h of hunks) {
+        const keys = changedKeys(baseJson, h);
+        let reached = false;
+        for (const key of keys) {
+          const u = keyUsage.get(key);
+          if (!u) continue;
+          for (const tpl of u.templates) {
+            for (const n of pagesRendering(tpl)) {
+              hit(n.id, `shows text "${key}" (changed in ${file.path}) via ${tpl}`, h.text, { kind: "locale" });
+              reached = true;
+            }
+          }
+          for (const c of u.code) {
+            const codeAbs = join(appRoot, c.file);
+            const text = readText(codeAbs) ?? "";
+            for (const r of routesOf(codeAbs, c.file, text, `tree:${c.file}`)) {
+              if (c.line < r.span.start || c.line > r.span.end) continue;
+              hitRoute(r, `{route} sends text "${key}" (changed in ${file.path})`, h.text, true, "locale");
+              reached = true;
+            }
+          }
+        }
+        if (!reached) {
+          unmapped.push({
+            file: file.path,
+            header: header(h),
+            why: keys.length ? `locale keys ${keys.slice(0, 4).join(", ")} are not used by any literal t() call` : "no translation key on the changed lines",
+          });
+        }
+      }
+      continue;
+    }
+    // ---- stylesheets and client scripts (PER-63) ---------------------------------------
+    if (isStaticAsset(file.path)) {
+      const refs = assetReferences(appRoot, file.path);
+      let reached = false;
+      for (const tpl of refs) {
+        for (const n of pagesRendering(tpl)) {
+          for (const h of hunks) hit(n.id, `loads ${file.path} (changed) via ${tpl}`, h.text, { kind: "asset" });
+          reached = true;
+        }
+      }
+      if (!reached) for (const h of hunks) unmapped.push({ file: file.path, header: header(h), why: "static asset not linked by any template" });
+      continue;
+    }
 
     if (ext === ".ejs") {
       for (const n of map.nodes) {

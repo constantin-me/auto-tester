@@ -61,7 +61,9 @@ type ExecCache = { entries: Record<string, { key: string; pDiffers: number }> };
 
 /** The strongest link wins: any direct link makes the candidate direct. */
 function mechanismOf(links: Link[]): FlowRow["mechanism"] {
-  if (links.some(isDirect)) return "direct";
+  if (links.some((l) => l.kind === "handler" || l.kind === "template")) return "direct";
+  if (links.some((l) => l.kind === "locale")) return "locale";
+  if (links.some((l) => l.kind === "asset")) return "asset";
   if (links.some((l) => l.kind === "middleware")) return "middleware";
   if (links.some((l) => l.kind === "action")) return "action";
   return "helper";
@@ -230,7 +232,7 @@ async function main() {
     const subset = rows.filter((r) => r.split === split && r.candidate && r.label !== "unsure");
     if (!subset.length) continue;
     console.log(`\nby mechanism, ${split}, sure labels (candidates: true / false positives; kept after triage / after execution check)`);
-    for (const m of ["direct", "middleware", "action", "helper"] as const) {
+    for (const m of ["direct", "locale", "asset", "middleware", "action", "helper"] as const) {
       const g = subset.filter((r) => r.mechanism === m);
       if (!g.length) continue;
       const kept = (f: (r: FlowRow) => boolean | undefined) => `${g.filter((r) => r.label && f(r)).length}/${g.filter((r) => !r.label && f(r)).length}`;

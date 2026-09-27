@@ -21,7 +21,7 @@ export interface FlowRow {
   /** Jev triage alone (before the execution check) */
   triageOnly?: boolean;
   /** how the change reached this candidate: direct, or the indirect mechanism */
-  mechanism?: "direct" | "middleware" | "action" | "helper";
+  mechanism?: "direct" | "locale" | "asset" | "middleware" | "action" | "helper";
 }
 
 /** How `unsure` labels count: excluded from scoring, or counted as affected. */
