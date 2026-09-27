@@ -12,14 +12,17 @@
   "definition": "labels/_definition.md",
   "affected": [
     {
-      "flow": "node:album-id",
-      "confidence": "sure",
-      "note": "estimate modal calls GET /api/estimate/:discogsId, whose response changed"
-    },
-    {
       "flow": "node:collection",
       "confidence": "sure",
       "note": "snapshot save/history scoped to the reader's currency; new other-currency notice (locale)"
+    },
+    {
+      "flow": "node:api-estimate-history",
+      "confidence": "sure",
+      "note": "history endpoint now returns only the reader's currency"
     }
+  ],
+  "corrections": [
+    "2026-09-27, after batch-4 scoring: removed node:album-id and added node:api-estimate-history. The label misread git's hunk header (getEstimate is only the context line; the changed code is in saveEstimateSnapshot and getEstimateHistory). Found because the detector disagreed, so this correction can only favour the detector."
   ]
 }

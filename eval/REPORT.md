@@ -3,6 +3,44 @@
 **Status: labels UNREVIEWED.** All labels were drafted by the assistant from diffs and
 templates. Every number below is provisional until a human reviews `eval/labels/`.
 
+## Round 4 — 2026-09-27: crawler residuals (PER-68), locale/assets (PER-63), batch 4
+
+Batch 4 (PER-71) was picked by a path-only stratified rule (2 newest unused commits each
+touching locales/css, middleware/app.ts, routes) and its labels committed (20c1f4d) before
+any of these fixes. Batch 4 labels are not yet reviewed by the user.
+
+Fixes, measured on data already seen (detector only):
+- `req.app.get("io")` (Express settings getter) was read as a route: it cut the enclosing
+  handler's span and added a fake `/admin/io` flow. Routes now need a route-shaped path and a
+  non-member receiver. Cut spans in the corpus 1 → 0.
+- templates rendered by literal path (`res.render(path.join(__dirname, 'partials/episodes'))`)
+  resolve; computed paths are left out. `/dvd/:id/episodes` now inherits the header.
+- changed translation keys reach literal `t('key')` users; changed public CSS/JS reach the
+  pages that link them. 77859d1 (unused key) and 887c1c7 (boot code) still give 0 candidates.
+- a re-crawl no longer wipes the QA baseline (observations carried over).
+- Batch 2 recall 0.97 → 1.00; no recall lost on dev, train or batch 3.
+
+| (sure labels) | detector R / P | + Jev triage | + execution check |
+|---|---|---|---|
+| **HELDOUT4 pooled** (scored once) | **1.00** / 0.26 | **1.00 / 0.70** | 0.94 / **0.83** |
+| HELDOUT4 dedup | 1.00 / 0.34 | 1.00 / 0.81 | 0.92 / 0.86 |
+| HELDOUT3 pooled | 1.00 / 0.99 | 1.00 / 1.00 | 1.00 / 1.00 |
+| HELDOUT2 pooled | 1.00 / 0.98 | 1.00 / 0.98 | 1.00 / 0.98 |
+| DEV pooled | 0.99 / 0.56 | 0.97 / 0.68 | 0.96 / 0.84 |
+
+- **First held-out middleware evidence.** 5da97aa adds one line to `settingsMiddleware`; the
+  detector fans out to 45 flows, all false. Triage keeps 6, the execution check 2.
+- **The execution check keeps costing held-out recall on action links:** one true positive in
+  batch 3 (8707d43) and one in batch 4 (4a4bd8b, P(differs) 0.43). On dev it lost none. Its
+  held-out gains are in middleware. Candidate change for the next iteration (not applied,
+  since it would be chosen on held-out data): only let it drop middleware-linked flows.
+- **Label correction after scoring (disclosed):** bc459e8 had `/album/:id` labelled from git's
+  hunk header (`getEstimate` is only the context line) and missed the changed
+  `/api/estimate/history` endpoint. Both fixed; both favour the detector.
+- Still open: PER-68c (a guard attached to route-table entries through a flag, 3005b51).
+
+---
+
 ## Round 3 — 2026-09-26: Jev live on everything + execution check (PER-69)
 
 Labels for train/dev/batch 1/batch 2 reviewed by the user at rule level (error-path,
