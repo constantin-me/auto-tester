@@ -6,7 +6,18 @@ import { readCommit, readRange, readWorkingTree } from "../diff/git.js";
 import { detectCandidates, isDirect } from "../detect/impact.js";
 import { viewIndexFor } from "../bootstrap/crawl.js";
 import { Judge, mapLimit, type UsageRecord } from "../jev/client.js";
-import { askExecution, askTriage, decideTriage, dropByExecution, type FlowContext } from "../jev/judgments.js";
+import {
+  askExecution,
+  askTriage,
+  decideTriage,
+  dropByExecution,
+  EXECUTION_QUESTIONS,
+  triageState,
+  TRIAGE_QUESTIONS,
+  type FlowContext,
+  type TriageRaw,
+} from "../jev/judgments.js";
+import { JevCache } from "../jev/cache.js";
 import { executionState } from "../jev/evidence.js";
 import { DEFAULT_POLICY } from "../jev/policy.js";
 import { QaSession } from "../qa/driver.js";
@@ -29,7 +40,9 @@ async function main() {
   const argv = process.argv.slice(2);
   // --no-exec: skip the execution check (PER-69), e.g. to compare how many flows it saves
   const useExec = !argv.includes("--no-exec");
-  const [configArg, target] = argv.filter((a) => a !== "--no-exec");
+  // --no-cache: ask Jev again even when an identical question was answered before
+  const useCache = !argv.includes("--no-cache");
+  const [configArg, target] = argv.filter((a) => a !== "--no-exec" && a !== "--no-cache");
   if (!configArg || !target || !existsSync(configArg)) {
     console.error("usage: npm run qa:check -- <config> (--working-tree | <commit> | <base>..<head>) [--no-exec]");
     process.exit(2);
@@ -58,6 +71,11 @@ async function main() {
   // ---- which flows are affected --------------------------------------------------
   const usage: UsageRecord[] = [];
   const judge = new Judge({ model: config.jev.model, onUsage: (u) => usage.push(u) });
+  // same change, same question, same state, same model -> same answer, free (--no-cache to re-ask)
+  const cacheDir = resolve(baseDir, config.qa.runsDir, "..", "cache");
+  const model = config.jev.model ?? "sdk-default";
+  const triageCache = new JevCache<TriageRaw>(useCache ? join(cacheDir, "triage.json") : null, model);
+  const execCache = new JevCache<number>(useCache ? join(cacheDir, "execution.json") : null, model);
   const detection = detectCandidates(appRoot, map, change, baseRev, config.crawler);
   const views = viewIndexFor(appRoot, config.crawler);
   const byId = new Map(map.nodes.map((n) => [n.id, n]));
@@ -68,12 +86,24 @@ async function main() {
       edges: map.edges.filter((e) => e.from === k.nodeId),
       templates: views.chainAll(node.views.length ? node.views : node.view ? [node.view] : []),
     };
-    const triage = decideTriage(await askTriage(judge, change, flow, { reasons: k.reasons, hunks: k.hunks }), DEFAULT_POLICY);
+    const focus = { reasons: k.reasons, hunks: k.hunks };
+    const raw = await triageCache.getOrAsk(triageCache.key("triage", TRIAGE_QUESTIONS, triageState(change, flow, focus)), () =>
+      askTriage(judge, change, flow, focus),
+    );
+    const triage = decideTriage(raw, DEFAULT_POLICY);
     let pDiffers: number | undefined;
-    if (useExec && triage.affected && k.links.every((l) => !isDirect(l))) pDiffers = await askExecution(judge, executionState(node, k, { appRoot, views }));
+    if (useExec && triage.affected && k.links.every((l) => !isDirect(l))) {
+      const state = executionState(node, k, { appRoot, views });
+      pDiffers = await execCache.getOrAsk(execCache.key("execution", EXECUTION_QUESTIONS, state), () => askExecution(judge, state));
+    }
     const affected = triage.affected && !(pDiffers !== undefined && dropByExecution(pDiffers, k.links, DEFAULT_POLICY));
     return { k, node, triage, pDiffers, affected };
   });
+  if (useCache) {
+    triageCache.save();
+    execCache.save();
+  }
+  console.log(`[qa] Jev cache: ${triageCache.hits + execCache.hits} answers reused, ${triageCache.misses + execCache.misses} asked${useCache ? "" : " (--no-cache)"}`);
   const affected = judged.filter((j) => j.affected).sort((a, b) => b.triage.value - a.triage.value);
   console.log(`[qa] ${detection.candidates.length} candidates -> ${affected.length} affected after Jev (execution check ${useExec ? "on" : "off"})`);
   for (const j of judged.filter((x) => !x.affected)) console.log(`    not tested  ${j.node.route ?? j.node.id}  (Jev: P(runs)=${j.triage.pRuns.toFixed(2)}${j.pDiffers !== undefined ? `, P(differs)=${j.pDiffers.toFixed(2)}` : ""})`);

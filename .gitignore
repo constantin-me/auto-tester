@@ -5,3 +5,4 @@ test-projects/
 eval/maps/
 eval/results/
 .autotester/runs/
+.autotester/cache/
