@@ -1,0 +1,106 @@
+# Auto-tester for pull requests — TEMPLATE.
+#
+# Copy to `.github/workflows/autotester.yml` in the APP's repository (not this one).
+# Advisory: the job reports, it never blocks a merge (the check step always succeeds).
+#
+# Decisions to make before enabling (see ci/README.md):
+#   - how the app is built and started in CI (here: docker compose from the checkout)
+#   - how CI gets a signed-in test user and some data (here: an app-specific seed step)
+#   - whether reports are posted as PR comments (off by default)
+#
+# Secrets used:
+#   TYPESAFE_API_KEY    Jev judgments
+#   QA_USER / QA_PASS   test account the auth recipe signs in with
+
+name: autotester (advisory)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  # pull-requests: write   # only if you enable the comment step below
+
+concurrency:
+  group: autotester-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      QA_USER: ${{ secrets.QA_USER }}
+      QA_PASS: ${{ secrets.QA_PASS }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Check out the app (full history, for base..head)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Check out auto-tester
+        uses: actions/checkout@v4
+        with:
+          repository: constantin-me/auto-tester   # adjust if you fork or move it
+          path: .autotester-tool
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: .autotester-tool/package-lock.json
+
+      - name: Install auto-tester
+        working-directory: .autotester-tool
+        run: npm ci
+
+      # ---- baseline on the PR's base ------------------------------------------------
+      - name: Start the app at the base commit
+        run: |
+          git checkout --quiet "$BASE_SHA"
+          docker compose up -d --build
+          curl -s -o /dev/null --retry 60 --retry-delay 2 --retry-connrefused --retry-all-errors http://localhost:3099/login
+
+      - name: Seed a test user and data (APP-SPECIFIC — replace)
+        run: |
+          echo "Create the QA_USER account and a few items here, e.g. by restoring a"
+          echo "fixture backup through the app's own import endpoint."
+
+      - name: Record the baseline
+        working-directory: .autotester-tool
+        run: |
+          npm run bootstrap -- "$GITHUB_WORKSPACE/autotester.config.json"
+          npm run qa:baseline -- "$GITHUB_WORKSPACE/autotester.config.json"
+
+      # ---- check the PR's head against it ------------------------------------------
+      - name: Rebuild the app at the head commit
+        run: |
+          git checkout --quiet "$HEAD_SHA"
+          docker compose up -d --build
+          curl -s -o /dev/null --retry 60 --retry-delay 2 --retry-connrefused --retry-all-errors http://localhost:3099/login
+
+      - name: Check the change (advisory, never fails the job)
+        working-directory: .autotester-tool
+        run: npm run qa:check -- "$GITHUB_WORKSPACE/autotester.config.json" "$BASE_SHA..$HEAD_SHA" || true
+
+      - name: Upload the report and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autotester-report
+          path: .autotester/runs/
+          if-no-files-found: warn
+
+      # ---- optional: post the report on the PR (off by default) ----------------------
+      # - name: Comment the report on the PR
+      #   if: always()
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     report=$(ls -td .autotester/runs/check-*/ | head -1)report.md
+      #     gh pr comment ${{ github.event.pull_request.number }} --body-file "$report"
