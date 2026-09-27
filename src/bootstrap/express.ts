@@ -38,7 +38,7 @@ export interface RouteDef {
 }
 
 const ROUTE_RE =
-  /\b(app|router|\w*[Rr]outer)\.(get|post|put|delete|patch)\s*\(\s*(?:[A-Za-z_$][\w.$]*\s*\+\s*)?(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
+  /(?<![.\w$])(app|router|\w*[Rr]outer)\.(get|post|put|delete|patch)\s*\(\s*(?:[A-Za-z_$][\w.$]*\s*\+\s*)?(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
 const RENDER_RE = /\bres\.render\s*\(\s*['"`]([^'"`]+)['"`]/g;
 const REDIRECT_RE = /\bres\.redirect\s*\(\s*(?:\d+\s*,\s*)?(?:[A-Za-z_$][\w.$]*\s*\+\s*)?(?:'([^']*)'|"([^"]*)"|`([^`]*)`)/g;
 const HANDLER_START = /\basync\b|\(\s*_?req\b|\bfunction\b|\b_?req\s*=>/;
@@ -258,7 +258,9 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
   // fake string in closingParen and cut the handler's span short
   const text = stripComments(source);
   const routes: RouteDef[] = [];
-  const matches = [...text.matchAll(ROUTE_RE)];
+  // only route-shaped paths are routes (and delimit spans): `app.get("io")` is Express's
+  // settings getter, and treating it as a route cut the handler around it short (PER-68)
+  const matches = [...text.matchAll(ROUTE_RE)].filter((m) => /^(\/|\$\{|\*)/.test(m[3] ?? m[4] ?? m[5] ?? ""));
   // `router.use(requireAuth, …)` guards every route the router declares after it
   const routerUses = [...text.matchAll(/\b(\w*[Rr]outer)\.use\s*\(/g)].map((u) => {
     const argsAt = u.index! + u[0].length;

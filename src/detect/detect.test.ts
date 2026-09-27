@@ -46,6 +46,24 @@ test("an apostrophe in a comment does not cut a handler's span short", () => {
   assert.deepEqual(other!.span, { start: 6, end: 6 });
 });
 
+test("PER-68: app.get(\"io\") inside a handler is Express's settings getter, not a route", () => {
+  const src = [
+    "router.post(", //                                  1
+    "  \"/refresh-all/:pluginId\",", //                2
+    "  requireAuth,", //                                3
+    "  async (req, res) => {", //                       4
+    "    const io = req.app.get(\"io\");", //           5  (DVinyl adminRoutes.ts, a67e7a7)
+    "    io.emit('x');", //                             6
+    "    res.redirect('/admin');", //                   7
+    "  },", //                                          8
+    ");", //                                            9
+    "router.get('/next', (req, res) => res.send(''));", // 10
+  ].join("\n");
+  const routes = routesInText(src, "/x/admin.ts", "admin.ts", ["/admin"], []);
+  assert.deepEqual(routes.map((r) => r.path), ["/admin/refresh-all/:pluginId", "/admin/next"], "no fake /io route");
+  assert.deepEqual(routes[0]!.span, { start: 1, end: 9 }, "span covers the whole handler");
+});
+
 test("PER-65: a handler keeps every view it renders, fallback first", () => {
   const src = [
     "router.get('/collection', async (req, res) => {", // 1
