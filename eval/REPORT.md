@@ -22,7 +22,8 @@ Fixes, measured on data already seen (detector only):
 
 | (sure labels) | detector R / P | + Jev triage | + execution check |
 |---|---|---|---|
-| **HELDOUT4 pooled** (scored once) | **1.00** / 0.26 | **1.00 / 0.70** | 0.94 / **0.83** |
+| **HELDOUT4 pooled** (scored once, labels corrected) | **1.00** / 0.26 | **1.00 / 0.70** | 0.94 / **0.83** |
+| HELDOUT4 pooled, labels as written before scoring | 0.94 / 0.24 | 0.94 / 0.65 | 0.88 / 0.78 |
 | HELDOUT4 dedup | 1.00 / 0.34 | 1.00 / 0.81 | 0.92 / 0.86 |
 | HELDOUT3 pooled | 1.00 / 0.99 | 1.00 / 1.00 | 1.00 / 1.00 |
 | HELDOUT2 pooled | 1.00 / 0.98 | 1.00 / 0.98 | 1.00 / 0.98 |

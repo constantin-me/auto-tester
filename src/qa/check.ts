@@ -2,6 +2,7 @@ import type { Assertion, FlowNode } from "../mindmap/schema.js";
 import type { Judge } from "../jev/client.js";
 import { judgeObservation, rateSeverity, type Verdict } from "../jev/judgments.js";
 import type { PageEvidence, QaSession } from "./driver.js";
+import type { JevCache } from "../jev/cache.js";
 
 /**
  * Check one affected flow against its baseline (M4 slice 2, PER-52/53).
@@ -47,7 +48,13 @@ const textSeen = (value: string, ev: PageEvidence) =>
   ev.structure.labels.includes(value);
 
 /** Deviations from one visit, before retries and severity. */
-async function deviations(node: FlowNode, ev: PageEvidence, visited: string, judge: Judge): Promise<Omit<Finding, "confidence">[]> {
+/** Jev answer caches for the comparison step (see JevCache); optional. */
+export interface CheckCaches {
+  observation?: JevCache<{ pSufficient: number; pHolds: number }>;
+  severity?: JevCache<{ score: number; confidence: number }>;
+}
+
+async function deviations(node: FlowNode, ev: PageEvidence, visited: string, judge: Judge, caches: CheckCaches): Promise<Omit<Finding, "confidence">[]> {
   const out: Omit<Finding, "confidence">[] = [];
   const base = node.observed;
 
@@ -71,7 +78,7 @@ async function deviations(node: FlowNode, ev: PageEvidence, visited: string, jud
   const checkable = node.assertions.filter((a): a is Assertion & { check: { kind: "text-present"; value: string } } => a.check?.kind === "text-present");
   for (const a of checkable) {
     if (textSeen(a.check.value, ev)) continue;
-    const j = await judgeObservation(judge, a.expectation, ev.observation);
+    const j = await judgeObservation(judge, a.expectation, ev.observation, undefined, caches.observation);
     if (j.verdict === "match") continue;
     out.push({ kind: "assertion", expectation: a.expectation, actual: `"${a.check.value}" not found on the page`, verdict: j.verdict });
   }
@@ -85,11 +92,12 @@ export async function checkFlow(
   node: FlowNode,
   path: string,
   judge: Judge,
-  opts: { retryCount: number; evidenceDir: string },
+  opts: { retryCount: number; evidenceDir: string; caches?: CheckCaches },
 ): Promise<FlowCheck> {
+  const caches = opts.caches ?? {};
   const name = node.id.replace(/[^\w-]+/g, "_");
   let ev = await session.visit(path, opts.evidenceDir, name);
-  let found = await deviations(node, ev, path, judge);
+  let found = await deviations(node, ev, path, judge, caches);
   let attempts = 1;
   const seen = new Map(found.map((f) => [keyOf(f), 1]));
 
@@ -97,14 +105,14 @@ export async function checkFlow(
   while (found.length && attempts <= opts.retryCount) {
     attempts++;
     ev = await session.visit(path, opts.evidenceDir, `${name}_retry${attempts - 1}`);
-    const again = await deviations(node, ev, path, judge);
+    const again = await deviations(node, ev, path, judge, caches);
     for (const f of again) seen.set(keyOf(f), (seen.get(keyOf(f)) ?? 0) + 1);
     found = [...new Map([...found, ...again].map((f) => [keyOf(f), f])).values()];
   }
 
   const findings: Finding[] = [];
   for (const f of found) {
-    const sev = await rateSeverity(judge, { flow: `${node.label} (${node.route})`, expectation: f.expectation, actual: f.actual });
+    const sev = await rateSeverity(judge, { flow: `${node.label} (${node.route})`, expectation: f.expectation, actual: f.actual }, caches.severity);
     const stable = (seen.get(keyOf(f)) ?? 0) === attempts;
     // one-shot deviations are never reported as bugs; severity >= 3 must repeat
     const confidence: Finding["confidence"] = stable && (sev.level < 3 || attempts > 1) ? "stable" : "maybe";

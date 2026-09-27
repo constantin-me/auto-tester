@@ -5,7 +5,14 @@
   "crawler": {
     "entry": "app.ts",
     "expansions": [
-      { "var": "plugin", "from": "plugins/*/index.ts", "fields": ["id", "routePrefix"] }
+      {
+        "var": "plugin",
+        "from": "plugins/*/index.ts",
+        "fields": [
+          "id",
+          "routePrefix"
+        ]
+      }
     ]
   },
   "env": {
@@ -20,7 +27,17 @@
     },
     "submitSelector": "button[type=submit]"
   },
-  "budget": { "maxTokens": 200000 },
-  "flakiness": { "retryCount": 2 },
-  "store": { "backend": "local-disk", "dir": ".autotester/mindmap/dvinyl" }
+  "budget": {
+    "maxTokens": 200000
+  },
+  "flakiness": {
+    "retryCount": 2
+  },
+  "store": {
+    "backend": "local-disk",
+    "dir": ".autotester/mindmap/dvinyl"
+  },
+  "jev": {
+    "model": "jev-1.13.0"
+  }
 }

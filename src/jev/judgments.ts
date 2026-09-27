@@ -1,6 +1,7 @@
 import { choice, noul, score, type JsonValue } from "@typesafe-ai/sdk";
 import type { FlowEdge, FlowNode } from "../mindmap/schema.js";
 import type { Judge } from "./client.js";
+import type { JevCache } from "./cache.js";
 import { DEFAULT_POLICY, type Policy } from "./policy.js";
 
 /**
@@ -315,32 +316,32 @@ export interface ObservationJudgment {
 
 const MAX_TEXT_CHARS = 6000;
 
+export const OBSERVATION_QUESTIONS = {
+  evidence_sufficient: noul("Does \`observation\` contain enough information to tell whether \`expectation\` holds?", {
+    true: "The page state in \`observation\` directly shows the thing \`expectation\` is about.",
+    false: "\`observation\` does not show the relevant part of the page, or the page did not load far enough to tell.",
+  }),
+  expectation_holds: noul("Does \`observation\` show that \`expectation\` holds?", {
+    true: "What the page shows agrees with \`expectation\`.",
+    false: "What the page shows contradicts \`expectation\`, or the expected element, text or outcome is missing.",
+  }),
+} as const;
+
+/** `cache`: raw answers keyed by question set + exact state (see JevCache); policy applies after. */
 export async function judgeObservation(
   judge: Judge,
   expectation: string,
   observation: Observation,
   policy: Policy = DEFAULT_POLICY,
+  cache?: JevCache<{ pSufficient: number; pHolds: number }>,
 ): Promise<ObservationJudgment> {
-  const a = await judge.ask(
-    "observation",
-    {
-      expectation,
-      observation: { ...observation, text: observation.text.slice(0, MAX_TEXT_CHARS) },
-    },
-    {
-      evidence_sufficient: noul("Does `observation` contain enough information to tell whether `expectation` holds?", {
-        true: "The page state in `observation` directly shows the thing `expectation` is about.",
-        false: "`observation` does not show the relevant part of the page, or the page did not load far enough to tell.",
-      }),
-      expectation_holds: noul("Does `observation` show that `expectation` holds?", {
-        true: "What the page shows agrees with `expectation`.",
-        false: "What the page shows contradicts `expectation`, or the expected element, text or outcome is missing.",
-      }),
-    },
-  );
+  const state = { expectation, observation: { ...observation, text: observation.text.slice(0, MAX_TEXT_CHARS) } };
+  const ask = async () => {
+    const a = await judge.ask("observation", state, OBSERVATION_QUESTIONS);
+    return { pSufficient: a.evidence_sufficient.noul, pHolds: a.expectation_holds.noul };
+  };
+  const { pSufficient, pHolds } = cache ? await cache.getOrAsk(cache.key("observation", OBSERVATION_QUESTIONS, state), ask) : await ask();
   const p = policy.observation;
-  const pSufficient = a.evidence_sufficient.noul;
-  const pHolds = a.expectation_holds.noul;
   const verdict: Verdict =
     pSufficient < p.sufficient ? "inconclusive" : pHolds >= p.holds ? "match" : pHolds <= p.violated ? "deviation" : "inconclusive";
   return { verdict, pSufficient, pHolds };
@@ -362,19 +363,25 @@ export interface Severity {
   confidence: number;
 }
 
-export async function rateSeverity(judge: Judge, finding: Finding): Promise<Severity> {
-  const a = await judge.ask("severity", { finding }, {
-    severity: score("How severe is `finding` for releasing this version of the app?", [
-      "Non-blocking and minor: a cosmetic blemish most users would not notice.",
-      "Minor: a noticeable cosmetic or wording problem; the flow still fully works.",
-      "Moderate: a secondary part of the flow misbehaves, and an easy workaround exists.",
-      "Major: a main step of the flow fails or gives a wrong result for some users.",
-      "Critical: the flow fails for most users, or data is shown or saved incorrectly.",
-      "Release blocker: the app or a core flow is unusable, or user data is lost or exposed.",
-    ]),
-  });
-  const s = a.severity.score;
-  return { score: s, level: Math.min(5, Math.max(0, Math.round(s))) as Severity["level"], confidence: a.severity.confidence };
+export const SEVERITY_QUESTIONS = {
+  severity: score("How severe is \`finding\` for releasing this version of the app?", [
+    "Non-blocking and minor: a cosmetic blemish most users would not notice.",
+    "Minor: a noticeable cosmetic or wording problem; the flow still fully works.",
+    "Moderate: a secondary part of the flow misbehaves, and an easy workaround exists.",
+    "Major: a main step of the flow fails or gives a wrong result for some users.",
+    "Critical: the flow fails for most users, or data is shown or saved incorrectly.",
+    "Release blocker: the app or a core flow is unusable, or user data is lost or exposed.",
+  ]),
+} as const;
+
+/** `cache`: keyed by the finding itself, so the same finding always gets the same severity. */
+export async function rateSeverity(judge: Judge, finding: Finding, cache?: JevCache<{ score: number; confidence: number }>): Promise<Severity> {
+  const ask = async () => {
+    const a = await judge.ask("severity", { finding }, SEVERITY_QUESTIONS);
+    return { score: a.severity.score, confidence: a.severity.confidence };
+  };
+  const r = cache ? await cache.getOrAsk(cache.key("severity", SEVERITY_QUESTIONS, { finding }), ask) : await ask();
+  return { score: r.score, level: Math.min(5, Math.max(0, Math.round(r.score))) as Severity["level"], confidence: r.confidence };
 }
 
 // ---- 4. next browser action: select among code-enumerated candidates -------

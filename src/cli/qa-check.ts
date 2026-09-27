@@ -76,6 +76,9 @@ async function main() {
   const model = config.jev.model ?? "sdk-default";
   const triageCache = new JevCache<TriageRaw>(useCache ? join(cacheDir, "triage.json") : null, model);
   const execCache = new JevCache<number>(useCache ? join(cacheDir, "execution.json") : null, model);
+  // the comparison step too: severity decides the verdict, so it must not flip between runs
+  const observationCache = new JevCache<{ pSufficient: number; pHolds: number }>(useCache ? join(cacheDir, "observation.json") : null, model);
+  const severityCache = new JevCache<{ score: number; confidence: number }>(useCache ? join(cacheDir, "severity.json") : null, model);
   const detection = detectCandidates(appRoot, map, change, baseRev, config.crawler);
   const views = viewIndexFor(appRoot, config.crawler);
   const byId = new Map(map.nodes.map((n) => [n.id, n]));
@@ -124,11 +127,19 @@ async function main() {
       results.push({ flow: p.node.id, path: p.path, status: "unreachable-here", reason: "404 at baseline too (module disabled here)" });
     }
     const checks = await mapLimit(visits, config.qa.concurrency, (p) =>
-      checkFlow(session, p.node, p.path!, judge, { retryCount: config.flakiness.retryCount, evidenceDir: runDir }),
+      checkFlow(session, p.node, p.path!, judge, {
+        retryCount: config.flakiness.retryCount,
+        evidenceDir: runDir,
+        caches: { observation: observationCache, severity: severityCache },
+      }),
     );
     results.push(...checks);
   } finally {
     await session.close();
+    if (useCache) {
+      observationCache.save();
+      severityCache.save();
+    }
   }
 
   // ---- report ----------------------------------------------------------------------

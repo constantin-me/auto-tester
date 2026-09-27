@@ -3,6 +3,8 @@
 # Copy to `.github/workflows/autotester.yml` in the APP's repository (not this one).
 # Advisory: the job reports, it never blocks a merge (the check step always succeeds).
 #
+# STATUS: linted with actionlint, never run. Expect to fix the first run (see ci/README.md).
+#
 # Decisions to make before enabling (see ci/README.md):
 #   - how the app is built and started in CI (here: docker compose from the checkout)
 #   - how CI gets a signed-in test user and some data (here: an app-specific seed step)
@@ -36,6 +38,8 @@ jobs:
       QA_PASS: ${{ secrets.QA_PASS }}
       BASE_SHA: ${{ github.event.pull_request.base.sha }}
       HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      # must match store.dir in autotester.config.json (relative to the repo root)
+      STORE_DIR: .autotester/mindmap
     steps:
       - name: Check out the app (full history, for base..head)
         uses: actions/checkout@v4
@@ -80,7 +84,11 @@ jobs:
       # ---- check the PR's head against it ------------------------------------------
       - name: Rebuild the app at the head commit
         run: |
-          git checkout --quiet "$HEAD_SHA"
+          # the baseline rewrote the committed mind-map; keep it across the checkout
+          # (a PR that changes that file would otherwise make the checkout fail)
+          cp -r "$STORE_DIR" "$RUNNER_TEMP/mindmap-baseline"
+          git checkout --quiet --force "$HEAD_SHA"
+          rm -rf "$STORE_DIR" && mkdir -p "$(dirname "$STORE_DIR")" && cp -r "$RUNNER_TEMP/mindmap-baseline" "$STORE_DIR"
           docker compose up -d --build
           curl -s -o /dev/null --retry 60 --retry-delay 2 --retry-connrefused --retry-all-errors http://localhost:3099/login
 
