@@ -45,6 +45,11 @@ export class ViewIndex {
   /** `res.render('add')` -> abs path of add.ejs in the first view dir that has it */
   resolveView(name: string): string | undefined {
     const file = name.endsWith(".ejs") ? name : `${name}.ejs`;
+    // "@/plugins/dvds/partials/episodes": rendered by path (res.render(path.join(__dirname, …)))
+    if (file.startsWith("@/")) {
+      const abs = join(this.appRoot, file.slice(2));
+      return existsSync(abs) ? abs : undefined;
+    }
     return this.viewDirs.map((d) => join(this.appRoot, d, file)).find((p) => existsSync(p));
   }
 

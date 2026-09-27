@@ -1,5 +1,5 @@
-%% Kyonew/DVinyl — generated 2026-09-26T16:14:53.783Z. Do not edit; regenerate with bootstrap.
-%% nodes=63 edges=201 (folded: 54 api, 8 unlinked)
+%% Kyonew/DVinyl — generated 2026-09-27T18:07:52.109Z. Do not edit; regenerate with bootstrap.
+%% nodes=62 edges=202 (folded: 54 api, 8 unlinked)
 flowchart LR
   n_root["Home<br/>/<br/>(5 api, 4 unlinked)"]
   n_global_nav{{"Global navigation (header, footer)<br/>(1 api)"}}
@@ -29,7 +29,6 @@ flowchart LR
     n_admin_personnalisation["Admin personnalisation<br/>/admin/personnalisation"]
     n_admin_api_search_collection(["Admin api search collection<br/>/admin/api/search-collection"])
     n_admin_api_search_image_universal(["Admin api search image universal<br/>/admin/api/search-image-universal"])
-    n_admin_io(["Admin io<br/>/admin/io"])
   end
   subgraph n_g_album["album"]
     n_album_edit_id["Album edit #123;id#125;<br/>/album/edit/:id"]
@@ -66,7 +65,7 @@ flowchart LR
     n_dvd_edit_id["Dvd edit #123;id#125;<br/>/dvd/edit/:id"]
     n_dvd_id["Dvd #123;id#125;<br/>/dvd/:id<br/>(4 api)"]
     n_dvd_id_label["Dvd #123;id#125; label<br/>/dvd/:id/label"]
-    n_dvd_id_episodes(["Dvd #123;id#125; episodes<br/>/dvd/:id/episodes"])
+    n_dvd_id_episodes["Dvd #123;id#125; episodes<br/>/dvd/:id/episodes"]
   end
   subgraph n_g_game["game"]
     n_game_edit_id["Game edit #123;id#125;<br/>/game/edit/:id"]
@@ -180,6 +179,7 @@ flowchart LR
   n_manual_add ==>|"POST /save-music"| n_wishlist
   n_manual_add ==>|"POST /save-music"| n_collection
   n_search ==>|"POST /collection/switch"| n_search
+  n_dvd_id_episodes --> n_dvd_id
   n_admin --> n_admin_instance
   n_admin --> n_create_plugin
   n_admin --> n_backup_collection_export_archive
@@ -237,7 +237,7 @@ flowchart LR
   classDef endpoint fill:#f4f4f4,stroke:#888,color:#111
   classDef synthetic fill:#fff6e0,stroke:#c98a00,color:#111
   classDef auth stroke-width:3px
-  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_login,n_create_plugin,n_settings,n_setup page
-  class n_dvd_id_episodes,n_api_collection_ids,n_api_album_id_track_trackId_lyrics,n_api_estimate_history,n_api_estimate_discogsId,n_api_search_discogs_gallery,n_admin_api_search_collection,n_admin_api_search_image_universal,n_admin_io,n_logout,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_login_oidc,n_login_oidc_callback,n_settings_oidc_link,n_plugin_assets_pluginId_file,n_share_token endpoint
+  class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_dvd_id_episodes,n_admin,n_admin_instance,n_admin_personnalisation,n_login,n_create_plugin,n_settings,n_setup page
+  class n_api_collection_ids,n_api_album_id_track_trackId_lyrics,n_api_estimate_history,n_api_estimate_discogsId,n_api_search_discogs_gallery,n_admin_api_search_collection,n_admin_api_search_image_universal,n_logout,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_login_oidc,n_login_oidc_callback,n_settings_oidc_link,n_plugin_assets_pluginId_file,n_share_token endpoint
   class n_global_nav synthetic
   class n_wishlist,n_collection,n_root,n_add_books,n_add_dvd,n_add_games,n_add_lego,n_add_music,n_confirm_books_id,n_confirm_dvd_id,n_confirm_games_id,n_confirm_lego_id,n_confirm_music_id,n_add_books_manual,n_add_dvd_manual,n_add_games_manual,n_add_lego_manual,n_add_music_manual,n_book_edit_id,n_dvd_edit_id,n_game_edit_id,n_lego_edit_id,n_album_edit_id,n_book_id,n_dvd_id,n_game_id,n_lego_id,n_album_id,n_book_id_label,n_dvd_id_label,n_game_id_label,n_lego_id_label,n_album_id_label,n_manual_add,n_search,n_admin,n_admin_instance,n_admin_personnalisation,n_admin_api_search_collection,n_admin_api_search_image_universal,n_backup_export,n_backup_export_archive,n_backup_collection_export,n_backup_collection_export_archive,n_backup_collection_export_csv,n_settings_oidc_link,n_create_plugin,n_settings auth

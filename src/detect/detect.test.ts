@@ -64,6 +64,25 @@ test("PER-68: app.get(\"io\") inside a handler is Express's settings getter, not
   assert.deepEqual(routes[0]!.span, { start: 1, end: 9 }, "span covers the whole handler");
 });
 
+test("PER-68: a template rendered by literal path resolves; a computed one is left out", () => {
+  const src = [
+    "export default {",
+    "  apiRoutes: [",
+    "    {",
+    "      method: 'get',",
+    "      path: '/dvd/:id/episodes',",
+    "      async handler(req, res) {",
+    "        if (!req.params.id) return res.render(path.join(__dirname, 'partials/episodes'), { item });",
+    "        res.render(path.join(__dirname, name), {});",
+    "      },",
+    "    },",
+    "  ],",
+    "};",
+  ].join("\n");
+  const [ep] = routesInText(src, "/app/plugins/dvds/index.ts", "plugins/dvds/index.ts", [""], []);
+  assert.deepEqual(ep!.views, ["@/plugins/dvds/partials/episodes"]);
+});
+
 test("PER-65: a handler keeps every view it renders, fallback first", () => {
   const src = [
     "router.get('/collection', async (req, res) => {", // 1

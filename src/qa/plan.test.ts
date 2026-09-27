@@ -90,3 +90,19 @@ test("expandEnv names a missing variable without revealing values", () => {
   assert.throws(() => expandEnv("${QA_TEST_MISSING}"), /QA_TEST_MISSING is not set/);
   delete process.env.QA_TEST_SECRET;
 });
+
+test("a re-crawl keeps live observations for nodes that still exist", async () => {
+  const { carryObservations } = await import("../mindmap/guard.js");
+  const prev = node("n:c", "/collection");
+  prev.observed = { at: "t", status: "reachable", httpStatus: 200 };
+  prev.assertions = observedAssertions(prev, evidence(), "/collection", [{ kind: "control", text: "Sort by" }]);
+  const fresh = node("n:c", "/collection");
+  const gone = node("n:gone", "/gone");
+  const out = carryObservations(
+    { schemaVersion: 1, repo: "r", generatedAt: "t", nodes: [prev, gone], edges: [] },
+    { schemaVersion: 1, repo: "r", generatedAt: "t", nodes: [fresh], edges: [] },
+  );
+  assert.equal(out.nodes.length, 1);
+  assert.equal(out.nodes[0]!.observed?.httpStatus, 200);
+  assert.equal(out.nodes[0]!.assertions.length, 2);
+});

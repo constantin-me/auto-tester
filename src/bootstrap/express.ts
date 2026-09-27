@@ -1,5 +1,5 @@
 import { existsSync, readdirSync } from "node:fs";
-import { dirname, join, relative, extname } from "node:path";
+import { dirname, join, relative, extname, posix, sep } from "node:path";
 import type { Expansion } from "../config/config.js";
 import { walk, readText, resolveModule, literalsOf, stripComments } from "./source.js";
 import { normalizePath, isAssetPath, PARAM } from "./paths.js";
@@ -207,8 +207,20 @@ interface HandlerFacts {
 }
 const NO_FACTS: HandlerFacts = { views: [], redirects: [] };
 
-function viewAndRedirects(body: string): HandlerFacts {
-  const views = [...new Set([...body.matchAll(RENDER_RE)].map((m) => m[1]!))];
+/**
+ * `res.render(path.join(__dirname, 'partials/episodes'))`: a template addressed by path,
+ * resolvable only when every part after __dirname is a literal. Recorded as a
+ * repo-relative "@/…" view (see ViewIndex.resolveView); anything computed is left out
+ * rather than guessed (PER-68).
+ */
+const PATH_RENDER_RE = /\bres\.render\s*\(\s*path\.(?:join|resolve)\(\s*__dirname((?:\s*,\s*(?:'[^']*'|"[^"]*"))+)\s*\)/g;
+
+/** `handlerDir`: repo-relative directory of the file the handler body lives in. */
+function viewAndRedirects(body: string, handlerDir = ""): HandlerFacts {
+  const byPath = [...body.matchAll(PATH_RENDER_RE)].map(
+    (m) => "@/" + posix.join(handlerDir, ...[...m[1]!.matchAll(/'([^']*)'|"([^"]*)"/g)].map((p) => p[1] ?? p[2] ?? "")),
+  );
+  const views = [...new Set([...[...body.matchAll(RENDER_RE)].map((m) => m[1]!), ...byPath])];
   const redirects = [
     ...new Set(
       [...body.matchAll(REDIRECT_RE)]
@@ -258,6 +270,10 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
   // fake string in closingParen and cut the handler's span short
   const text = stripComments(source);
   const routes: RouteDef[] = [];
+  // repo-relative paths for handlers resolved into other files
+  const appRoot = abs.slice(0, abs.length - rel.length);
+  const relTo = (fileAbs: string) => relative(appRoot, fileAbs);
+  const dirOf = (fileRel: string) => posix.dirname(fileRel.split(sep).join("/"));
   // only route-shaped paths are routes (and delimit spans): `app.get("io")` is Express's
   // settings getter, and treating it as a route cut the handler around it short (PER-68)
   const matches = [...text.matchAll(ROUTE_RE)].filter((m) => /^(\/|\$\{|\*)/.test(m[3] ?? m[4] ?? m[5] ?? ""));
@@ -294,14 +310,14 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
 
     if (handlerAt >= 0 && handlerAt < callEnd) {
       // inline handler: facts come from the handler's own body
-      emit(m[2]!, rawPath, guardsOf(afterPath.slice(0, handlerAt)), viewAndRedirects(afterPath.slice(handlerAt, callEnd)), span);
+      emit(m[2]!, rawPath, guardsOf(afterPath.slice(0, handlerAt)), viewAndRedirects(afterPath.slice(handlerAt, callEnd), dirOf(rel)), span);
       return;
     }
     // handler by reference: last argument is the handler, the rest are guards
     const tokens = guardsOf(afterPath.slice(0, callEnd));
     const ref = tokens.pop();
     const handler = ref && !ref.startsWith("...") ? referencedHandler(ref, abs, text) : undefined;
-    emit(m[2]!, rawPath, tokens, handler ? viewAndRedirects(handler.body) : NO_FACTS, span);
+    emit(m[2]!, rawPath, tokens, handler ? viewAndRedirects(handler.body, dirOf(relTo(handler.file))) : NO_FACTS, span);
   });
 
   for (const t of text.matchAll(ROUTE_TABLE_START)) {
@@ -316,9 +332,9 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
     let facts = NO_FACTS;
     if (ref && ref !== "async" && ref !== "function") {
       const handler = referencedHandler(ref, abs, text);
-      if (handler) facts = viewAndRedirects(handler.body);
+      if (handler) facts = viewAndRedirects(handler.body, dirOf(relTo(handler.file)));
     } else if (handlerAt >= 0) {
-      facts = viewAndRedirects(rest.slice(handlerAt)); // inline arrow, function value or method
+      facts = viewAndRedirects(rest.slice(handlerAt), dirOf(rel)); // inline arrow, function value or method
     }
     const span = { start: lineAt(text, t.index!), end: lineAt(text, objectEnd) };
     emit(t[1]!, t[2] ?? t[3] ?? t[4] ?? "", guards, facts, span);

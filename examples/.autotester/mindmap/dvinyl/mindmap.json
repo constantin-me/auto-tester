@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repo": "Kyonew/DVinyl",
-  "generatedAt": "2026-09-26T16:14:53.783Z",
+  "generatedAt": "2026-09-27T18:07:52.109Z",
   "nodes": [
     {
       "id": "node:wishlist",
@@ -3928,8 +3928,11 @@
       "id": "node:dvd-id-episodes",
       "label": "Dvd {id} episodes",
       "route": "/dvd/:id/episodes",
-      "views": [],
-      "kind": "endpoint",
+      "view": "@/plugins/dvds/partials/episodes",
+      "views": [
+        "@/plugins/dvds/partials/episodes"
+      ],
+      "kind": "page",
       "requiresAuth": false,
       "guards": [
         "allowShareView"
@@ -6437,28 +6440,6 @@
       }
     },
     {
-      "id": "node:admin-io",
-      "label": "Admin io",
-      "route": "/admin/io",
-      "views": [],
-      "kind": "endpoint",
-      "requiresAuth": false,
-      "guards": [],
-      "assertions": [],
-      "provenance": {
-        "sourceFiles": [
-          "routes/adminRoutes.ts"
-        ],
-        "origin": "static-crawl",
-        "confidence": 0.6
-      },
-      "observed": {
-        "at": "2026-09-27T14:24:14.047Z",
-        "status": "skipped",
-        "note": "endpoint (redirect/download/JSON); qa.visitEndpoints is off"
-      }
-    },
-    {
       "id": "node:login",
       "label": "Login",
       "route": "/login",
@@ -8069,8 +8050,8 @@
     {
       "id": "node:global-nav",
       "label": "Global navigation (header, footer)",
-      "views": [],
       "kind": "synthetic",
+      "views": [],
       "requiresAuth": false,
       "guards": [],
       "assertions": [
@@ -8164,15 +8145,15 @@
   ],
   "edges": [
     {
-      "id": "api:node:wishlist->node:wishlist|POST /import/:importer_id",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /import/:importer_id",
       "kind": "api",
+      "action": "fetch POST /import/:importer_id",
       "backing": {
         "method": "POST",
         "path": "/import/:importer_id"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /import/:importer_id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8183,15 +8164,15 @@
       }
     },
     {
-      "id": "api:node:wishlist->node:wishlist|POST /api/book/:id/move-to-collection",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /api/book/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/book/:id/move-to-collection"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /api/book/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8202,15 +8183,15 @@
       }
     },
     {
-      "id": "api:node:wishlist->node:wishlist|POST /api/dvd/:id/move-to-collection",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /api/dvd/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/dvd/:id/move-to-collection"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /api/dvd/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8221,15 +8202,15 @@
       }
     },
     {
-      "id": "api:node:wishlist->node:wishlist|POST /api/game/:id/move-to-collection",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /api/game/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/game/:id/move-to-collection"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /api/game/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8240,15 +8221,15 @@
       }
     },
     {
-      "id": "api:node:wishlist->node:wishlist|POST /api/lego/:id/move-to-collection",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /api/lego/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/lego/:id/move-to-collection"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /api/lego/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8259,15 +8240,15 @@
       }
     },
     {
-      "id": "api:node:wishlist->node:wishlist|POST /api/album/:id/move-to-collection",
       "from": "node:wishlist",
       "to": "node:wishlist",
-      "action": "fetch POST /api/album/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/album/:id/move-to-collection"
       },
+      "id": "api:node:wishlist->node:wishlist|POST /api/album/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8278,15 +8259,15 @@
       }
     },
     {
-      "id": "submit:node:collection->node:collection|POST /collection/labels",
       "from": "node:collection",
       "to": "node:collection",
-      "action": "submit form -> POST /collection/labels",
       "kind": "submit",
+      "action": "submit form -> POST /collection/labels",
       "backing": {
         "method": "POST",
         "path": "/collection/labels"
       },
+      "id": "submit:node:collection->node:collection|POST /collection/labels",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8297,15 +8278,15 @@
       }
     },
     {
-      "id": "api:node:collection->node:collection|POST /import/:importer_id",
       "from": "node:collection",
       "to": "node:collection",
-      "action": "fetch POST /import/:importer_id",
       "kind": "api",
+      "action": "fetch POST /import/:importer_id",
       "backing": {
         "method": "POST",
         "path": "/import/:importer_id"
       },
+      "id": "api:node:collection->node:collection|POST /import/:importer_id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8316,15 +8297,15 @@
       }
     },
     {
-      "id": "api:node:collection->node:collection|POST /api/estimate/snapshot",
       "from": "node:collection",
       "to": "node:collection",
-      "action": "fetch POST /api/estimate/snapshot",
       "kind": "api",
+      "action": "fetch POST /api/estimate/snapshot",
       "backing": {
         "method": "POST",
         "path": "/api/estimate/snapshot"
       },
+      "id": "api:node:collection->node:collection|POST /api/estimate/snapshot",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8335,15 +8316,15 @@
       }
     },
     {
-      "id": "api:node:collection->node:collection|GET /api/estimate/history",
       "from": "node:collection",
       "to": "node:collection",
-      "action": "fetch GET /api/estimate/history",
       "kind": "api",
+      "action": "fetch GET /api/estimate/history",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/history"
       },
+      "id": "api:node:collection->node:collection|GET /api/estimate/history",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8354,15 +8335,15 @@
       }
     },
     {
-      "id": "submit:node:root->node:root|POST /collection/create",
       "from": "node:root",
       "to": "node:root",
-      "action": "submit form -> POST /collection/create",
       "kind": "submit",
+      "action": "submit form -> POST /collection/create",
       "backing": {
         "method": "POST",
         "path": "/collection/create"
       },
+      "id": "submit:node:root->node:root|POST /collection/create",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8373,15 +8354,15 @@
       }
     },
     {
-      "id": "navigate:node:root->node:collection|GET /collection",
       "from": "node:root",
       "to": "node:collection",
-      "action": "open /collection",
       "kind": "navigate",
+      "action": "open /collection",
       "backing": {
         "method": "GET",
         "path": "/collection"
       },
+      "id": "navigate:node:root->node:collection|GET /collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8392,15 +8373,15 @@
       }
     },
     {
-      "id": "navigate:node:root->node:wishlist|GET /wishlist",
       "from": "node:root",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:root->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8411,15 +8392,15 @@
       }
     },
     {
-      "id": "api:node:root->node:root|POST /api/book/:id/move-to-collection",
       "from": "node:root",
       "to": "node:root",
-      "action": "fetch POST /api/book/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/book/:id/move-to-collection"
       },
+      "id": "api:node:root->node:root|POST /api/book/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8430,15 +8411,15 @@
       }
     },
     {
-      "id": "api:node:root->node:root|POST /api/dvd/:id/move-to-collection",
       "from": "node:root",
       "to": "node:root",
-      "action": "fetch POST /api/dvd/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/dvd/:id/move-to-collection"
       },
+      "id": "api:node:root->node:root|POST /api/dvd/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8449,15 +8430,15 @@
       }
     },
     {
-      "id": "api:node:root->node:root|POST /api/game/:id/move-to-collection",
       "from": "node:root",
       "to": "node:root",
-      "action": "fetch POST /api/game/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/game/:id/move-to-collection"
       },
+      "id": "api:node:root->node:root|POST /api/game/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8468,15 +8449,15 @@
       }
     },
     {
-      "id": "api:node:root->node:root|POST /api/lego/:id/move-to-collection",
       "from": "node:root",
       "to": "node:root",
-      "action": "fetch POST /api/lego/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/lego/:id/move-to-collection"
       },
+      "id": "api:node:root->node:root|POST /api/lego/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8487,15 +8468,15 @@
       }
     },
     {
-      "id": "api:node:root->node:root|POST /api/album/:id/move-to-collection",
       "from": "node:root",
       "to": "node:root",
-      "action": "fetch POST /api/album/:id/move-to-collection",
       "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-collection",
       "backing": {
         "method": "POST",
         "path": "/api/album/:id/move-to-collection"
       },
+      "id": "api:node:root->node:root|POST /api/album/:id/move-to-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8506,15 +8487,15 @@
       }
     },
     {
-      "id": "navigate:node:add-books->node:add-books-manual|GET /add-books/manual",
       "from": "node:add-books",
       "to": "node:add-books-manual",
-      "action": "open /add-books/manual",
       "kind": "navigate",
+      "action": "open /add-books/manual",
       "backing": {
         "method": "GET",
         "path": "/add-books/manual"
       },
+      "id": "navigate:node:add-books->node:add-books-manual|GET /add-books/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8525,15 +8506,15 @@
       }
     },
     {
-      "id": "navigate:node:add-books->node:confirm-books-id|GET /confirm-books/:id",
       "from": "node:add-books",
       "to": "node:confirm-books-id",
-      "action": "open /confirm-books/:id",
       "kind": "navigate",
+      "action": "open /confirm-books/:id",
       "backing": {
         "method": "GET",
         "path": "/confirm-books/:id"
       },
+      "id": "navigate:node:add-books->node:confirm-books-id|GET /confirm-books/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8544,15 +8525,15 @@
       }
     },
     {
-      "id": "submit:node:add-books->node:add-books|POST /search-books",
       "from": "node:add-books",
       "to": "node:add-books",
-      "action": "submit form -> POST /search-books",
       "kind": "submit",
+      "action": "submit form -> POST /search-books",
       "backing": {
         "method": "POST",
         "path": "/search-books"
       },
+      "id": "submit:node:add-books->node:add-books|POST /search-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8563,15 +8544,15 @@
       }
     },
     {
-      "id": "navigate:node:add-dvd->node:add-dvd-manual|GET /add-dvd/manual",
       "from": "node:add-dvd",
       "to": "node:add-dvd-manual",
-      "action": "open /add-dvd/manual",
       "kind": "navigate",
+      "action": "open /add-dvd/manual",
       "backing": {
         "method": "GET",
         "path": "/add-dvd/manual"
       },
+      "id": "navigate:node:add-dvd->node:add-dvd-manual|GET /add-dvd/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8582,15 +8563,15 @@
       }
     },
     {
-      "id": "navigate:node:add-dvd->node:confirm-dvd-id|GET /confirm-dvd/:id",
       "from": "node:add-dvd",
       "to": "node:confirm-dvd-id",
-      "action": "open /confirm-dvd/:id",
       "kind": "navigate",
+      "action": "open /confirm-dvd/:id",
       "backing": {
         "method": "GET",
         "path": "/confirm-dvd/:id"
       },
+      "id": "navigate:node:add-dvd->node:confirm-dvd-id|GET /confirm-dvd/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8601,15 +8582,15 @@
       }
     },
     {
-      "id": "submit:node:add-dvd->node:add-dvd|POST /search-dvd",
       "from": "node:add-dvd",
       "to": "node:add-dvd",
-      "action": "submit form -> POST /search-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /search-dvd",
       "backing": {
         "method": "POST",
         "path": "/search-dvd"
       },
+      "id": "submit:node:add-dvd->node:add-dvd|POST /search-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8620,15 +8601,15 @@
       }
     },
     {
-      "id": "navigate:node:add-games->node:add-games-manual|GET /add-games/manual",
       "from": "node:add-games",
       "to": "node:add-games-manual",
-      "action": "open /add-games/manual",
       "kind": "navigate",
+      "action": "open /add-games/manual",
       "backing": {
         "method": "GET",
         "path": "/add-games/manual"
       },
+      "id": "navigate:node:add-games->node:add-games-manual|GET /add-games/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8639,15 +8620,15 @@
       }
     },
     {
-      "id": "navigate:node:add-games->node:confirm-games-id|GET /confirm-games/:id",
       "from": "node:add-games",
       "to": "node:confirm-games-id",
-      "action": "open /confirm-games/:id",
       "kind": "navigate",
+      "action": "open /confirm-games/:id",
       "backing": {
         "method": "GET",
         "path": "/confirm-games/:id"
       },
+      "id": "navigate:node:add-games->node:confirm-games-id|GET /confirm-games/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8658,15 +8639,15 @@
       }
     },
     {
-      "id": "submit:node:add-games->node:add-games|POST /search-games",
       "from": "node:add-games",
       "to": "node:add-games",
-      "action": "submit form -> POST /search-games",
       "kind": "submit",
+      "action": "submit form -> POST /search-games",
       "backing": {
         "method": "POST",
         "path": "/search-games"
       },
+      "id": "submit:node:add-games->node:add-games|POST /search-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8677,15 +8658,15 @@
       }
     },
     {
-      "id": "navigate:node:add-lego->node:add-lego-manual|GET /add-lego/manual",
       "from": "node:add-lego",
       "to": "node:add-lego-manual",
-      "action": "open /add-lego/manual",
       "kind": "navigate",
+      "action": "open /add-lego/manual",
       "backing": {
         "method": "GET",
         "path": "/add-lego/manual"
       },
+      "id": "navigate:node:add-lego->node:add-lego-manual|GET /add-lego/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8696,15 +8677,15 @@
       }
     },
     {
-      "id": "navigate:node:add-lego->node:confirm-lego-id|GET /confirm-lego/:id",
       "from": "node:add-lego",
       "to": "node:confirm-lego-id",
-      "action": "open /confirm-lego/:id",
       "kind": "navigate",
+      "action": "open /confirm-lego/:id",
       "backing": {
         "method": "GET",
         "path": "/confirm-lego/:id"
       },
+      "id": "navigate:node:add-lego->node:confirm-lego-id|GET /confirm-lego/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8715,15 +8696,15 @@
       }
     },
     {
-      "id": "submit:node:add-lego->node:add-lego|POST /search-lego",
       "from": "node:add-lego",
       "to": "node:add-lego",
-      "action": "submit form -> POST /search-lego",
       "kind": "submit",
+      "action": "submit form -> POST /search-lego",
       "backing": {
         "method": "POST",
         "path": "/search-lego"
       },
+      "id": "submit:node:add-lego->node:add-lego|POST /search-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8734,15 +8715,15 @@
       }
     },
     {
-      "id": "navigate:node:add-music->node:add-music-manual|GET /add-music/manual",
       "from": "node:add-music",
       "to": "node:add-music-manual",
-      "action": "open /add-music/manual",
       "kind": "navigate",
+      "action": "open /add-music/manual",
       "backing": {
         "method": "GET",
         "path": "/add-music/manual"
       },
+      "id": "navigate:node:add-music->node:add-music-manual|GET /add-music/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8753,15 +8734,15 @@
       }
     },
     {
-      "id": "navigate:node:add-music->node:confirm-music-id|GET /confirm-music/:id",
       "from": "node:add-music",
       "to": "node:confirm-music-id",
-      "action": "open /confirm-music/:id",
       "kind": "navigate",
+      "action": "open /confirm-music/:id",
       "backing": {
         "method": "GET",
         "path": "/confirm-music/:id"
       },
+      "id": "navigate:node:add-music->node:confirm-music-id|GET /confirm-music/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8772,15 +8753,15 @@
       }
     },
     {
-      "id": "submit:node:add-music->node:add-music|POST /search-music",
       "from": "node:add-music",
       "to": "node:add-music",
-      "action": "submit form -> POST /search-music",
       "kind": "submit",
+      "action": "submit form -> POST /search-music",
       "backing": {
         "method": "POST",
         "path": "/search-music"
       },
+      "id": "submit:node:add-music->node:add-music|POST /search-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8791,15 +8772,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-books-id->node:add-books|GET /add-books",
       "from": "node:confirm-books-id",
       "to": "node:add-books",
-      "action": "open /add-books",
       "kind": "navigate",
+      "action": "open /add-books",
       "backing": {
         "method": "GET",
         "path": "/add-books"
       },
+      "id": "navigate:node:confirm-books-id->node:add-books|GET /add-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8810,15 +8791,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-books-id->node:wishlist|POST /save-books",
       "from": "node:confirm-books-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-books",
       "kind": "submit",
+      "action": "submit form -> POST /save-books",
       "backing": {
         "method": "POST",
         "path": "/save-books"
       },
+      "id": "submit:node:confirm-books-id->node:wishlist|POST /save-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8829,15 +8810,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-books-id->node:collection|POST /save-books",
       "from": "node:confirm-books-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-books",
       "kind": "submit",
+      "action": "submit form -> POST /save-books",
       "backing": {
         "method": "POST",
         "path": "/save-books"
       },
+      "id": "submit:node:confirm-books-id->node:collection|POST /save-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8848,15 +8829,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-books-id->node:add-books-manual|GET /add-books/manual",
       "from": "node:confirm-books-id",
       "to": "node:add-books-manual",
-      "action": "open /add-books/manual",
       "kind": "navigate",
+      "action": "open /add-books/manual",
       "backing": {
         "method": "GET",
         "path": "/add-books/manual"
       },
+      "id": "navigate:node:confirm-books-id->node:add-books-manual|GET /add-books/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8867,15 +8848,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-books-id->node:confirm-books-id|POST /search-books",
       "from": "node:confirm-books-id",
       "to": "node:confirm-books-id",
-      "action": "submit form -> POST /search-books",
       "kind": "submit",
+      "action": "submit form -> POST /search-books",
       "backing": {
         "method": "POST",
         "path": "/search-books"
       },
+      "id": "submit:node:confirm-books-id->node:confirm-books-id|POST /search-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8886,15 +8867,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-dvd-id->node:add-dvd|GET /add-dvd",
       "from": "node:confirm-dvd-id",
       "to": "node:add-dvd",
-      "action": "open /add-dvd",
       "kind": "navigate",
+      "action": "open /add-dvd",
       "backing": {
         "method": "GET",
         "path": "/add-dvd"
       },
+      "id": "navigate:node:confirm-dvd-id->node:add-dvd|GET /add-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8905,15 +8886,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-dvd-id->node:wishlist|POST /save-dvd",
       "from": "node:confirm-dvd-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
       "backing": {
         "method": "POST",
         "path": "/save-dvd"
       },
+      "id": "submit:node:confirm-dvd-id->node:wishlist|POST /save-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8924,15 +8905,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-dvd-id->node:collection|POST /save-dvd",
       "from": "node:confirm-dvd-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
       "backing": {
         "method": "POST",
         "path": "/save-dvd"
       },
+      "id": "submit:node:confirm-dvd-id->node:collection|POST /save-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8943,15 +8924,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-dvd-id->node:add-dvd-manual|GET /add-dvd/manual",
       "from": "node:confirm-dvd-id",
       "to": "node:add-dvd-manual",
-      "action": "open /add-dvd/manual",
       "kind": "navigate",
+      "action": "open /add-dvd/manual",
       "backing": {
         "method": "GET",
         "path": "/add-dvd/manual"
       },
+      "id": "navigate:node:confirm-dvd-id->node:add-dvd-manual|GET /add-dvd/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8962,15 +8943,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-dvd-id->node:confirm-dvd-id|POST /search-dvd",
       "from": "node:confirm-dvd-id",
       "to": "node:confirm-dvd-id",
-      "action": "submit form -> POST /search-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /search-dvd",
       "backing": {
         "method": "POST",
         "path": "/search-dvd"
       },
+      "id": "submit:node:confirm-dvd-id->node:confirm-dvd-id|POST /search-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -8981,15 +8962,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-games-id->node:add-games|GET /add-games",
       "from": "node:confirm-games-id",
       "to": "node:add-games",
-      "action": "open /add-games",
       "kind": "navigate",
+      "action": "open /add-games",
       "backing": {
         "method": "GET",
         "path": "/add-games"
       },
+      "id": "navigate:node:confirm-games-id->node:add-games|GET /add-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9000,15 +8981,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-games-id->node:wishlist|POST /save-games",
       "from": "node:confirm-games-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-games",
       "kind": "submit",
+      "action": "submit form -> POST /save-games",
       "backing": {
         "method": "POST",
         "path": "/save-games"
       },
+      "id": "submit:node:confirm-games-id->node:wishlist|POST /save-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9019,15 +9000,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-games-id->node:collection|POST /save-games",
       "from": "node:confirm-games-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-games",
       "kind": "submit",
+      "action": "submit form -> POST /save-games",
       "backing": {
         "method": "POST",
         "path": "/save-games"
       },
+      "id": "submit:node:confirm-games-id->node:collection|POST /save-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9038,15 +9019,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-games-id->node:add-games-manual|GET /add-games/manual",
       "from": "node:confirm-games-id",
       "to": "node:add-games-manual",
-      "action": "open /add-games/manual",
       "kind": "navigate",
+      "action": "open /add-games/manual",
       "backing": {
         "method": "GET",
         "path": "/add-games/manual"
       },
+      "id": "navigate:node:confirm-games-id->node:add-games-manual|GET /add-games/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9057,15 +9038,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-games-id->node:confirm-games-id|POST /search-games",
       "from": "node:confirm-games-id",
       "to": "node:confirm-games-id",
-      "action": "submit form -> POST /search-games",
       "kind": "submit",
+      "action": "submit form -> POST /search-games",
       "backing": {
         "method": "POST",
         "path": "/search-games"
       },
+      "id": "submit:node:confirm-games-id->node:confirm-games-id|POST /search-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9076,15 +9057,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-lego-id->node:add-lego|GET /add-lego",
       "from": "node:confirm-lego-id",
       "to": "node:add-lego",
-      "action": "open /add-lego",
       "kind": "navigate",
+      "action": "open /add-lego",
       "backing": {
         "method": "GET",
         "path": "/add-lego"
       },
+      "id": "navigate:node:confirm-lego-id->node:add-lego|GET /add-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9095,15 +9076,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-lego-id->node:wishlist|POST /save-lego",
       "from": "node:confirm-lego-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-lego",
       "kind": "submit",
+      "action": "submit form -> POST /save-lego",
       "backing": {
         "method": "POST",
         "path": "/save-lego"
       },
+      "id": "submit:node:confirm-lego-id->node:wishlist|POST /save-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9114,15 +9095,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-lego-id->node:collection|POST /save-lego",
       "from": "node:confirm-lego-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-lego",
       "kind": "submit",
+      "action": "submit form -> POST /save-lego",
       "backing": {
         "method": "POST",
         "path": "/save-lego"
       },
+      "id": "submit:node:confirm-lego-id->node:collection|POST /save-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9133,15 +9114,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-lego-id->node:add-lego-manual|GET /add-lego/manual",
       "from": "node:confirm-lego-id",
       "to": "node:add-lego-manual",
-      "action": "open /add-lego/manual",
       "kind": "navigate",
+      "action": "open /add-lego/manual",
       "backing": {
         "method": "GET",
         "path": "/add-lego/manual"
       },
+      "id": "navigate:node:confirm-lego-id->node:add-lego-manual|GET /add-lego/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9152,15 +9133,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-lego-id->node:confirm-lego-id|POST /search-lego",
       "from": "node:confirm-lego-id",
       "to": "node:confirm-lego-id",
-      "action": "submit form -> POST /search-lego",
       "kind": "submit",
+      "action": "submit form -> POST /search-lego",
       "backing": {
         "method": "POST",
         "path": "/search-lego"
       },
+      "id": "submit:node:confirm-lego-id->node:confirm-lego-id|POST /search-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9171,15 +9152,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-music-id->node:add-music|GET /add-music",
       "from": "node:confirm-music-id",
       "to": "node:add-music",
-      "action": "open /add-music",
       "kind": "navigate",
+      "action": "open /add-music",
       "backing": {
         "method": "GET",
         "path": "/add-music"
       },
+      "id": "navigate:node:confirm-music-id->node:add-music|GET /add-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9190,15 +9171,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-music-id->node:wishlist|POST /save-music",
       "from": "node:confirm-music-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:confirm-music-id->node:wishlist|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9209,15 +9190,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-music-id->node:collection|POST /save-music",
       "from": "node:confirm-music-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:confirm-music-id->node:collection|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9228,15 +9209,15 @@
       }
     },
     {
-      "id": "navigate:node:confirm-music-id->node:add-music-manual|GET /add-music/manual",
       "from": "node:confirm-music-id",
       "to": "node:add-music-manual",
-      "action": "open /add-music/manual",
       "kind": "navigate",
+      "action": "open /add-music/manual",
       "backing": {
         "method": "GET",
         "path": "/add-music/manual"
       },
+      "id": "navigate:node:confirm-music-id->node:add-music-manual|GET /add-music/manual",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9247,15 +9228,15 @@
       }
     },
     {
-      "id": "submit:node:confirm-music-id->node:confirm-music-id|POST /search-music",
       "from": "node:confirm-music-id",
       "to": "node:confirm-music-id",
-      "action": "submit form -> POST /search-music",
       "kind": "submit",
+      "action": "submit form -> POST /search-music",
       "backing": {
         "method": "POST",
         "path": "/search-music"
       },
+      "id": "submit:node:confirm-music-id->node:confirm-music-id|POST /search-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9266,15 +9247,15 @@
       }
     },
     {
-      "id": "navigate:node:add-books-manual->node:add-books|GET /add-books",
       "from": "node:add-books-manual",
       "to": "node:add-books",
-      "action": "open /add-books",
       "kind": "navigate",
+      "action": "open /add-books",
       "backing": {
         "method": "GET",
         "path": "/add-books"
       },
+      "id": "navigate:node:add-books-manual->node:add-books|GET /add-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9285,15 +9266,15 @@
       }
     },
     {
-      "id": "submit:node:add-books-manual->node:wishlist|POST /save-books",
       "from": "node:add-books-manual",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-books",
       "kind": "submit",
+      "action": "submit form -> POST /save-books",
       "backing": {
         "method": "POST",
         "path": "/save-books"
       },
+      "id": "submit:node:add-books-manual->node:wishlist|POST /save-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9304,15 +9285,15 @@
       }
     },
     {
-      "id": "submit:node:add-books-manual->node:collection|POST /save-books",
       "from": "node:add-books-manual",
       "to": "node:collection",
-      "action": "submit form -> POST /save-books",
       "kind": "submit",
+      "action": "submit form -> POST /save-books",
       "backing": {
         "method": "POST",
         "path": "/save-books"
       },
+      "id": "submit:node:add-books-manual->node:collection|POST /save-books",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9323,15 +9304,15 @@
       }
     },
     {
-      "id": "navigate:node:add-dvd-manual->node:add-dvd|GET /add-dvd",
       "from": "node:add-dvd-manual",
       "to": "node:add-dvd",
-      "action": "open /add-dvd",
       "kind": "navigate",
+      "action": "open /add-dvd",
       "backing": {
         "method": "GET",
         "path": "/add-dvd"
       },
+      "id": "navigate:node:add-dvd-manual->node:add-dvd|GET /add-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9342,15 +9323,15 @@
       }
     },
     {
-      "id": "submit:node:add-dvd-manual->node:wishlist|POST /save-dvd",
       "from": "node:add-dvd-manual",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
       "backing": {
         "method": "POST",
         "path": "/save-dvd"
       },
+      "id": "submit:node:add-dvd-manual->node:wishlist|POST /save-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9361,15 +9342,15 @@
       }
     },
     {
-      "id": "submit:node:add-dvd-manual->node:collection|POST /save-dvd",
       "from": "node:add-dvd-manual",
       "to": "node:collection",
-      "action": "submit form -> POST /save-dvd",
       "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
       "backing": {
         "method": "POST",
         "path": "/save-dvd"
       },
+      "id": "submit:node:add-dvd-manual->node:collection|POST /save-dvd",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9380,15 +9361,15 @@
       }
     },
     {
-      "id": "navigate:node:add-games-manual->node:add-games|GET /add-games",
       "from": "node:add-games-manual",
       "to": "node:add-games",
-      "action": "open /add-games",
       "kind": "navigate",
+      "action": "open /add-games",
       "backing": {
         "method": "GET",
         "path": "/add-games"
       },
+      "id": "navigate:node:add-games-manual->node:add-games|GET /add-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9399,15 +9380,15 @@
       }
     },
     {
-      "id": "submit:node:add-games-manual->node:wishlist|POST /save-games",
       "from": "node:add-games-manual",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-games",
       "kind": "submit",
+      "action": "submit form -> POST /save-games",
       "backing": {
         "method": "POST",
         "path": "/save-games"
       },
+      "id": "submit:node:add-games-manual->node:wishlist|POST /save-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9418,15 +9399,15 @@
       }
     },
     {
-      "id": "submit:node:add-games-manual->node:collection|POST /save-games",
       "from": "node:add-games-manual",
       "to": "node:collection",
-      "action": "submit form -> POST /save-games",
       "kind": "submit",
+      "action": "submit form -> POST /save-games",
       "backing": {
         "method": "POST",
         "path": "/save-games"
       },
+      "id": "submit:node:add-games-manual->node:collection|POST /save-games",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9437,15 +9418,15 @@
       }
     },
     {
-      "id": "navigate:node:add-lego-manual->node:add-lego|GET /add-lego",
       "from": "node:add-lego-manual",
       "to": "node:add-lego",
-      "action": "open /add-lego",
       "kind": "navigate",
+      "action": "open /add-lego",
       "backing": {
         "method": "GET",
         "path": "/add-lego"
       },
+      "id": "navigate:node:add-lego-manual->node:add-lego|GET /add-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9456,15 +9437,15 @@
       }
     },
     {
-      "id": "submit:node:add-lego-manual->node:wishlist|POST /save-lego",
       "from": "node:add-lego-manual",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-lego",
       "kind": "submit",
+      "action": "submit form -> POST /save-lego",
       "backing": {
         "method": "POST",
         "path": "/save-lego"
       },
+      "id": "submit:node:add-lego-manual->node:wishlist|POST /save-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9475,15 +9456,15 @@
       }
     },
     {
-      "id": "submit:node:add-lego-manual->node:collection|POST /save-lego",
       "from": "node:add-lego-manual",
       "to": "node:collection",
-      "action": "submit form -> POST /save-lego",
       "kind": "submit",
+      "action": "submit form -> POST /save-lego",
       "backing": {
         "method": "POST",
         "path": "/save-lego"
       },
+      "id": "submit:node:add-lego-manual->node:collection|POST /save-lego",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9494,15 +9475,15 @@
       }
     },
     {
-      "id": "navigate:node:add-music-manual->node:add-music|GET /add-music",
       "from": "node:add-music-manual",
       "to": "node:add-music",
-      "action": "open /add-music",
       "kind": "navigate",
+      "action": "open /add-music",
       "backing": {
         "method": "GET",
         "path": "/add-music"
       },
+      "id": "navigate:node:add-music-manual->node:add-music|GET /add-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9513,15 +9494,15 @@
       }
     },
     {
+      "from": "node:add-music-manual",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
       "id": "submit:node:add-music-manual->node:wishlist|POST /save-music",
-      "from": "node:add-music-manual",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-music",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-music"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9532,15 +9513,15 @@
       }
     },
     {
+      "from": "node:add-music-manual",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-music",
+      "backing": {
+        "method": "POST",
+        "path": "/save-music"
+      },
       "id": "submit:node:add-music-manual->node:collection|POST /save-music",
-      "from": "node:add-music-manual",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-music",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-music"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9551,15 +9532,15 @@
       }
     },
     {
+      "from": "node:book-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
       "id": "submit:node:book-edit-id->node:wishlist|POST /save-books",
-      "from": "node:book-edit-id",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-books",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-books"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9570,15 +9551,15 @@
       }
     },
     {
+      "from": "node:book-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
       "id": "submit:node:book-edit-id->node:collection|POST /save-books",
-      "from": "node:book-edit-id",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-books",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-books"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9589,15 +9570,15 @@
       }
     },
     {
+      "from": "node:dvd-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
       "id": "submit:node:dvd-edit-id->node:wishlist|POST /save-dvd",
-      "from": "node:dvd-edit-id",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-dvd",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-dvd"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9608,15 +9589,15 @@
       }
     },
     {
+      "from": "node:dvd-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
       "id": "submit:node:dvd-edit-id->node:collection|POST /save-dvd",
-      "from": "node:dvd-edit-id",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-dvd",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-dvd"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9627,15 +9608,15 @@
       }
     },
     {
+      "from": "node:game-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
       "id": "submit:node:game-edit-id->node:wishlist|POST /save-games",
-      "from": "node:game-edit-id",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-games",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-games"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9646,15 +9627,15 @@
       }
     },
     {
+      "from": "node:game-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
       "id": "submit:node:game-edit-id->node:collection|POST /save-games",
-      "from": "node:game-edit-id",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-games",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-games"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9665,15 +9646,15 @@
       }
     },
     {
+      "from": "node:lego-edit-id",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
       "id": "submit:node:lego-edit-id->node:wishlist|POST /save-lego",
-      "from": "node:lego-edit-id",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-lego",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-lego"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9684,15 +9665,15 @@
       }
     },
     {
+      "from": "node:lego-edit-id",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
       "id": "submit:node:lego-edit-id->node:collection|POST /save-lego",
-      "from": "node:lego-edit-id",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-lego",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-lego"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9703,15 +9684,15 @@
       }
     },
     {
-      "id": "submit:node:album-edit-id->node:wishlist|POST /save-music",
       "from": "node:album-edit-id",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:album-edit-id->node:wishlist|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9722,15 +9703,15 @@
       }
     },
     {
-      "id": "submit:node:album-edit-id->node:collection|POST /save-music",
       "from": "node:album-edit-id",
       "to": "node:collection",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:album-edit-id->node:collection|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9741,15 +9722,15 @@
       }
     },
     {
-      "id": "navigate:node:book-id->node:wishlist|GET /wishlist",
       "from": "node:book-id",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:book-id->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9760,15 +9741,15 @@
       }
     },
     {
-      "id": "api:node:book-id->node:book-id|POST /api/book/:id/move-to-wishlist",
       "from": "node:book-id",
       "to": "node:book-id",
-      "action": "fetch POST /api/book/:id/move-to-wishlist",
       "kind": "api",
+      "action": "fetch POST /api/book/:id/move-to-wishlist",
       "backing": {
         "method": "POST",
         "path": "/api/book/:id/move-to-wishlist"
       },
+      "id": "api:node:book-id->node:book-id|POST /api/book/:id/move-to-wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9779,15 +9760,15 @@
       }
     },
     {
-      "id": "api:node:book-id->node:book-id|DELETE /api/book/:id",
       "from": "node:book-id",
       "to": "node:book-id",
-      "action": "fetch DELETE /api/book/:id",
       "kind": "api",
+      "action": "fetch DELETE /api/book/:id",
       "backing": {
         "method": "DELETE",
         "path": "/api/book/:id"
       },
+      "id": "api:node:book-id->node:book-id|DELETE /api/book/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9798,15 +9779,15 @@
       }
     },
     {
-      "id": "api:node:book-id->node:book-id|GET /api/estimate/:discogsId",
       "from": "node:book-id",
       "to": "node:book-id",
-      "action": "fetch GET /api/estimate/:discogsId",
       "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/:discogsId"
       },
+      "id": "api:node:book-id->node:book-id|GET /api/estimate/:discogsId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9817,15 +9798,15 @@
       }
     },
     {
-      "id": "api:node:book-id->node:book-id|POST /api/book/:id/refresh-info",
       "from": "node:book-id",
       "to": "node:book-id",
-      "action": "fetch POST /api/book/:id/refresh-info",
       "kind": "api",
+      "action": "fetch POST /api/book/:id/refresh-info",
       "backing": {
         "method": "POST",
         "path": "/api/book/:id/refresh-info"
       },
+      "id": "api:node:book-id->node:book-id|POST /api/book/:id/refresh-info",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9836,15 +9817,15 @@
       }
     },
     {
-      "id": "navigate:node:dvd-id->node:wishlist|GET /wishlist",
       "from": "node:dvd-id",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:dvd-id->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9855,15 +9836,15 @@
       }
     },
     {
-      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/move-to-wishlist",
       "from": "node:dvd-id",
       "to": "node:dvd-id",
-      "action": "fetch POST /api/dvd/:id/move-to-wishlist",
       "kind": "api",
+      "action": "fetch POST /api/dvd/:id/move-to-wishlist",
       "backing": {
         "method": "POST",
         "path": "/api/dvd/:id/move-to-wishlist"
       },
+      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/move-to-wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9874,15 +9855,15 @@
       }
     },
     {
-      "id": "api:node:dvd-id->node:dvd-id|DELETE /api/dvd/:id",
       "from": "node:dvd-id",
       "to": "node:dvd-id",
-      "action": "fetch DELETE /api/dvd/:id",
       "kind": "api",
+      "action": "fetch DELETE /api/dvd/:id",
       "backing": {
         "method": "DELETE",
         "path": "/api/dvd/:id"
       },
+      "id": "api:node:dvd-id->node:dvd-id|DELETE /api/dvd/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9893,15 +9874,15 @@
       }
     },
     {
-      "id": "api:node:dvd-id->node:dvd-id|GET /api/estimate/:discogsId",
       "from": "node:dvd-id",
       "to": "node:dvd-id",
-      "action": "fetch GET /api/estimate/:discogsId",
       "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/:discogsId"
       },
+      "id": "api:node:dvd-id->node:dvd-id|GET /api/estimate/:discogsId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9912,15 +9893,15 @@
       }
     },
     {
-      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/refresh-info",
       "from": "node:dvd-id",
       "to": "node:dvd-id",
-      "action": "fetch POST /api/dvd/:id/refresh-info",
       "kind": "api",
+      "action": "fetch POST /api/dvd/:id/refresh-info",
       "backing": {
         "method": "POST",
         "path": "/api/dvd/:id/refresh-info"
       },
+      "id": "api:node:dvd-id->node:dvd-id|POST /api/dvd/:id/refresh-info",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9931,15 +9912,15 @@
       }
     },
     {
-      "id": "navigate:node:game-id->node:wishlist|GET /wishlist",
       "from": "node:game-id",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:game-id->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9950,15 +9931,15 @@
       }
     },
     {
-      "id": "api:node:game-id->node:game-id|POST /api/game/:id/move-to-wishlist",
       "from": "node:game-id",
       "to": "node:game-id",
-      "action": "fetch POST /api/game/:id/move-to-wishlist",
       "kind": "api",
+      "action": "fetch POST /api/game/:id/move-to-wishlist",
       "backing": {
         "method": "POST",
         "path": "/api/game/:id/move-to-wishlist"
       },
+      "id": "api:node:game-id->node:game-id|POST /api/game/:id/move-to-wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9969,15 +9950,15 @@
       }
     },
     {
-      "id": "api:node:game-id->node:game-id|DELETE /api/game/:id",
       "from": "node:game-id",
       "to": "node:game-id",
-      "action": "fetch DELETE /api/game/:id",
       "kind": "api",
+      "action": "fetch DELETE /api/game/:id",
       "backing": {
         "method": "DELETE",
         "path": "/api/game/:id"
       },
+      "id": "api:node:game-id->node:game-id|DELETE /api/game/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -9988,15 +9969,15 @@
       }
     },
     {
-      "id": "api:node:game-id->node:game-id|GET /api/estimate/:discogsId",
       "from": "node:game-id",
       "to": "node:game-id",
-      "action": "fetch GET /api/estimate/:discogsId",
       "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/:discogsId"
       },
+      "id": "api:node:game-id->node:game-id|GET /api/estimate/:discogsId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10007,15 +9988,15 @@
       }
     },
     {
-      "id": "api:node:game-id->node:game-id|POST /api/game/:id/refresh-info",
       "from": "node:game-id",
       "to": "node:game-id",
-      "action": "fetch POST /api/game/:id/refresh-info",
       "kind": "api",
+      "action": "fetch POST /api/game/:id/refresh-info",
       "backing": {
         "method": "POST",
         "path": "/api/game/:id/refresh-info"
       },
+      "id": "api:node:game-id->node:game-id|POST /api/game/:id/refresh-info",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10026,15 +10007,15 @@
       }
     },
     {
-      "id": "navigate:node:lego-id->node:wishlist|GET /wishlist",
       "from": "node:lego-id",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:lego-id->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10045,15 +10026,15 @@
       }
     },
     {
-      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/move-to-wishlist",
       "from": "node:lego-id",
       "to": "node:lego-id",
-      "action": "fetch POST /api/lego/:id/move-to-wishlist",
       "kind": "api",
+      "action": "fetch POST /api/lego/:id/move-to-wishlist",
       "backing": {
         "method": "POST",
         "path": "/api/lego/:id/move-to-wishlist"
       },
+      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/move-to-wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10064,15 +10045,15 @@
       }
     },
     {
-      "id": "api:node:lego-id->node:lego-id|DELETE /api/lego/:id",
       "from": "node:lego-id",
       "to": "node:lego-id",
-      "action": "fetch DELETE /api/lego/:id",
       "kind": "api",
+      "action": "fetch DELETE /api/lego/:id",
       "backing": {
         "method": "DELETE",
         "path": "/api/lego/:id"
       },
+      "id": "api:node:lego-id->node:lego-id|DELETE /api/lego/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10083,15 +10064,15 @@
       }
     },
     {
-      "id": "api:node:lego-id->node:lego-id|GET /api/estimate/:discogsId",
       "from": "node:lego-id",
       "to": "node:lego-id",
-      "action": "fetch GET /api/estimate/:discogsId",
       "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/:discogsId"
       },
+      "id": "api:node:lego-id->node:lego-id|GET /api/estimate/:discogsId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10102,15 +10083,15 @@
       }
     },
     {
-      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/refresh-info",
       "from": "node:lego-id",
       "to": "node:lego-id",
-      "action": "fetch POST /api/lego/:id/refresh-info",
       "kind": "api",
+      "action": "fetch POST /api/lego/:id/refresh-info",
       "backing": {
         "method": "POST",
         "path": "/api/lego/:id/refresh-info"
       },
+      "id": "api:node:lego-id->node:lego-id|POST /api/lego/:id/refresh-info",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10121,15 +10102,15 @@
       }
     },
     {
-      "id": "navigate:node:album-id->node:wishlist|GET /wishlist",
       "from": "node:album-id",
       "to": "node:wishlist",
-      "action": "open /wishlist",
       "kind": "navigate",
+      "action": "open /wishlist",
       "backing": {
         "method": "GET",
         "path": "/wishlist"
       },
+      "id": "navigate:node:album-id->node:wishlist|GET /wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10140,15 +10121,15 @@
       }
     },
     {
-      "id": "api:node:album-id->node:album-id|POST /api/album/:id/move-to-wishlist",
       "from": "node:album-id",
       "to": "node:album-id",
-      "action": "fetch POST /api/album/:id/move-to-wishlist",
       "kind": "api",
+      "action": "fetch POST /api/album/:id/move-to-wishlist",
       "backing": {
         "method": "POST",
         "path": "/api/album/:id/move-to-wishlist"
       },
+      "id": "api:node:album-id->node:album-id|POST /api/album/:id/move-to-wishlist",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10159,15 +10140,15 @@
       }
     },
     {
-      "id": "api:node:album-id->node:album-id|DELETE /api/album/:id",
       "from": "node:album-id",
       "to": "node:album-id",
-      "action": "fetch DELETE /api/album/:id",
       "kind": "api",
+      "action": "fetch DELETE /api/album/:id",
       "backing": {
         "method": "DELETE",
         "path": "/api/album/:id"
       },
+      "id": "api:node:album-id->node:album-id|DELETE /api/album/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10178,15 +10159,15 @@
       }
     },
     {
-      "id": "api:node:album-id->node:album-id|GET /api/estimate/:discogsId",
       "from": "node:album-id",
       "to": "node:album-id",
-      "action": "fetch GET /api/estimate/:discogsId",
       "kind": "api",
+      "action": "fetch GET /api/estimate/:discogsId",
       "backing": {
         "method": "GET",
         "path": "/api/estimate/:discogsId"
       },
+      "id": "api:node:album-id->node:album-id|GET /api/estimate/:discogsId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10197,15 +10178,15 @@
       }
     },
     {
-      "id": "api:node:album-id->node:album-id|POST /api/album/:id/refresh-info",
       "from": "node:album-id",
       "to": "node:album-id",
-      "action": "fetch POST /api/album/:id/refresh-info",
       "kind": "api",
+      "action": "fetch POST /api/album/:id/refresh-info",
       "backing": {
         "method": "POST",
         "path": "/api/album/:id/refresh-info"
       },
+      "id": "api:node:album-id->node:album-id|POST /api/album/:id/refresh-info",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10216,15 +10197,15 @@
       }
     },
     {
-      "id": "navigate:node:manual-add->node:collection|GET /collection",
       "from": "node:manual-add",
       "to": "node:collection",
-      "action": "open /collection",
       "kind": "navigate",
+      "action": "open /collection",
       "backing": {
         "method": "GET",
         "path": "/collection"
       },
+      "id": "navigate:node:manual-add->node:collection|GET /collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10235,15 +10216,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
       "id": "submit:node:manual-add->node:wishlist|POST /save-books",
-      "from": "node:manual-add",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-books",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-books"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10254,15 +10235,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-books",
+      "backing": {
+        "method": "POST",
+        "path": "/save-books"
+      },
       "id": "submit:node:manual-add->node:collection|POST /save-books",
-      "from": "node:manual-add",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-books",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-books"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10273,15 +10254,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
       "id": "submit:node:manual-add->node:wishlist|POST /save-dvd",
-      "from": "node:manual-add",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-dvd",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-dvd"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10292,15 +10273,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-dvd",
+      "backing": {
+        "method": "POST",
+        "path": "/save-dvd"
+      },
       "id": "submit:node:manual-add->node:collection|POST /save-dvd",
-      "from": "node:manual-add",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-dvd",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-dvd"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10311,15 +10292,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
       "id": "submit:node:manual-add->node:wishlist|POST /save-games",
-      "from": "node:manual-add",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-games",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-games"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10330,15 +10311,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-games",
+      "backing": {
+        "method": "POST",
+        "path": "/save-games"
+      },
       "id": "submit:node:manual-add->node:collection|POST /save-games",
-      "from": "node:manual-add",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-games",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-games"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10349,15 +10330,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:wishlist",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
       "id": "submit:node:manual-add->node:wishlist|POST /save-lego",
-      "from": "node:manual-add",
-      "to": "node:wishlist",
-      "action": "submit form -> POST /save-lego",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-lego"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10368,15 +10349,15 @@
       }
     },
     {
+      "from": "node:manual-add",
+      "to": "node:collection",
+      "kind": "submit",
+      "action": "submit form -> POST /save-lego",
+      "backing": {
+        "method": "POST",
+        "path": "/save-lego"
+      },
       "id": "submit:node:manual-add->node:collection|POST /save-lego",
-      "from": "node:manual-add",
-      "to": "node:collection",
-      "action": "submit form -> POST /save-lego",
-      "kind": "submit",
-      "backing": {
-        "method": "POST",
-        "path": "/save-lego"
-      },
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10387,15 +10368,15 @@
       }
     },
     {
-      "id": "submit:node:manual-add->node:wishlist|POST /save-music",
       "from": "node:manual-add",
       "to": "node:wishlist",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:manual-add->node:wishlist|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10406,15 +10387,15 @@
       }
     },
     {
-      "id": "submit:node:manual-add->node:collection|POST /save-music",
       "from": "node:manual-add",
       "to": "node:collection",
-      "action": "submit form -> POST /save-music",
       "kind": "submit",
+      "action": "submit form -> POST /save-music",
       "backing": {
         "method": "POST",
         "path": "/save-music"
       },
+      "id": "submit:node:manual-add->node:collection|POST /save-music",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10425,15 +10406,15 @@
       }
     },
     {
-      "id": "submit:node:search->node:search|POST /collection/switch",
       "from": "node:search",
       "to": "node:search",
-      "action": "submit form -> POST /collection/switch",
       "kind": "submit",
+      "action": "submit form -> POST /collection/switch",
       "backing": {
         "method": "POST",
         "path": "/collection/switch"
       },
+      "id": "submit:node:search->node:search|POST /collection/switch",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10444,15 +10425,34 @@
       }
     },
     {
-      "id": "navigate:node:admin->node:admin-instance|GET /admin/instance",
+      "from": "node:dvd-id-episodes",
+      "to": "node:dvd-id",
+      "kind": "navigate",
+      "action": "open /dvd/:id",
+      "backing": {
+        "method": "GET",
+        "path": "/dvd/:id"
+      },
+      "id": "navigate:node:dvd-id-episodes->node:dvd-id|GET /dvd/:id",
+      "assertions": [],
+      "provenance": {
+        "sourceFiles": [
+          "plugins/dvds/partials/episodes.ejs"
+        ],
+        "origin": "static-crawl",
+        "confidence": 0.6
+      }
+    },
+    {
       "from": "node:admin",
       "to": "node:admin-instance",
-      "action": "open /admin/instance",
       "kind": "navigate",
+      "action": "open /admin/instance",
       "backing": {
         "method": "GET",
         "path": "/admin/instance"
       },
+      "id": "navigate:node:admin->node:admin-instance|GET /admin/instance",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10463,15 +10463,15 @@
       }
     },
     {
-      "id": "navigate:node:admin->node:create-plugin|GET /create-plugin",
       "from": "node:admin",
       "to": "node:create-plugin",
-      "action": "open /create-plugin",
       "kind": "navigate",
+      "action": "open /create-plugin",
       "backing": {
         "method": "GET",
         "path": "/create-plugin"
       },
+      "id": "navigate:node:admin->node:create-plugin|GET /create-plugin",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10482,15 +10482,15 @@
       }
     },
     {
-      "id": "navigate:node:admin->node:backup-collection-export-archive|GET /backup/collection/export-archive",
       "from": "node:admin",
       "to": "node:backup-collection-export-archive",
-      "action": "open /backup/collection/export-archive",
       "kind": "navigate",
+      "action": "open /backup/collection/export-archive",
       "backing": {
         "method": "GET",
         "path": "/backup/collection/export-archive"
       },
+      "id": "navigate:node:admin->node:backup-collection-export-archive|GET /backup/collection/export-archive",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10501,15 +10501,15 @@
       }
     },
     {
-      "id": "navigate:node:admin->node:backup-collection-export|GET /backup/collection/export",
       "from": "node:admin",
       "to": "node:backup-collection-export",
-      "action": "open /backup/collection/export",
       "kind": "navigate",
+      "action": "open /backup/collection/export",
       "backing": {
         "method": "GET",
         "path": "/backup/collection/export"
       },
+      "id": "navigate:node:admin->node:backup-collection-export|GET /backup/collection/export",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10520,15 +10520,15 @@
       }
     },
     {
-      "id": "navigate:node:admin->node:backup-collection-export-csv|GET /backup/collection/export-csv",
       "from": "node:admin",
       "to": "node:backup-collection-export-csv",
-      "action": "open /backup/collection/export-csv",
       "kind": "navigate",
+      "action": "open /backup/collection/export-csv",
       "backing": {
         "method": "GET",
         "path": "/backup/collection/export-csv"
       },
+      "id": "navigate:node:admin->node:backup-collection-export-csv|GET /backup/collection/export-csv",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10539,15 +10539,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/modules/save",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/modules/save",
       "kind": "submit",
+      "action": "submit form -> POST /admin/modules/save",
       "backing": {
         "method": "POST",
         "path": "/admin/modules/save"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/modules/save",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10558,15 +10558,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/members/invite",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/members/invite",
       "kind": "submit",
+      "action": "submit form -> POST /admin/members/invite",
       "backing": {
         "method": "POST",
         "path": "/admin/members/invite"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/members/invite",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10577,15 +10577,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/members/role",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/members/role",
       "kind": "submit",
+      "action": "submit form -> POST /admin/members/role",
       "backing": {
         "method": "POST",
         "path": "/admin/members/role"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/members/role",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10596,15 +10596,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/members/reset-password",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/members/reset-password",
       "kind": "submit",
+      "action": "submit form -> POST /admin/members/reset-password",
       "backing": {
         "method": "POST",
         "path": "/admin/members/reset-password"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/members/reset-password",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10615,15 +10615,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/members/remove",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/members/remove",
       "kind": "submit",
+      "action": "submit form -> POST /admin/members/remove",
       "backing": {
         "method": "POST",
         "path": "/admin/members/remove"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/members/remove",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10634,15 +10634,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/collections/:id/rename",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/collections/:id/rename",
       "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/rename",
       "backing": {
         "method": "POST",
         "path": "/admin/collections/:id/rename"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/collections/:id/rename",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10653,15 +10653,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/share/:token/toggle",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/share/:token/toggle",
       "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/toggle",
       "backing": {
         "method": "POST",
         "path": "/admin/share/:token/toggle"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/toggle",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10672,15 +10672,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/share/:token/regenerate",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/share/:token/regenerate",
       "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/regenerate",
       "backing": {
         "method": "POST",
         "path": "/admin/share/:token/regenerate"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/regenerate",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10691,15 +10691,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/share/:token/delete",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/share/:token/delete",
       "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/delete",
       "backing": {
         "method": "POST",
         "path": "/admin/share/:token/delete"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/delete",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10710,15 +10710,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/share/:token/scope",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/share/:token/scope",
       "kind": "submit",
+      "action": "submit form -> POST /admin/share/:token/scope",
       "backing": {
         "method": "POST",
         "path": "/admin/share/:token/scope"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/share/:token/scope",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10729,15 +10729,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/share/create",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/share/create",
       "kind": "submit",
+      "action": "submit form -> POST /admin/share/create",
       "backing": {
         "method": "POST",
         "path": "/admin/share/create"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/share/create",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10748,15 +10748,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/members/create",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/members/create",
       "kind": "submit",
+      "action": "submit form -> POST /admin/members/create",
       "backing": {
         "method": "POST",
         "path": "/admin/members/create"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/members/create",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10767,15 +10767,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /backup/collection/import-archive",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /backup/collection/import-archive",
       "kind": "api",
+      "action": "fetch POST /backup/collection/import-archive",
       "backing": {
         "method": "POST",
         "path": "/backup/collection/import-archive"
       },
+      "id": "api:node:admin->node:admin|POST /backup/collection/import-archive",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10786,15 +10786,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /backup/collection/import",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /backup/collection/import",
       "kind": "api",
+      "action": "fetch POST /backup/collection/import",
       "backing": {
         "method": "POST",
         "path": "/backup/collection/import"
       },
+      "id": "api:node:admin->node:admin|POST /backup/collection/import",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10805,15 +10805,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /admin/delete-last-items",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /admin/delete-last-items",
       "kind": "api",
+      "action": "fetch POST /admin/delete-last-items",
       "backing": {
         "method": "POST",
         "path": "/admin/delete-last-items"
       },
+      "id": "api:node:admin->node:admin|POST /admin/delete-last-items",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10824,15 +10824,15 @@
       }
     },
     {
-      "id": "submit:node:admin->node:admin|POST /admin/visibility/save",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/visibility/save",
       "kind": "submit",
+      "action": "submit form -> POST /admin/visibility/save",
       "backing": {
         "method": "POST",
         "path": "/admin/visibility/save"
       },
+      "id": "submit:node:admin->node:admin|POST /admin/visibility/save",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10843,15 +10843,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|GET /admin/api/search-collection",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch GET /admin/api/search-collection",
       "kind": "api",
+      "action": "fetch GET /admin/api/search-collection",
       "backing": {
         "method": "GET",
         "path": "/admin/api/search-collection"
       },
+      "id": "api:node:admin->node:admin|GET /admin/api/search-collection",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10862,15 +10862,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /import/csv/preview",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /import/csv/preview",
       "kind": "api",
+      "action": "fetch POST /import/csv/preview",
       "backing": {
         "method": "POST",
         "path": "/import/csv/preview"
       },
+      "id": "api:node:admin->node:admin|POST /import/csv/preview",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10881,15 +10881,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /import/csv",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /import/csv",
       "kind": "api",
+      "action": "fetch POST /import/csv",
       "backing": {
         "method": "POST",
         "path": "/import/csv"
       },
+      "id": "api:node:admin->node:admin|POST /import/csv",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10900,15 +10900,15 @@
       }
     },
     {
-      "id": "api:node:admin->node:admin|POST /import/:importer_id",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "fetch POST /import/:importer_id",
       "kind": "api",
+      "action": "fetch POST /import/:importer_id",
       "backing": {
         "method": "POST",
         "path": "/import/:importer_id"
       },
+      "id": "api:node:admin->node:admin|POST /import/:importer_id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10919,15 +10919,15 @@
       }
     },
     {
-      "id": "navigate:node:admin-instance->node:backup-export-archive|GET /backup/export-archive",
       "from": "node:admin-instance",
       "to": "node:backup-export-archive",
-      "action": "open /backup/export-archive",
       "kind": "navigate",
+      "action": "open /backup/export-archive",
       "backing": {
         "method": "GET",
         "path": "/backup/export-archive"
       },
+      "id": "navigate:node:admin-instance->node:backup-export-archive|GET /backup/export-archive",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10938,15 +10938,15 @@
       }
     },
     {
-      "id": "navigate:node:admin-instance->node:backup-export|GET /backup/export",
       "from": "node:admin-instance",
       "to": "node:backup-export",
-      "action": "open /backup/export",
       "kind": "navigate",
+      "action": "open /backup/export",
       "backing": {
         "method": "GET",
         "path": "/backup/export"
       },
+      "id": "navigate:node:admin-instance->node:backup-export|GET /backup/export",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10957,15 +10957,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/:id/delete",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/collections/:id/delete",
       "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/delete",
       "backing": {
         "method": "POST",
         "path": "/admin/collections/:id/delete"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/:id/delete",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10976,15 +10976,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/settings",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/instance/settings",
       "kind": "submit",
+      "action": "submit form -> POST /admin/instance/settings",
       "backing": {
         "method": "POST",
         "path": "/admin/instance/settings"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/settings",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -10995,15 +10995,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/reset-password",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/reset-password",
       "kind": "submit",
+      "action": "submit form -> POST /admin/reset-password",
       "backing": {
         "method": "POST",
         "path": "/admin/reset-password"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/reset-password",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11014,15 +11014,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin|POST /admin/reset-password",
       "from": "node:admin-instance",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/reset-password",
       "kind": "submit",
+      "action": "submit form -> POST /admin/reset-password",
       "backing": {
         "method": "POST",
         "path": "/admin/reset-password"
       },
+      "id": "submit:node:admin-instance->node:admin|POST /admin/reset-password",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11033,15 +11033,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/delete-user",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/delete-user",
       "kind": "submit",
+      "action": "submit form -> POST /admin/delete-user",
       "backing": {
         "method": "POST",
         "path": "/admin/delete-user"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/delete-user",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11052,15 +11052,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/unblock-ip",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/unblock-ip",
       "kind": "submit",
+      "action": "submit form -> POST /admin/unblock-ip",
       "backing": {
         "method": "POST",
         "path": "/admin/unblock-ip"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/unblock-ip",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11071,15 +11071,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/block-ip",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/block-ip",
       "kind": "submit",
+      "action": "submit form -> POST /admin/block-ip",
       "backing": {
         "method": "POST",
         "path": "/admin/block-ip"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/block-ip",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11090,15 +11090,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/create",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/collections/create",
       "kind": "submit",
+      "action": "submit form -> POST /admin/collections/create",
       "backing": {
         "method": "POST",
         "path": "/admin/collections/create"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/collections/create",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11109,15 +11109,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin|POST /admin/collections/:id/rename",
       "from": "node:admin-instance",
       "to": "node:admin",
-      "action": "submit form -> POST /admin/collections/:id/rename",
       "kind": "submit",
+      "action": "submit form -> POST /admin/collections/:id/rename",
       "backing": {
         "method": "POST",
         "path": "/admin/collections/:id/rename"
       },
+      "id": "submit:node:admin-instance->node:admin|POST /admin/collections/:id/rename",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11128,15 +11128,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/role",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/instance/collections/:id/members/role",
       "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/role",
       "backing": {
         "method": "POST",
         "path": "/admin/instance/collections/:id/members/role"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/role",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11147,15 +11147,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/remove",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/instance/collections/:id/members/remove",
       "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/remove",
       "backing": {
         "method": "POST",
         "path": "/admin/instance/collections/:id/members/remove"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/remove",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11166,15 +11166,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/add",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/instance/collections/:id/members/add",
       "kind": "submit",
+      "action": "submit form -> POST /admin/instance/collections/:id/members/add",
       "backing": {
         "method": "POST",
         "path": "/admin/instance/collections/:id/members/add"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/instance/collections/:id/members/add",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11185,15 +11185,15 @@
       }
     },
     {
-      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/add-user",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "submit form -> POST /admin/add-user",
       "kind": "submit",
+      "action": "submit form -> POST /admin/add-user",
       "backing": {
         "method": "POST",
         "path": "/admin/add-user"
       },
+      "id": "submit:node:admin-instance->node:admin-instance|POST /admin/add-user",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11204,15 +11204,15 @@
       }
     },
     {
-      "id": "navigate:node:admin-instance->node:login|GET /login",
       "from": "node:admin-instance",
       "to": "node:login",
-      "action": "open /login",
       "kind": "navigate",
+      "action": "open /login",
       "backing": {
         "method": "GET",
         "path": "/login"
       },
+      "id": "navigate:node:admin-instance->node:login|GET /login",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11223,15 +11223,15 @@
       }
     },
     {
-      "id": "api:node:admin-instance->node:admin-instance|POST /admin/delete-last-logs",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "fetch POST /admin/delete-last-logs",
       "kind": "api",
+      "action": "fetch POST /admin/delete-last-logs",
       "backing": {
         "method": "POST",
         "path": "/admin/delete-last-logs"
       },
+      "id": "api:node:admin-instance->node:admin-instance|POST /admin/delete-last-logs",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11242,15 +11242,15 @@
       }
     },
     {
-      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import-archive",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "fetch POST /backup/import-archive",
       "kind": "api",
+      "action": "fetch POST /backup/import-archive",
       "backing": {
         "method": "POST",
         "path": "/backup/import-archive"
       },
+      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import-archive",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11261,15 +11261,15 @@
       }
     },
     {
-      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import",
       "from": "node:admin-instance",
       "to": "node:admin-instance",
-      "action": "fetch POST /backup/import",
       "kind": "api",
+      "action": "fetch POST /backup/import",
       "backing": {
         "method": "POST",
         "path": "/backup/import"
       },
+      "id": "api:node:admin-instance->node:admin-instance|POST /backup/import",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11280,15 +11280,15 @@
       }
     },
     {
-      "id": "submit:node:admin-personnalisation->node:admin-personnalisation|POST /admin/personnalisation/save",
       "from": "node:admin-personnalisation",
       "to": "node:admin-personnalisation",
-      "action": "submit form -> POST /admin/personnalisation/save",
       "kind": "submit",
+      "action": "submit form -> POST /admin/personnalisation/save",
       "backing": {
         "method": "POST",
         "path": "/admin/personnalisation/save"
       },
+      "id": "submit:node:admin-personnalisation->node:admin-personnalisation|POST /admin/personnalisation/save",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11299,15 +11299,15 @@
       }
     },
     {
-      "id": "navigate:node:login->node:login-oidc|GET /login/oidc",
       "from": "node:login",
       "to": "node:login-oidc",
-      "action": "open /login/oidc",
       "kind": "navigate",
+      "action": "open /login/oidc",
       "backing": {
         "method": "GET",
         "path": "/login/oidc"
       },
+      "id": "navigate:node:login->node:login-oidc|GET /login/oidc",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11318,15 +11318,15 @@
       }
     },
     {
-      "id": "api:node:login->node:login|POST /login",
       "from": "node:login",
       "to": "node:login",
-      "action": "fetch POST /login",
       "kind": "api",
+      "action": "fetch POST /login",
       "backing": {
         "method": "POST",
         "path": "/login"
       },
+      "id": "api:node:login->node:login|POST /login",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11337,15 +11337,15 @@
       }
     },
     {
-      "id": "navigate:node:create-plugin->node:admin|GET /admin",
       "from": "node:create-plugin",
       "to": "node:admin",
-      "action": "open /admin",
       "kind": "navigate",
+      "action": "open /admin",
       "backing": {
         "method": "GET",
         "path": "/admin"
       },
+      "id": "navigate:node:create-plugin->node:admin|GET /admin",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11356,15 +11356,15 @@
       }
     },
     {
-      "id": "navigate:node:settings->node:settings-oidc-link|GET /settings/oidc/link",
       "from": "node:settings",
       "to": "node:settings-oidc-link",
-      "action": "open /settings/oidc/link",
       "kind": "navigate",
+      "action": "open /settings/oidc/link",
       "backing": {
         "method": "GET",
         "path": "/settings/oidc/link"
       },
+      "id": "navigate:node:settings->node:settings-oidc-link|GET /settings/oidc/link",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11375,15 +11375,15 @@
       }
     },
     {
-      "id": "submit:node:settings->node:settings|POST /settings/update-language",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "submit form -> POST /settings/update-language",
       "kind": "submit",
+      "action": "submit form -> POST /settings/update-language",
       "backing": {
         "method": "POST",
         "path": "/settings/update-language"
       },
+      "id": "submit:node:settings->node:settings|POST /settings/update-language",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11394,15 +11394,15 @@
       }
     },
     {
-      "id": "submit:node:settings->node:settings|POST /settings/update-currency",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "submit form -> POST /settings/update-currency",
       "kind": "submit",
+      "action": "submit form -> POST /settings/update-currency",
       "backing": {
         "method": "POST",
         "path": "/settings/update-currency"
       },
+      "id": "submit:node:settings->node:settings|POST /settings/update-currency",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11413,15 +11413,15 @@
       }
     },
     {
-      "id": "submit:node:settings->node:settings|POST /settings/update-username",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "submit form -> POST /settings/update-username",
       "kind": "submit",
+      "action": "submit form -> POST /settings/update-username",
       "backing": {
         "method": "POST",
         "path": "/settings/update-username"
       },
+      "id": "submit:node:settings->node:settings|POST /settings/update-username",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11432,15 +11432,15 @@
       }
     },
     {
-      "id": "navigate:node:settings->node:logout|GET /logout",
       "from": "node:settings",
       "to": "node:logout",
-      "action": "open /logout",
       "kind": "navigate",
+      "action": "open /logout",
       "backing": {
         "method": "GET",
         "path": "/logout"
       },
+      "id": "navigate:node:settings->node:logout|GET /logout",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11451,15 +11451,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/oidc/unlink",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/oidc/unlink",
       "kind": "api",
+      "action": "fetch POST /settings/oidc/unlink",
       "backing": {
         "method": "POST",
         "path": "/settings/oidc/unlink"
       },
+      "id": "api:node:settings->node:settings|POST /settings/oidc/unlink",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11470,15 +11470,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/check-username",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/check-username",
       "kind": "api",
+      "action": "fetch POST /settings/check-username",
       "backing": {
         "method": "POST",
         "path": "/settings/check-username"
       },
+      "id": "api:node:settings->node:settings|POST /settings/check-username",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11489,15 +11489,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/upload-avatar",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/upload-avatar",
       "kind": "api",
+      "action": "fetch POST /settings/upload-avatar",
       "backing": {
         "method": "POST",
         "path": "/settings/upload-avatar"
       },
+      "id": "api:node:settings->node:settings|POST /settings/upload-avatar",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11508,15 +11508,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/import-gravatar",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/import-gravatar",
       "kind": "api",
+      "action": "fetch POST /settings/import-gravatar",
       "backing": {
         "method": "POST",
         "path": "/settings/import-gravatar"
       },
+      "id": "api:node:settings->node:settings|POST /settings/import-gravatar",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11527,15 +11527,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/remove-avatar",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/remove-avatar",
       "kind": "api",
+      "action": "fetch POST /settings/remove-avatar",
       "backing": {
         "method": "POST",
         "path": "/settings/remove-avatar"
       },
+      "id": "api:node:settings->node:settings|POST /settings/remove-avatar",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11546,15 +11546,15 @@
       }
     },
     {
-      "id": "api:node:settings->node:settings|POST /settings/update-password",
       "from": "node:settings",
       "to": "node:settings",
-      "action": "fetch POST /settings/update-password",
       "kind": "api",
+      "action": "fetch POST /settings/update-password",
       "backing": {
         "method": "POST",
         "path": "/settings/update-password"
       },
+      "id": "api:node:settings->node:settings|POST /settings/update-password",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11565,15 +11565,15 @@
       }
     },
     {
-      "id": "submit:node:setup->node:login|POST /setup",
       "from": "node:setup",
       "to": "node:login",
-      "action": "submit form -> POST /setup",
       "kind": "submit",
+      "action": "submit form -> POST /setup",
       "backing": {
         "method": "POST",
         "path": "/setup"
       },
+      "id": "submit:node:setup->node:login|POST /setup",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11584,15 +11584,15 @@
       }
     },
     {
-      "id": "navigate:node:setup->node:login|GET /login",
       "from": "node:setup",
       "to": "node:login",
-      "action": "open /login",
       "kind": "navigate",
+      "action": "open /login",
       "backing": {
         "method": "GET",
         "path": "/login"
       },
+      "id": "navigate:node:setup->node:login|GET /login",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11603,15 +11603,15 @@
       }
     },
     {
-      "id": "api:node:setup->node:setup|POST /backup/import-archive",
       "from": "node:setup",
       "to": "node:setup",
-      "action": "fetch POST /backup/import-archive",
       "kind": "api",
+      "action": "fetch POST /backup/import-archive",
       "backing": {
         "method": "POST",
         "path": "/backup/import-archive"
       },
+      "id": "api:node:setup->node:setup|POST /backup/import-archive",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11622,15 +11622,15 @@
       }
     },
     {
-      "id": "api:node:setup->node:setup|POST /backup/import",
       "from": "node:setup",
       "to": "node:setup",
-      "action": "fetch POST /backup/import",
       "kind": "api",
+      "action": "fetch POST /backup/import",
       "backing": {
         "method": "POST",
         "path": "/backup/import"
       },
+      "id": "api:node:setup->node:setup|POST /backup/import",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11641,15 +11641,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:search|GET /search",
       "from": "node:global-nav",
       "to": "node:search",
-      "action": "open /search",
       "kind": "navigate",
+      "action": "open /search",
       "backing": {
         "method": "GET",
         "path": "/search"
       },
+      "id": "navigate:node:global-nav->node:search|GET /search",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11660,15 +11660,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:admin-instance|GET /admin/instance",
       "from": "node:global-nav",
       "to": "node:admin-instance",
-      "action": "open /admin/instance",
       "kind": "navigate",
+      "action": "open /admin/instance",
       "backing": {
         "method": "GET",
         "path": "/admin/instance"
       },
+      "id": "navigate:node:global-nav->node:admin-instance|GET /admin/instance",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11679,15 +11679,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:admin|GET /admin",
       "from": "node:global-nav",
       "to": "node:admin",
-      "action": "open /admin",
       "kind": "navigate",
+      "action": "open /admin",
       "backing": {
         "method": "GET",
         "path": "/admin"
       },
+      "id": "navigate:node:global-nav->node:admin|GET /admin",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11698,15 +11698,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:admin-personnalisation|GET /admin/personnalisation",
       "from": "node:global-nav",
       "to": "node:admin-personnalisation",
-      "action": "open /admin/personnalisation",
       "kind": "navigate",
+      "action": "open /admin/personnalisation",
       "backing": {
         "method": "GET",
         "path": "/admin/personnalisation"
       },
+      "id": "navigate:node:global-nav->node:admin-personnalisation|GET /admin/personnalisation",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11717,15 +11717,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:settings|GET /settings",
       "from": "node:global-nav",
       "to": "node:settings",
-      "action": "open /settings",
       "kind": "navigate",
+      "action": "open /settings",
       "backing": {
         "method": "GET",
         "path": "/settings"
       },
+      "id": "navigate:node:global-nav->node:settings|GET /settings",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11736,15 +11736,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:logout|GET /logout",
       "from": "node:global-nav",
       "to": "node:logout",
-      "action": "open /logout",
       "kind": "navigate",
+      "action": "open /logout",
       "backing": {
         "method": "GET",
         "path": "/logout"
       },
+      "id": "navigate:node:global-nav->node:logout|GET /logout",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11755,15 +11755,15 @@
       }
     },
     {
-      "id": "navigate:node:global-nav->node:login|GET /login",
       "from": "node:global-nav",
       "to": "node:login",
-      "action": "open /login",
       "kind": "navigate",
+      "action": "open /login",
       "backing": {
         "method": "GET",
         "path": "/login"
       },
+      "id": "navigate:node:global-nav->node:login|GET /login",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11774,15 +11774,15 @@
       }
     },
     {
-      "id": "submit:node:global-nav->node:global-nav|POST /collection/switch",
       "from": "node:global-nav",
       "to": "node:global-nav",
-      "action": "submit form -> POST /collection/switch",
       "kind": "submit",
+      "action": "submit form -> POST /collection/switch",
       "backing": {
         "method": "POST",
         "path": "/collection/switch"
       },
+      "id": "submit:node:global-nav->node:global-nav|POST /collection/switch",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11793,15 +11793,15 @@
       }
     },
     {
-      "id": "submit:node:global-nav->node:global-nav|POST /collection/create",
       "from": "node:global-nav",
       "to": "node:global-nav",
-      "action": "submit form -> POST /collection/create",
       "kind": "submit",
+      "action": "submit form -> POST /collection/create",
       "backing": {
         "method": "POST",
         "path": "/collection/create"
       },
+      "id": "submit:node:global-nav->node:global-nav|POST /collection/create",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11812,15 +11812,15 @@
       }
     },
     {
-      "id": "api:node:global-nav->node:global-nav|POST /settings/update-theme",
       "from": "node:global-nav",
       "to": "node:global-nav",
-      "action": "fetch POST /settings/update-theme",
       "kind": "api",
+      "action": "fetch POST /settings/update-theme",
       "backing": {
         "method": "POST",
         "path": "/settings/update-theme"
       },
+      "id": "api:node:global-nav->node:global-nav|POST /settings/update-theme",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11831,15 +11831,15 @@
       }
     },
     {
-      "id": "unlinked:node:root->node:root|POST /api/dvd/:id/episode/:number/meta",
       "from": "node:root",
       "to": "node:root",
-      "action": "POST /api/dvd/:id/episode/:number/meta",
       "kind": "unlinked",
+      "action": "POST /api/dvd/:id/episode/:number/meta",
       "backing": {
         "method": "POST",
         "path": "/api/dvd/:id/episode/:number/meta"
       },
+      "id": "unlinked:node:root->node:root|POST /api/dvd/:id/episode/:number/meta",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11850,15 +11850,15 @@
       }
     },
     {
-      "id": "unlinked:node:root->node:root|POST /api/album/:id/track/:trackId/meta",
       "from": "node:root",
       "to": "node:root",
-      "action": "POST /api/album/:id/track/:trackId/meta",
       "kind": "unlinked",
+      "action": "POST /api/album/:id/track/:trackId/meta",
       "backing": {
         "method": "POST",
         "path": "/api/album/:id/track/:trackId/meta"
       },
+      "id": "unlinked:node:root->node:root|POST /api/album/:id/track/:trackId/meta",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11869,15 +11869,15 @@
       }
     },
     {
-      "id": "unlinked:node:root->node:root|POST /api/batch-update-barcodes",
       "from": "node:root",
       "to": "node:root",
-      "action": "POST /api/batch-update-barcodes",
       "kind": "unlinked",
+      "action": "POST /api/batch-update-barcodes",
       "backing": {
         "method": "POST",
         "path": "/api/batch-update-barcodes"
       },
+      "id": "unlinked:node:root->node:root|POST /api/batch-update-barcodes",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11888,15 +11888,15 @@
       }
     },
     {
-      "id": "unlinked:node:admin->node:admin|POST /admin/refresh-all/:pluginId",
       "from": "node:admin",
       "to": "node:admin",
-      "action": "POST /admin/refresh-all/:pluginId",
       "kind": "unlinked",
+      "action": "POST /admin/refresh-all/:pluginId",
       "backing": {
         "method": "POST",
         "path": "/admin/refresh-all/:pluginId"
       },
+      "id": "unlinked:node:admin->node:admin|POST /admin/refresh-all/:pluginId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11907,15 +11907,15 @@
       }
     },
     {
-      "id": "unlinked:node:root->node:root|POST /api/item-images/upload",
       "from": "node:root",
       "to": "node:root",
-      "action": "POST /api/item-images/upload",
       "kind": "unlinked",
+      "action": "POST /api/item-images/upload",
       "backing": {
         "method": "POST",
         "path": "/api/item-images/upload"
       },
+      "id": "unlinked:node:root->node:root|POST /api/item-images/upload",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11926,15 +11926,15 @@
       }
     },
     {
-      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/customize/:pluginId",
       "from": "node:create-plugin",
       "to": "node:create-plugin",
-      "action": "POST /create-plugin/customize/:pluginId",
       "kind": "unlinked",
+      "action": "POST /create-plugin/customize/:pluginId",
       "backing": {
         "method": "POST",
         "path": "/create-plugin/customize/:pluginId"
       },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/customize/:pluginId",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11945,15 +11945,15 @@
       }
     },
     {
-      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/save",
       "from": "node:create-plugin",
       "to": "node:create-plugin",
-      "action": "POST /create-plugin/save",
       "kind": "unlinked",
+      "action": "POST /create-plugin/save",
       "backing": {
         "method": "POST",
         "path": "/create-plugin/save"
       },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/save",
       "assertions": [],
       "provenance": {
         "sourceFiles": [
@@ -11964,15 +11964,15 @@
       }
     },
     {
-      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/delete/:id",
       "from": "node:create-plugin",
       "to": "node:create-plugin",
-      "action": "POST /create-plugin/delete/:id",
       "kind": "unlinked",
+      "action": "POST /create-plugin/delete/:id",
       "backing": {
         "method": "POST",
         "path": "/create-plugin/delete/:id"
       },
+      "id": "unlinked:node:create-plugin->node:create-plugin|POST /create-plugin/delete/:id",
       "assertions": [],
       "provenance": {
         "sourceFiles": [

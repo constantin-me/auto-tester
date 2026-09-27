@@ -32,6 +32,29 @@ export function mergePreservingPins(previous: MindMap, next: MindMap): MindMap {
   return merged;
 }
 
+/**
+ * Live observations survive a re-crawl: the static crawl rebuilds structure from code,
+ * but what the browser saw (`observed`, `qa-observed` assertions) is only refreshed by
+ * a new QA baseline. Carried over for every node that still exists.
+ */
+export function carryObservations(previous: MindMap, next: MindMap): MindMap {
+  const prev = new Map(previous.nodes.map((n) => [n.id, n]));
+  return {
+    ...next,
+    nodes: next.nodes.map((n) => {
+      const p = prev.get(n.id);
+      if (!p) return n;
+      const observedAssertions = p.assertions.filter((a) => a.provenance.origin === "qa-observed" && !a.pinned);
+      const ids = new Set(n.assertions.map((a) => a.id));
+      return {
+        ...n,
+        ...(p.observed ? { observed: p.observed } : {}),
+        assertions: [...n.assertions, ...observedAssertions.filter((a) => !ids.has(a.id))],
+      };
+    }),
+  };
+}
+
 function reattach<T extends { assertions: Assertion[] }>(el: T, pins: Assertion[]): T {
   if (!pins.length) return el;
   // drop any agent assertion colliding with a pinned id, then add the pins back
