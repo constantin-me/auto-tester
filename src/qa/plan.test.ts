@@ -84,6 +84,15 @@ test("withObserved replaces qa-observed assertions but keeps pinned and authored
   assert.deepEqual(withObserved(n, fresh).assertions.map((a) => a.id).sort(), ["pin", fresh[0]!.id].sort());
 });
 
+test("withObserved: a pinned qa-observed assertion is kept once, not duplicated by the fresh baseline", () => {
+  const n = node("n:c", "/collection");
+  const fresh = observedAssertions(n, evidence(), "/collection", []);
+  n.assertions = [{ ...fresh[0]!, pinned: true, provenance: { ...fresh[0]!.provenance, confidence: 1 } }];
+  const out = withObserved(n, fresh).assertions;
+  assert.equal(out.filter((a) => a.id === fresh[0]!.id).length, 1);
+  assert.equal(out.find((a) => a.id === fresh[0]!.id)!.pinned, true);
+});
+
 test("expandEnv names a missing variable without revealing values", () => {
   process.env.QA_TEST_SECRET = "s3cret";
   assert.equal(expandEnv("${QA_TEST_SECRET}"), "s3cret");

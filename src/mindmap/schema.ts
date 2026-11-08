@@ -81,6 +81,14 @@ export const FlowNode = z.object({
       /** console errors and failed same-origin requests seen at baseline, so a check can tell new ones apart */
       errors: z.array(z.string()).optional(),
       failedRequests: z.array(z.string()).optional(),
+      /**
+       * Whether each `llm-author`/`human` assertion held on the base version (PER-47). A check
+       * reports an assertion only when it held here and fails at head; unobservable ones
+       * (needs interaction, unmet condition) are never compared.
+       */
+      assertionStates: z.record(z.enum(["holds", "fails", "unobservable"])).optional(),
+      /** per assertion id, a hash of the claim (text + check) the state was recorded for */
+      assertionFingerprints: z.record(z.string()).optional(),
     })
     .optional(),
 });

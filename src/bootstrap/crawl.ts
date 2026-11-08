@@ -236,7 +236,8 @@ export function nodeId(path: string): string {
   return "node:" + (path === "/" ? "root" : path.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, ""));
 }
 
-function labelFor(path: string): string {
+/** the crawler's route-derived name; triage keeps using it after enrichment renames a page */
+export function labelFor(path: string): string {
   if (path === "/") return "Home";
   const segs = path.split("/").filter(Boolean);
   const words = segs

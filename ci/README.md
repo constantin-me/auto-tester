@@ -36,7 +36,8 @@ of the same commit are free when `.autotester/cache` (in the workspace) is kept 
 ## Likely first failures (verify, not yet fixed)
 
 - **Headless Chrome sandbox** on ubuntu-24.04 runners (AppArmor restricts unprivileged user
-  namespaces). Puppeteer may need `--no-sandbox` there; the driver does not pass launch args yet.
+  namespaces). Puppeteer may need `--no-sandbox` there: set `"qa": { "launchArgs": ["--no-sandbox"] }` in the
+  app's config (opt-in; only on a runner you trust, since it turns off Chrome's sandbox).
 - **Compose needs the app's `.env`.** DVinyl's compose reads `env_file: .env`, which is not in
   the repo; write one from secrets before `docker compose up`.
 - **A private auto-tester repo** needs `token:` on the second checkout.

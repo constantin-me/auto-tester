@@ -3,6 +3,7 @@ import type { FlowEdge, FlowNode } from "../mindmap/schema.js";
 import type { Judge } from "./client.js";
 import type { JevCache } from "./cache.js";
 import { DEFAULT_POLICY, type Policy } from "./policy.js";
+import { labelFor } from "../bootstrap/crawl.js";
 
 /**
  * The typed judgment surface (plan Q13). Each function:
@@ -69,7 +70,9 @@ function changeState(change: ChangeContext, focus?: Focus): { [key: string]: Jso
 
 function flowState({ node, edges, templates }: FlowContext) {
   return {
-    name: node.label,
+    // the crawler's route-derived name, not the enriched label: triage was designed and measured
+    // on these inputs, and a renamed page must not invalidate every cached triage answer
+    name: node.route && node.kind !== "synthetic" ? labelFor(node.route) : node.label,
     route: node.route ?? null,
     kind: node.kind,
     views: node.views.length ? node.views : node.view ? [node.view] : [],
@@ -314,7 +317,7 @@ export interface ObservationJudgment {
   pHolds: number;
 }
 
-const MAX_TEXT_CHARS = 6000;
+export const MAX_TEXT_CHARS = 6000;
 
 export const OBSERVATION_QUESTIONS = {
   evidence_sufficient: noul("Does \`observation\` contain enough information to tell whether \`expectation\` holds?", {

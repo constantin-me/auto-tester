@@ -53,12 +53,33 @@ export function renderMarkdown(r: Report): string {
       `${r.summary.executionCheck ? " (execution check on)" : ""} → ${r.summary.tested} tested in the browser.`,
   );
 
+  if (r.summary.comparison) {
+    const c = r.summary.comparison;
+    lines.push(
+      "",
+      `Map expectations: ${plural(c.compared, "assertion")} held at baseline and were re-checked` +
+        `${c.skippedNoBaseline ? `; ${c.skippedNoBaseline} skipped with no baseline state (the page did not load on its own path at baseline, or the map changed since: re-run the baseline)` : ""}.`,
+    );
+  }
+
+  if (r.budget) {
+    const b = r.budget;
+    lines.push(
+      "",
+      b.partial
+        ? `**Partial run: the ${b.cap.toLocaleString("en-US")}-token budget ran out** (${b.spent.toLocaleString("en-US")} spent). ` +
+            `${plural(b.notTriaged, "candidate flow")} not judged and ${plural(b.notVisited, "affected flow")} not visited; they are listed under not tested.`
+        : `Budget: ${b.spent.toLocaleString("en-US")} of ${b.cap.toLocaleString("en-US")} tokens spent.`,
+    );
+  }
+
   if (bad.length) {
     lines.push("", "### Findings", "");
     for (const f of bad) {
       lines.push(`- ${flowSentence(f)}`);
       for (const x of [...f.findings].sort((a, b) => b.severity - a.severity)) {
-        lines.push(`  - **Severity ${x.severity}/5** (${x.severityLabel}, ${x.reproduced}). Expected: ${x.expected} Got: ${x.actual}`);
+        const held = x.heldAtBaseline ? `. Held at baseline (${x.pinned ? "pinned by a human" : "not pinned"}).` : "";
+        lines.push(`  - **Severity ${x.severity}/5** (${x.severityLabel}, ${x.reproduced}). Expected: ${x.expected} Got: ${x.actual}${held}`);
       }
       if (f.why.length) lines.push(`  - Why it was tested: ${f.why.slice(0, 2).join("; ")}`);
       if (f.screenshot) lines.push(`  - Evidence: ${code(f.screenshot)}`);

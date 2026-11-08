@@ -144,5 +144,7 @@ export function chromeAssertions(nodeId: string, sourceFiles: string[], texts: U
 /** Replace a node's qa-observed assertions; human-pinned and other origins are kept as they are. */
 export function withObserved(node: FlowNode, fresh: Assertion[]): FlowNode {
   const kept = node.assertions.filter((a) => a.pinned || a.provenance.origin !== "qa-observed");
-  return { ...node, assertions: [...kept, ...fresh] };
+  // a pinned qa-observed assertion stays as pinned; a fresh one with its id must not duplicate it
+  const ids = new Set(kept.map((a) => a.id));
+  return { ...node, assertions: [...kept, ...fresh.filter((a) => !ids.has(a.id))] };
 }

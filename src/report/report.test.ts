@@ -67,6 +67,8 @@ function input(over: Partial<BuildInput> = {}): BuildInput {
       { flow: "node:root", path: "/", status: "passed", attempts: 1, checksRun: 32, settled: true, findings: [] },
       { flow: "node:add-books", path: "/add-books", status: "unreachable-here", reason: "404 at baseline too (module disabled here)" },
     ],
+    untriaged: [],
+    budget: { cap: 200_000, spent: 1010, reserveForChecks: 0.3 },
     executionCheck: true,
     dropBelow: 0.45,
     usage: [{ purpose: "triage", model: "jev-1.13.0", inputTokens: 1000, outputTokens: 10 }],
@@ -133,4 +135,74 @@ test("the not-tested list is capped in markdown, never in the JSON", () => {
   assert.equal(r.flows.filter((f) => f.outcome === "not-tested").length, 42);
   assert.equal((md.match(/was not tested:/g) ?? []).length, 25);
   assert.match(md, /…and 17 more, listed in report\.json/);
+});
+
+test("report: budget cap leaves candidates and visits as skipped-budget, run is partial", () => {
+  const extra = node("node:extra", "/extra", "Extra");
+  const late = node("node:late", "/late", "Late");
+  const r = buildReport(
+    input({
+      judged: [judged(node("node:search", "/search", "Search")), judged(late)],
+      untriaged: [{ node: extra, reasons: ["views/x.ejs: indirect"], files: ["views/x.ejs"] }],
+      results: [{ flow: "node:late", path: "/late", status: "skipped-budget", reason: "budget: token cap reached before it was visited" }],
+      budget: { cap: 1000, spent: 1180, reserveForChecks: 0.3 },
+    }),
+  );
+  assert.deepEqual(r.budget, { cap: 1000, spent: 1180, reserveForChecks: 0.3, partial: true, notTriaged: 1, notVisited: 1 });
+  assert.equal(r.summary.candidates, 3);
+  const skipped = r.flows.filter((f) => f.notTestedStatus === "skipped-budget").map((f) => f.flow).sort();
+  assert.deepEqual(skipped, ["node:extra", "node:late"]);
+  assert.equal(r.summary.notTestedBy["budget: token cap reached"], 2);
+  const md = renderMarkdown(r);
+  assert.match(md, /Partial run: the 1,000-token budget ran out/);
+  assert.match(md, /1 candidate flow not judged and 1 affected flow not visited/);
+  assert.match(md, /token cap reached before it was visited/);
+});
+
+test("report: a run within budget is not partial", () => {
+  const r = buildReport(input());
+  assert.equal(r.budget?.partial, false);
+  assert.match(renderMarkdown(r), /Budget: 1,010 of 200,000 tokens spent/);
+});
+
+test("report: an expectation finding carries its assertion, pinned flag and held-at-baseline; the summary counts comparisons", () => {
+  const i = input();
+  i.results = [
+    {
+      flow: "node:search",
+      path: "/search",
+      status: "failed",
+      attempts: 3,
+      checksRun: 7,
+      settled: true,
+      comparison: { compared: 3, skippedNoBaseline: 2 },
+      findings: [{ kind: "expectation", expectation: "Search shows a results table", actual: "selector #results is not visible", assertionId: "a1", pinned: true, decidedBy: "check", severity: 4, confidence: "stable" }],
+    },
+    { flow: "node:root", path: "/", status: "passed", attempts: 1, checksRun: 6, settled: true, comparison: { compared: 4, skippedNoBaseline: 0 }, findings: [] },
+  ];
+  const r = buildReport(i);
+  const f = r.flows.find((x) => x.flow === "node:search")!.findings[0]!;
+  assert.deepEqual([f.kind, f.assertionId, f.pinned, f.heldAtBaseline], ["expectation", "a1", true, true]);
+  assert.deepEqual(r.summary.comparison, { compared: 7, skippedNoBaseline: 2 });
+  assert.equal(r.verdict, "likely-regression");
+  const md = renderMarkdown(r);
+  assert.match(md, /Expected: Search shows a results table Got: selector #results is not visible\. Held at baseline \(pinned by a human\)\./);
+  assert.match(md, /Map expectations: 7 assertions held at baseline and were re-checked; 2 skipped with no baseline state/);
+});
+
+test("report: an unpinned expectation finding says so, and non-expectation findings carry no baseline claim", () => {
+  const i = input();
+  i.results = [
+    { flow: "node:search", path: "/search", status: "maybe", attempts: 3, checksRun: 5, settled: true, findings: [
+      { kind: "expectation", expectation: "e", actual: "a", assertionId: "a2", pinned: false, decidedBy: "jev", severity: 3, confidence: "maybe" },
+      { kind: "status", expectation: "s", actual: "HTTP 500", severity: 5, confidence: "maybe" },
+    ] },
+  ];
+  const r = buildReport(i);
+  const [exp, status] = [r.flows[0]!.findings.find((x) => x.kind === "expectation")!, r.flows[0]!.findings.find((x) => x.kind === "status")!];
+  assert.equal(exp.pinned, false);
+  assert.equal(status.heldAtBaseline, undefined);
+  const md = renderMarkdown(r);
+  assert.match(md, /Held at baseline \(not pinned\)\./);
+  assert.equal((md.match(/Held at baseline/g) ?? []).length, 1);
 });

@@ -7,6 +7,8 @@ import { QaSession } from "../qa/driver.js";
 import { candidateTexts, chromeAssertions, classify, globalTexts, observedAssertions, planVisits, withObserved, type FlowStatus } from "../qa/plan.js";
 import { Judge, mapLimit, type UsageRecord } from "../jev/client.js";
 import { classifyUiTexts, type UiText } from "../jev/judgments.js";
+import { JevCache } from "../jev/cache.js";
+import { comparable, countStates, evaluateAssertions, probeSelectors, toFingerprints, toStates, type AssertionCache, type AssertionState } from "../compare/compare.js";
 
 /**
  * M4 slice 1: visit every mapped page of the running app read-only and record what it
@@ -32,7 +34,7 @@ async function main() {
   const usage: UsageRecord[] = [];
 
   console.log(`[qa] ${config.env.baseUrl} — read-only${config.qa.allowWrites ? " OFF (writes allowed)" : ""}; evidence -> ${runDir}`);
-  const session = await QaSession.open({ baseUrl: config.env.baseUrl, auth: config.auth, allowWrites: config.qa.allowWrites });
+  const session = await QaSession.open({ baseUrl: config.env.baseUrl, auth: config.auth, allowWrites: config.qa.allowWrites, launchArgs: config.qa.launchArgs });
   console.log("[qa] logged in");
 
   try {
@@ -42,7 +44,7 @@ async function main() {
     console.log(`[qa] ${links.length} live links harvested; visiting ${visits.length} of ${plan.length} flows`);
 
     const results = await mapLimit(visits, config.qa.concurrency, async (v) => {
-      const ev = await session.visit(v.path!, runDir, v.node.id.replace(/[^\w-]+/g, "_"));
+      const ev = await session.visit(v.path!, runDir, v.node.id.replace(/[^\w-]+/g, "_"), { selectors: probeSelectors(comparable(v.node)) });
       return { v, ev, ...classify(ev, loginPath, v.path!) };
     });
 
@@ -75,6 +77,19 @@ async function main() {
     const dropped = [...textsOf.values()].flat().length - [...kept.values()].flat().length - chromeItems.length;
     console.log(`[qa] texts: ${chromeKept.length} shared chrome (of ${chromeItems.length}), ${[...kept.values()].flat().length} page-specific kept, ${dropped} judged as content and not asserted`);
 
+    // which map expectations hold on this (base) version: a check later reports only those that
+    // held here and fail at head. Jev is asked once per page, and only for assertions with no machine check
+    const assertionCache: AssertionCache = new JevCache(join(resolve(baseDir, config.qa.runsDir, "..", "cache"), "assertions.json"), config.jev.model ?? "sdk-default");
+    const stateOf = new Map<string, Record<string, AssertionState>>();
+    await mapLimit(loaded, config.jev.concurrency, async (r) => {
+      const assertions = comparable(r.v.node);
+      if (assertions.length) stateOf.set(r.v.node.id, toStates(await evaluateAssertions(judge, r.v.node, assertions, r.ev, assertionCache)));
+    });
+    assertionCache.save();
+    const total = { holds: 0, fails: 0, unobservable: 0 };
+    for (const states of stateOf.values()) for (const [k, n] of Object.entries(countStates(states))) total[k as AssertionState] += n;
+    console.log(`[qa] map assertions on ${stateOf.size} pages: ${total.holds} hold, ${total.fails} fail, ${total.unobservable} unobservable at baseline`);
+
     // record: reachability on every node, structural assertions on the ones that loaded
     map.nodes = map.nodes.map((n) => {
       if (n.id === "node:global-nav") return withObserved(n, chromeAssertions(n.id, n.provenance.sourceFiles, chromeKept));
@@ -87,6 +102,8 @@ async function main() {
         note: s.reason,
         errors: byId.get(n.id)?.ev.observation.consoleErrors,
         failedRequests: byId.get(n.id)?.ev.observation.failedRequests,
+        assertionStates: stateOf.get(n.id),
+        ...(stateOf.has(n.id) ? { assertionFingerprints: toFingerprints(comparable(n)) } : {}),
       };
       const r = byId.get(n.id);
       const updated = r && r.status === "ok" ? withObserved(n, observedAssertions(n, r.ev, r.v.path!, kept.get(n.id) ?? [])) : n;

@@ -33,6 +33,8 @@ export interface PageEvidence {
   settled: boolean;
   blockedWrites: string[];
   screenshot?: string;
+  /** per probed selector: visible (matches an element with a non-empty box), or "invalid" syntax */
+  selectors?: Record<string, boolean | "invalid">;
 }
 
 export interface SessionOptions {
@@ -40,12 +42,20 @@ export interface SessionOptions {
   auth: AuthRecipe;
   allowWrites: boolean;
   headless?: boolean;
+  /** extra Chrome flags (config qa.launchArgs) */
+  launchArgs?: string[];
 }
 
 const SETTLE_QUIET_MS = 500;
 const DOM_QUIET_MS = 300;
 const SETTLE_CAP_MS = 10_000;
 const MAX_TEXT = 20_000;
+
+/**
+ * The app did not let the test user sign in. Baseline treats it as fatal; a check reports it,
+ * since a change that breaks login is the most severe regression there is.
+ */
+export class LoginFailedError extends Error {}
 
 /** `${VAR}` -> process.env.VAR. Throws naming the variable, never the value. */
 export function expandEnv(value: string): string {
@@ -73,7 +83,7 @@ export class QaSession {
   ) {}
 
   static async open(opts: SessionOptions): Promise<QaSession> {
-    const browser = await puppeteer.launch({ headless: opts.headless ?? true });
+    const browser = await puppeteer.launch({ headless: opts.headless ?? true, args: opts.launchArgs ?? [] });
     const session = new QaSession(browser, opts, new URL(opts.baseUrl));
     try {
       await session.login();
@@ -94,16 +104,22 @@ export class QaSession {
     }
     if (!auth.loginPath || !auth.fields || !auth.submitSelector) throw new Error("auth.kind=form needs loginPath, fields and submitSelector");
     const page = await this.browser.newPage();
+    const loginPath = new URL(auth.loginPath, this.base).pathname;
     try {
-      await page.goto(new URL(auth.loginPath, this.base).href, { waitUntil: "domcontentloaded" });
-      for (const [selector, value] of Object.entries(auth.fields)) await page.type(selector, expandEnv(value));
-      await page.click(auth.submitSelector);
-      const loginPath = new URL(auth.loginPath, this.base).pathname;
+      // a missing field or button is the app failing to offer a login, not a crash
+      try {
+        await page.goto(new URL(auth.loginPath, this.base).href, { waitUntil: "domcontentloaded" });
+        for (const [selector, value] of Object.entries(auth.fields)) await page.type(selector, expandEnv(value));
+        await page.click(auth.submitSelector);
+      } catch (err) {
+        if (err instanceof Error && err.message.startsWith("environment variable")) throw err; // config, not the app
+        throw new LoginFailedError(`login failed: the login form at ${loginPath} could not be used (${err instanceof Error ? err.message : String(err)})`);
+      }
       try {
         await page.waitForFunction((p: string) => location.pathname !== p, { timeout: 15_000 }, loginPath);
       } catch {
         const shown = (await page.evaluate(() => document.body.innerText)).slice(0, 200).replace(/\s+/g, " ");
-        throw new Error(`login failed: still on ${loginPath} after submitting. Page says: "${shown}"`);
+        throw new LoginFailedError(`login failed: still on ${loginPath} after submitting. Page says: "${shown}"`);
       }
     } finally {
       await page.close();
@@ -173,7 +189,7 @@ export class QaSession {
   }
 
   /** Visit one path read-only and capture everything a check needs. */
-  async visit(path: string, evidenceDir?: string, name?: string): Promise<PageEvidence> {
+  async visit(path: string, evidenceDir?: string, name?: string, opts: { selectors?: string[] } = {}): Promise<PageEvidence> {
     const { page, evidence } = await this.newPage();
     try {
       const response = await page.goto(new URL(path, this.base).href, { waitUntil: "domcontentloaded", timeout: 30_000 });
@@ -196,6 +212,24 @@ export class QaSession {
           hasNav: !!document.querySelector("nav, header"),
         };
       }, MAX_TEXT);
+      // read-only probe, no clicks; what a visible selector means is decided here, everything
+      // else (which selectors, what a result implies) in compare/
+      const selectors = opts.selectors?.length
+        ? await page.evaluate((sels: string[]) => {
+            const out: Record<string, boolean | "invalid"> = {};
+            for (const s of sels) {
+              try {
+                out[s] = [...document.querySelectorAll(s)].some((el) => {
+                  const r = el.getBoundingClientRect();
+                  return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden";
+                });
+              } catch {
+                out[s] = "invalid";
+              }
+            }
+            return out;
+          }, opts.selectors)
+        : undefined;
       let screenshot: string | undefined;
       if (evidenceDir && name) {
         mkdirSync(evidenceDir, { recursive: true });
@@ -218,6 +252,7 @@ export class QaSession {
         settled,
         blockedWrites: evidence.blocked,
         screenshot,
+        selectors,
       };
     } finally {
       await page.close();

@@ -16,13 +16,17 @@ export const SEVERITY_LABELS = [
 ] as const;
 
 export const ReportFinding = z.object({
-  kind: z.enum(["status", "redirect", "new-error", "new-failed-request", "assertion"]),
+  kind: z.enum(["status", "redirect", "new-error", "new-failed-request", "assertion", "expectation", "login"]),
   expected: z.string(),
   actual: z.string(),
   severity: z.number().int().min(0).max(5),
   severityLabel: z.string(),
   /** stable = seen on every visit; maybe = not reproduced, never reported as a bug */
   reproduced: z.enum(["stable", "maybe"]),
+  /** expectation findings (PER-47): the map assertion behind it, whether a human pinned it, and that it held at baseline */
+  assertionId: z.string().optional(),
+  pinned: z.boolean().optional(),
+  heldAtBaseline: z.boolean().optional(),
 });
 export type ReportFinding = z.infer<typeof ReportFinding>;
 
@@ -37,6 +41,8 @@ export const FlowReport = z.object({
   confidence: z.enum(["high", "medium", "low"]).optional(),
   confidenceWhy: z.string().optional(),
   notTestedReason: z.string().optional(),
+  /** set when the token cap, not Jev or the planner, is why the flow was not tested */
+  notTestedStatus: z.enum(["skipped-budget"]).optional(),
   /** why the flow was considered: how the change reached it */
   why: z.array(z.string()),
   /** changed files that linked this flow: the likely origin of any finding */
@@ -51,6 +57,7 @@ export const FlowReport = z.object({
     })
     .optional(),
   checks: z.object({ run: z.number(), attempts: z.number(), settled: z.boolean() }).optional(),
+  comparison: z.object({ compared: z.number(), skippedNoBaseline: z.number() }).optional(),
   findings: z.array(ReportFinding),
   screenshot: z.string().optional(),
 });
@@ -75,9 +82,23 @@ export const Report = z.object({
     /** not-tested reasons, bucketed */
     notTestedBy: z.record(z.number()),
     executionCheck: z.boolean(),
+    /** map assertions compared with their baseline state; skipped = no baseline state yet (absent in older reports) */
+    comparison: z.object({ compared: z.number(), skippedNoBaseline: z.number() }).optional(),
   }),
   flows: z.array(FlowReport),
   jev: z.object({ requests: z.number(), tokens: z.number(), model: z.string().optional() }),
+  /** absent in reports saved before PER-48 */
+  budget: z
+    .object({
+      cap: z.number(),
+      spent: z.number(),
+      reserveForChecks: z.number(),
+      /** true when the cap stopped work from starting: the report lists what was left untested */
+      partial: z.boolean(),
+      notTriaged: z.number(),
+      notVisited: z.number(),
+    })
+    .optional(),
   evidenceDir: z.string(),
 });
 export type Report = z.infer<typeof Report>;
@@ -101,6 +122,8 @@ export function confidenceOf(outcome: FlowReport["outcome"], checks: { run: numb
 
 /** Coarse bucket for a not-tested reason, for the summary counts. */
 export function notTestedBucket(reason: string): string {
+  if (reason.startsWith("budget")) return "budget: token cap reached";
+  if (reason.startsWith("login failed")) return "login failed: blocked";
   if (reason.startsWith("execution check")) return "execution check: change does not reach it";
   if (reason.startsWith("Jev")) return "Jev: not affected";
   if (reason.includes("404")) return "unreachable on this instance";
