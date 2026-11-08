@@ -3,16 +3,20 @@
 # Copy to `.github/workflows/autotester.yml` in the APP's repository (not this one).
 # Advisory: the job reports, it never blocks a merge (the check step always succeeds).
 #
-# STATUS: linted with actionlint, never run. Expect to fix the first run (see ci/README.md).
+# STATUS: never run on GitHub. Every step was rehearsed locally with ci/rehearse.sh
+# (same sequence, on a clone of the app): see ci/README.md.
 #
-# Decisions to make before enabling (see ci/README.md):
-#   - how the app is built and started in CI (here: docker compose from the checkout)
-#   - how CI gets a signed-in test user and some data (here: an app-specific seed step)
+# The app repo commits: autotester.config.json (qa.disposable + qa.seed), the fixture it
+# seeds, and the enriched mind-map (store.dir). Enrichment runs on a developer machine,
+# never here; a re-crawl in CI keeps it.
+#
+# Decisions before enabling (see ci/README.md):
+#   - which repository this goes in
 #   - whether reports are posted as PR comments (off by default)
 #
 # Secrets used:
 #   TYPESAFE_API_KEY    Jev judgments
-#   QA_USER / QA_PASS   test account the auth recipe signs in with
+# (the test login comes from the committed fixture: public on purpose, no secret needed)
 
 name: autotester (advisory)
 
@@ -34,8 +38,6 @@ jobs:
     timeout-minutes: 45
     env:
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      QA_USER: ${{ secrets.QA_USER }}
-      QA_PASS: ${{ secrets.QA_PASS }}
       BASE_SHA: ${{ github.event.pull_request.base.sha }}
       HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       # must match store.dir in autotester.config.json (relative to the repo root)
@@ -63,17 +65,36 @@ jobs:
         working-directory: .autotester-tool
         run: npm ci
 
+      # same change, same question -> same Jev answer: re-runs and unchanged pages are free
+      - uses: actions/cache@v4
+        with:
+          path: .autotester/cache
+          key: autotester-jev-${{ github.run_id }}
+          restore-keys: autotester-jev-
+
+      # APP: DVinyl reads .env (not committed) and refuses empty or published secrets
+      - name: Write the app's .env with fresh secrets
+        run: |
+          {
+            echo "MONGODB_URL=mongodb://mongodb:27017/dvinyl"
+            echo "PASSJWT=$(openssl rand -hex 32)"
+            echo "SESSION_SECRET=$(openssl rand -hex 32)"
+            echo "PROD=false"
+            echo "VINYL_PORT=3099"
+            echo "BASE_URL="
+          } > "$RUNNER_TEMP/app.env"
+
       # ---- baseline on the PR's base ------------------------------------------------
       - name: Start the app at the base commit
         run: |
           git checkout --quiet "$BASE_SHA"
+          cp "$RUNNER_TEMP/app.env" .env
           docker compose up -d --build
           curl -s -o /dev/null --retry 60 --retry-delay 2 --retry-connrefused --retry-all-errors http://localhost:3099/login
 
-      - name: Seed a test user and data (APP-SPECIFIC — replace)
-        run: |
-          echo "Create the QA_USER account and a few items here, e.g. by restoring a"
-          echo "fixture backup through the app's own import endpoint."
+      - name: Seed the test user and data from the committed fixture
+        working-directory: .autotester-tool
+        run: npm run qa:seed -- "$GITHUB_WORKSPACE/autotester.config.json"
 
       - name: Record the baseline
         working-directory: .autotester-tool
@@ -89,6 +110,7 @@ jobs:
           cp -r "$STORE_DIR" "$RUNNER_TEMP/mindmap-baseline"
           git checkout --quiet --force "$HEAD_SHA"
           rm -rf "$STORE_DIR" && mkdir -p "$(dirname "$STORE_DIR")" && cp -r "$RUNNER_TEMP/mindmap-baseline" "$STORE_DIR"
+          cp "$RUNNER_TEMP/app.env" .env
           docker compose up -d --build
           curl -s -o /dev/null --retry 60 --retry-delay 2 --retry-connrefused --retry-all-errors http://localhost:3099/login
 
