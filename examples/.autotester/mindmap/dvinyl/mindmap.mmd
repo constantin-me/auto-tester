@@ -1,39 +1,39 @@
-%% Kyonew/DVinyl — generated 2026-09-27T18:07:52.109Z. Do not edit; regenerate with bootstrap.
+%% Kyonew/DVinyl — generated 2026-11-08T20:40:02.710Z. Do not edit; regenerate with bootstrap.
 %% nodes=62 edges=202 (folded: 54 api, 8 unlinked)
 flowchart LR
-  n_root["Home<br/>/<br/>(5 api, 4 unlinked)"]
+  n_root["Dashboard<br/>/<br/>(5 api, 4 unlinked)"]
   n_global_nav{{"Global navigation (header, footer)<br/>(1 api)"}}
   subgraph n_g_add_books["add-books"]
     n_add_books["Add books<br/>/add-books"]
-    n_add_books_manual["Add books manual<br/>/add-books/manual"]
+    n_add_books_manual["Manual book add<br/>/add-books/manual"]
   end
   subgraph n_g_add_dvd["add-dvd"]
-    n_add_dvd["Add dvd<br/>/add-dvd"]
-    n_add_dvd_manual["Add dvd manual<br/>/add-dvd/manual"]
+    n_add_dvd["Add DVD<br/>/add-dvd"]
+    n_add_dvd_manual["Manual DVD add<br/>/add-dvd/manual"]
   end
   subgraph n_g_add_games["add-games"]
-    n_add_games["Add games<br/>/add-games"]
-    n_add_games_manual["Add games manual<br/>/add-games/manual"]
+    n_add_games["Add game<br/>/add-games"]
+    n_add_games_manual["Manual game add<br/>/add-games/manual"]
   end
   subgraph n_g_add_lego["add-lego"]
-    n_add_lego["Add lego<br/>/add-lego"]
-    n_add_lego_manual["Add lego manual<br/>/add-lego/manual"]
+    n_add_lego["Add LEGO set<br/>/add-lego"]
+    n_add_lego_manual["Manual LEGO add<br/>/add-lego/manual"]
   end
   subgraph n_g_add_music["add-music"]
     n_add_music["Add music<br/>/add-music"]
-    n_add_music_manual["Add music manual<br/>/add-music/manual"]
+    n_add_music_manual["Manual music add<br/>/add-music/manual"]
   end
   subgraph n_g_admin["admin"]
     n_admin["Admin<br/>/admin<br/>(7 api, 1 unlinked)"]
-    n_admin_instance["Admin instance<br/>/admin/instance<br/>(3 api)"]
-    n_admin_personnalisation["Admin personnalisation<br/>/admin/personnalisation"]
+    n_admin_instance["Instance administration<br/>/admin/instance<br/>(3 api)"]
+    n_admin_personnalisation["Personalization settings<br/>/admin/personnalisation"]
     n_admin_api_search_collection(["Admin api search collection<br/>/admin/api/search-collection"])
     n_admin_api_search_image_universal(["Admin api search image universal<br/>/admin/api/search-image-universal"])
   end
   subgraph n_g_album["album"]
-    n_album_edit_id["Album edit #123;id#125;<br/>/album/edit/:id"]
-    n_album_id["Album #123;id#125;<br/>/album/:id<br/>(4 api)"]
-    n_album_id_label["Album #123;id#125; label<br/>/album/:id/label"]
+    n_album_edit_id["Edit album<br/>/album/edit/:id"]
+    n_album_id["Album detail<br/>/album/:id<br/>(4 api)"]
+    n_album_id_label["Album label<br/>/album/:id/label"]
   end
   subgraph n_g_api["api"]
     n_api_collection_ids(["Api collection ids<br/>/api/collection/ids"])
@@ -50,32 +50,32 @@ flowchart LR
     n_backup_collection_export_csv(["Backup collection export csv<br/>/backup/collection/export-csv"])
   end
   subgraph n_g_book["book"]
-    n_book_edit_id["Book edit #123;id#125;<br/>/book/edit/:id"]
-    n_book_id["Book #123;id#125;<br/>/book/:id<br/>(4 api)"]
-    n_book_id_label["Book #123;id#125; label<br/>/book/:id/label"]
+    n_book_edit_id["Edit book<br/>/book/edit/:id"]
+    n_book_id["Book detail<br/>/book/:id<br/>(4 api)"]
+    n_book_id_label["Item print label<br/>/book/:id/label"]
   end
   n_collection["Collection<br/>/collection<br/>(3 api)"]
-  n_confirm_books_id["Confirm books #123;id#125;<br/>/confirm-books/:id"]
-  n_confirm_dvd_id["Confirm dvd #123;id#125;<br/>/confirm-dvd/:id"]
-  n_confirm_games_id["Confirm games #123;id#125;<br/>/confirm-games/:id"]
-  n_confirm_lego_id["Confirm lego #123;id#125;<br/>/confirm-lego/:id"]
-  n_confirm_music_id["Confirm music #123;id#125;<br/>/confirm-music/:id"]
-  n_create_plugin["Create plugin<br/>/create-plugin<br/>(3 unlinked)"]
+  n_confirm_books_id["Confirm book<br/>/confirm-books/:id"]
+  n_confirm_dvd_id["Confirm DVD<br/>/confirm-dvd/:id"]
+  n_confirm_games_id["Confirm game<br/>/confirm-games/:id"]
+  n_confirm_lego_id["Confirm LEGO set<br/>/confirm-lego/:id"]
+  n_confirm_music_id["Confirm music release<br/>/confirm-music/:id"]
+  n_create_plugin["Plugin builder<br/>/create-plugin<br/>(3 unlinked)"]
   subgraph n_g_dvd["dvd"]
-    n_dvd_edit_id["Dvd edit #123;id#125;<br/>/dvd/edit/:id"]
-    n_dvd_id["Dvd #123;id#125;<br/>/dvd/:id<br/>(4 api)"]
-    n_dvd_id_label["Dvd #123;id#125; label<br/>/dvd/:id/label"]
-    n_dvd_id_episodes["Dvd #123;id#125; episodes<br/>/dvd/:id/episodes"]
+    n_dvd_edit_id["Edit DVD<br/>/dvd/edit/:id"]
+    n_dvd_id["DVD detail<br/>/dvd/:id<br/>(4 api)"]
+    n_dvd_id_label["DVD print label<br/>/dvd/:id/label"]
+    n_dvd_id_episodes["Season episode list<br/>/dvd/:id/episodes"]
   end
   subgraph n_g_game["game"]
-    n_game_edit_id["Game edit #123;id#125;<br/>/game/edit/:id"]
-    n_game_id["Game #123;id#125;<br/>/game/:id<br/>(4 api)"]
-    n_game_id_label["Game #123;id#125; label<br/>/game/:id/label"]
+    n_game_edit_id["Edit game<br/>/game/edit/:id"]
+    n_game_id["Game detail<br/>/game/:id<br/>(4 api)"]
+    n_game_id_label["Item label<br/>/game/:id/label"]
   end
   subgraph n_g_lego["lego"]
-    n_lego_edit_id["Lego edit #123;id#125;<br/>/lego/edit/:id"]
-    n_lego_id["Lego #123;id#125;<br/>/lego/:id<br/>(4 api)"]
-    n_lego_id_label["Lego #123;id#125; label<br/>/lego/:id/label"]
+    n_lego_edit_id["Edit LEGO set<br/>/lego/edit/:id"]
+    n_lego_id["LEGO set detail<br/>/lego/:id<br/>(4 api)"]
+    n_lego_id_label["Item label<br/>/lego/:id/label"]
   end
   subgraph n_g_login["login"]
     n_login["Login<br/>/login<br/>(1 api)"]
@@ -83,14 +83,14 @@ flowchart LR
     n_login_oidc_callback(["Login oidc callback<br/>/login/oidc/callback"])
   end
   n_logout(["Logout<br/>/logout"])
-  n_manual_add["Manual add<br/>/manual-add"]
+  n_manual_add["Manual add item<br/>/manual-add"]
   n_plugin_assets_pluginId_file(["Plugin assets #123;pluginId#125; #123;file#125;<br/>/plugin-assets/:pluginId/:file"])
   n_search["Search<br/>/search"]
   subgraph n_g_settings["settings"]
     n_settings_oidc_link(["Settings oidc link<br/>/settings/oidc/link"])
-    n_settings["Settings<br/>/settings<br/>(6 api)"]
+    n_settings["Account settings<br/>/settings<br/>(6 api)"]
   end
-  n_setup["Setup<br/>/setup<br/>(2 api)"]
+  n_setup["Initial admin setup<br/>/setup<br/>(2 api)"]
   n_share_token(["Share #123;token#125;<br/>/share/:token"])
   n_wishlist["Wishlist<br/>/wishlist<br/>(6 api)"]
   n_collection ==>|"POST /collection/labels"| n_collection
