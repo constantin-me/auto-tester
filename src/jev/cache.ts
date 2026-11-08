@@ -33,6 +33,11 @@ export class JevCache<T> {
       .digest("hex");
   }
 
+  /** would this key be answered without a call? (lets a budget gate let free work through) */
+  has(key: string): boolean {
+    return key in this.entries;
+  }
+
   async getOrAsk(key: string, ask: () => Promise<T>): Promise<T> {
     if (key in this.entries) {
       this.hits++;

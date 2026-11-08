@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "bootstrap": "tsx src/cli/bootstrap.ts",
-    "typecheck": "tsc --noEmit",
+    "enrich": "tsx --env-file-if-exists=.env src/cli/enrich.ts",
+    "typecheck":"tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
     "jev:smoke": "tsx --env-file-if-exists=.env src/cli/jev-smoke.ts",
     "eval:prepare": "tsx src/cli/eval-prepare.ts",
@@ -17,6 +18,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
     "@typesafe-ai/sdk": "^0.6.0",
     "puppeteer": "^25.12.0",
     "zod": "^3.23.8"

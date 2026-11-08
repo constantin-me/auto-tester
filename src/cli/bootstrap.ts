@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import { loadConfig } from "../config/config.js";
 import { makeStore } from "../store/store.js";
 import { staticCrawl } from "../bootstrap/crawl.js";
-import { carryObservations, mergePreservingPins } from "../mindmap/guard.js";
+import { carryEnrichment, carryObservations, mergePreservingPins } from "../mindmap/guard.js";
 import { toMermaid } from "../mindmap/mermaid.js";
 
 /**
@@ -36,7 +36,7 @@ async function main() {
 
   const { map: fresh, unresolved, stats } = staticCrawl(appRoot, config.repo, config.crawler);
   const previous = store.load(config.repo);
-  const merged = carryObservations(previous, mergePreservingPins(previous, fresh));
+  const merged = carryEnrichment(previous, carryObservations(previous, mergePreservingPins(previous, fresh)));
 
   const pinned = countPinned(merged);
   store.save(merged);

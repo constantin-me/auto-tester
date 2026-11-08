@@ -35,6 +35,8 @@ export interface RouteDef {
   binding?: Binding;
   /** 1-based inclusive lines of the route declaration + inline handler in `file` */
   span: { start: number; end: number };
+  /** handler given by reference: where its source lives, for readers that need the code itself */
+  referenced?: { file: string; body: string };
 }
 
 const ROUTE_RE =
@@ -204,6 +206,7 @@ interface HandlerFacts {
   /** every rendered view, in source order */
   views: string[];
   redirects: string[];
+  referenced?: { file: string; body: string };
 }
 const NO_FACTS: HandlerFacts = { views: [], redirects: [] };
 
@@ -317,7 +320,7 @@ export function routesInText(source: string, abs: string, rel: string, filePrefi
     const tokens = guardsOf(afterPath.slice(0, callEnd));
     const ref = tokens.pop();
     const handler = ref && !ref.startsWith("...") ? referencedHandler(ref, abs, text) : undefined;
-    emit(m[2]!, rawPath, tokens, handler ? viewAndRedirects(handler.body, dirOf(relTo(handler.file))) : NO_FACTS, span);
+    emit(m[2]!, rawPath, tokens, handler ? { ...viewAndRedirects(handler.body, dirOf(relTo(handler.file))), referenced: { file: relTo(handler.file), body: handler.body } } : NO_FACTS, span);
   });
 
   for (const t of text.matchAll(ROUTE_TABLE_START)) {

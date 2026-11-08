@@ -55,6 +55,31 @@ export function carryObservations(previous: MindMap, next: MindMap): MindMap {
   };
 }
 
+/**
+ * LLM enrichment survives a re-crawl too (PER-42). The crawler rebuilds labels and
+ * assertions from code, which would silently drop the enrichment pass's work. For every
+ * node that still exists, its `llm-author` assertions and the label enrichment gave it are
+ * carried over. They may describe code that just changed: re-running `enrich` refreshes
+ * them, and costs nothing for nodes whose evidence is unchanged (answers are cached).
+ */
+export function carryEnrichment(previous: MindMap, next: MindMap): MindMap {
+  const prev = new Map(previous.nodes.map((n) => [n.id, n]));
+  return {
+    ...next,
+    nodes: next.nodes.map((n) => {
+      const p = prev.get(n.id);
+      const authored = p?.assertions.filter((a) => a.provenance.origin === "llm-author" && !a.pinned) ?? [];
+      if (!p || !authored.length) return n;
+      const ids = new Set(n.assertions.map((a) => a.id));
+      return {
+        ...n,
+        label: p.label,
+        assertions: [...n.assertions, ...authored.filter((a) => !ids.has(a.id))],
+      };
+    }),
+  };
+}
+
 function reattach<T extends { assertions: Assertion[] }>(el: T, pins: Assertion[]): T {
   if (!pins.length) return el;
   // drop any agent assertion colliding with a pinned id, then add the pins back

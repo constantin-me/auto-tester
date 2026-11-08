@@ -37,6 +37,10 @@
     "backend": "local-disk",
     "dir": ".autotester/mindmap/dvinyl"
   },
+  "enrich": {
+    "backend": "claude-code",
+    "concurrency": 2
+  },
   "jev": {
     "model": "jev-1.13.0"
   }

@@ -59,6 +59,11 @@ export const Config = z.object({
   budget: z.object({
     /** hard token cap per run; orchestrator stops new spawns past it (plan Q14) */
     maxTokens: z.number().int().positive().default(200_000),
+    /**
+     * share of maxTokens (0..1) that triage + execution checks may not spend, kept for the
+     * browser visits: their Jev calls (observation, severity) would otherwise find nothing left
+     */
+    reserveForChecks: z.number().min(0).max(1).default(0.3),
   }),
   flakiness: z.object({
     /** retries before a deviation is allowed to be flagged (plan Q15) */
@@ -72,6 +77,22 @@ export const Config = z.object({
       concurrency: z.number().int().positive().default(8),
     })
     .default({}),
+  /** LLM enrichment pass (PER-42): labels + expected-behavior assertions, written by Claude */
+  enrich: z
+    .object({
+      /**
+       * api         = Anthropic API, ANTHROPIC_API_KEY (works in CI)
+       * claude-code = local `claude -p`, covered by the user's Claude subscription (local only)
+       */
+      backend: z.enum(["api", "claude-code"]).default("api"),
+      model: z.string().default("claude-opus-5-5"),
+      effort: z.enum(["low", "medium", "high", "xhigh", "max"]).default("low"),
+      /** parallel requests in flight */
+      concurrency: z.number().int().positive().default(4),
+      /** a node whose handler + templates exceed this is skipped, never truncated */
+      maxEvidenceChars: z.number().int().positive().default(100_000),
+    })
+    .default({}),
   /** browser QA (M4). Read-only unless allowWrites: it runs against a real instance. */
   qa: z
     .object({
@@ -83,6 +104,11 @@ export const Config = z.object({
       visitEndpoints: z.boolean().default(false),
       /** submitting forms / non-GET actions; off by default */
       allowWrites: z.boolean().default(false),
+      /**
+       * extra Chrome flags, e.g. ["--no-sandbox"] on CI runners whose kernel blocks the
+       * Chrome sandbox (ubuntu-24.04 AppArmor). Opt-in: the sandbox stays on by default.
+       */
+      launchArgs: z.array(z.string()).default([]),
       concurrency: z.number().int().positive().default(4),
       /** where run evidence (screenshots, observations) is written, relative to the config */
       runsDir: z.string().default("../.autotester/runs"),
