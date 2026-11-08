@@ -1,0 +1,24 @@
+# Disposable QA instance of DVinyl, next to (never instead of) the developer's own.
+# Own containers, port, database and uploads; nothing is shared with the real instance,
+# so a QA run may write (qa.allowWrites) and the database can be wiped and re-seeded.
+#
+#   docker compose -p dvinyl-qa -f test-projects/DVinyl/docker-compose.yml \
+#     -f examples/dvinyl-qa.compose.yml up -d --build
+#   docker compose -p dvinyl-qa ... down -v      # throw it away, data included
+services:
+  dvinyl-app:
+    container_name: dvinyl_qa_app
+    restart: "no"
+    ports: !override
+      - "3199:3099"
+    volumes: !override
+      - qa_uploads:/app/public/uploads
+  mongodb:
+    container_name: dvinyl_qa_db
+    restart: "no"
+    volumes: !override
+      - qa_mongo:/data/db
+
+volumes:
+  qa_uploads:
+  qa_mongo:

@@ -264,12 +264,14 @@ export async function classifyUiTexts(
   page: { route: string; title: string; hasParams: boolean },
   items: UiText[],
   minConfidence = 0.6,
+  /** raw answers per exact page + texts, so re-baselining an unchanged page is free */
+  cache?: JevCache<{ choice: string; confidence: number }[]>,
 ): Promise<{ interface: boolean; confidence: number }[]> {
   if (!items.length) return [];
   // at most CHUNK questions per request; every text is judged
   if (items.length > UI_TEXT_CHUNK) {
     const out: { interface: boolean; confidence: number }[] = [];
-    for (let i = 0; i < items.length; i += UI_TEXT_CHUNK) out.push(...(await classifyUiTexts(judge, page, items.slice(i, i + UI_TEXT_CHUNK), minConfidence)));
+    for (let i = 0; i < items.length; i += UI_TEXT_CHUNK) out.push(...(await classifyUiTexts(judge, page, items.slice(i, i + UI_TEXT_CHUNK), minConfidence, cache)));
     return out;
   }
   const questions = Object.fromEntries(
@@ -290,11 +292,13 @@ export async function classifyUiTexts(
       ),
     ]),
   );
-  const a = await judge.ask("ui-text", { page, texts: items }, questions);
-  return items.map((_, i) => {
-    const r = (a as Record<string, { choice: string; confidence: number }>)[`t${i}`]!;
-    return { interface: r.choice === "interface" && r.confidence >= minConfidence, confidence: r.confidence };
-  });
+  const state = { page, texts: items };
+  const ask = async () => {
+    const a = (await judge.ask("ui-text", state, questions)) as Record<string, { choice: string; confidence: number }>;
+    return items.map((_, i) => ({ choice: a[`t${i}`]!.choice, confidence: a[`t${i}`]!.confidence }));
+  };
+  const raw = cache ? await cache.getOrAsk(cache.key("ui-text", questions, state), ask) : await ask();
+  return raw.map((r) => ({ interface: r.choice === "interface" && r.confidence >= minConfidence, confidence: r.confidence }));
 }
 
 // ---- 2. observation vs expectation (comparator core) -----------------------

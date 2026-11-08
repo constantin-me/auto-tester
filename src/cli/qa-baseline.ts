@@ -38,7 +38,7 @@ async function main() {
   console.log("[qa] logged in");
 
   try {
-    const links = await session.harvestLinks(config.qa.seedPaths);
+    const links = await session.harvestLinks(config.qa.seedPaths, { depth: config.qa.harvestDepth, deny: config.qa.denyPaths });
     const plan = planVisits(map.nodes, links, config.qa);
     const visits = plan.filter((p) => p.path);
     console.log(`[qa] ${links.length} live links harvested; visiting ${visits.length} of ${plan.length} flows`);
@@ -65,14 +65,16 @@ async function main() {
     const textsOf = new Map(loaded.map((r) => [r.v.node.id, candidateTexts(r.ev)]));
     const chrome = globalTexts([...textsOf.values()]);
     const judge = new Judge({ model: config.jev.model, onUsage: (u) => usage.push(u) });
+    // same page, same texts -> same answer: a re-baseline of unchanged pages costs nothing
+    const uiTextCache = new JevCache<{ choice: string; confidence: number }[]>(join(resolve(baseDir, config.qa.runsDir, "..", "cache"), "ui-text.json"), config.jev.model ?? "sdk-default");
     const kept = new Map<string, UiText[]>();
     await mapLimit(loaded, config.jev.concurrency, async (r) => {
       const own = textsOf.get(r.v.node.id)!.filter((t) => !chrome.has(t.text));
-      const verdicts = await classifyUiTexts(judge, { route: r.v.node.route!, title: r.ev.structure.title, hasParams: r.v.node.route!.includes(":") }, own);
+      const verdicts = await classifyUiTexts(judge, { route: r.v.node.route!, title: r.ev.structure.title, hasParams: r.v.node.route!.includes(":") }, own, undefined, uiTextCache);
       kept.set(r.v.node.id, own.filter((_, i) => verdicts[i]!.interface));
     });
     const chromeItems = [...new Map([...textsOf.values()].flat().filter((t) => chrome.has(t.text)).map((t) => [t.text, t])).values()];
-    const chromeVerdicts = await classifyUiTexts(judge, { route: "(every signed-in page)", title: "shared header and navigation", hasParams: false }, chromeItems);
+    const chromeVerdicts = await classifyUiTexts(judge, { route: "(every signed-in page)", title: "shared header and navigation", hasParams: false }, chromeItems, undefined, uiTextCache);
     const chromeKept = chromeItems.filter((_, i) => chromeVerdicts[i]!.interface);
     const dropped = [...textsOf.values()].flat().length - [...kept.values()].flat().length - chromeItems.length;
     console.log(`[qa] texts: ${chromeKept.length} shared chrome (of ${chromeItems.length}), ${[...kept.values()].flat().length} page-specific kept, ${dropped} judged as content and not asserted`);
@@ -86,6 +88,7 @@ async function main() {
       if (assertions.length) stateOf.set(r.v.node.id, toStates(await evaluateAssertions(judge, r.v.node, assertions, r.ev, assertionCache)));
     });
     assertionCache.save();
+    uiTextCache.save();
     const total = { holds: 0, fails: 0, unobservable: 0 };
     for (const states of stateOf.values()) for (const [k, n] of Object.entries(countStates(states))) total[k as AssertionState] += n;
     console.log(`[qa] map assertions on ${stateOf.size} pages: ${total.holds} hold, ${total.fails} fail, ${total.unobservable} unobservable at baseline`);

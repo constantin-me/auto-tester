@@ -98,6 +98,8 @@ export const Config = z.object({
     .object({
       /** pages whose links are harvested to resolve :id params */
       seedPaths: z.array(z.string()).default(["/", "/collection", "/wishlist"]),
+      /** 2 = also read the pages the seed pages link to (detail pages link to edit/label pages); denyPaths apply */
+      harvestDepth: z.number().int().min(1).max(2).default(1),
       /** never visited, whatever the map says (substring match on the route) */
       denyPaths: z.array(z.string()).default(["/logout", "/login/oidc", "/backup/", "/api/", "/socket.io"]),
       /** endpoints (redirects, downloads, JSON) are skipped unless enabled */
@@ -109,6 +111,19 @@ export const Config = z.object({
        * Chrome sandbox (ubuntu-24.04 AppArmor). Opt-in: the sandbox stays on by default.
        */
       launchArgs: z.array(z.string()).default([]),
+      /**
+       * the instance at env.baseUrl is throwaway (e.g. a docker compose project of its own):
+       * required before `qa:seed` may wipe and re-seed it. Never set it for a real instance.
+       */
+      disposable: z.boolean().default(false),
+      /** fixture loader: POST `file` (relative to the config) to `path` on a fresh instance */
+      seed: z
+        .object({
+          path: z.string(),
+          file: z.string(),
+          contentType: z.string().default("application/json"),
+        })
+        .optional(),
       concurrency: z.number().int().positive().default(4),
       /** where run evidence (screenshots, observations) is written, relative to the config */
       runsDir: z.string().default("../.autotester/runs"),

@@ -1,0 +1,55 @@
+{
+  "repo": "Kyonew/DVinyl",
+  "appRoot": "../test-projects/DVinyl",
+  "framework": "express-ejs",
+  "crawler": {
+    "entry": "app.ts",
+    "expansions": [
+      {
+        "var": "plugin",
+        "from": "plugins/*/index.ts",
+        "fields": [
+          "id",
+          "routePrefix"
+        ]
+      }
+    ]
+  },
+  "env": {
+    "baseUrl": "http://localhost:3199"
+  },
+  "auth": {
+    "kind": "form",
+    "loginPath": "/login",
+    "fields": {
+      "input[name=email]": "qa@example.test",
+      "input[name=password]": "qa-fixture-password"
+    },
+    "submitSelector": "button[type=submit]"
+  },
+  "budget": {
+    "maxTokens": 500000
+  },
+  "flakiness": {
+    "retryCount": 2
+  },
+  "store": {
+    "backend": "local-disk",
+    "dir": ".autotester/mindmap/dvinyl-qa"
+  },
+  "enrich": {
+    "backend": "claude-code",
+    "concurrency": 2
+  },
+  "jev": {
+    "model": "jev-1.13.0"
+  },
+  "qa": {
+    "harvestDepth": 2,
+    "disposable": true,
+    "seed": {
+      "path": "/backup/import",
+      "file": "fixtures/dvinyl-qa.json"
+    }
+  }
+}

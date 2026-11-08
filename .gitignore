@@ -6,3 +6,4 @@ eval/maps/
 eval/results/
 .autotester/runs/
 .autotester/cache/
+.autotester/ci-cache/

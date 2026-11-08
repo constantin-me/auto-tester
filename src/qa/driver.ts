@@ -259,8 +259,22 @@ export class QaSession {
     }
   }
 
-  /** Same-origin link pathnames found on the given pages (used to resolve :id params). */
-  async harvestLinks(paths: string[]): Promise<string[]> {
+  /**
+   * Same-origin link pathnames found on the given pages (used to resolve :id params).
+   * depth 2 also reads the pages those links lead to (an item's edit and label links live on
+   * its detail page), at most `maxFollow` of them, never a denied path (logout, downloads).
+   */
+  async harvestLinks(paths: string[], opts: { depth?: number; deny?: string[]; maxFollow?: number } = {}): Promise<string[]> {
+    const found = new Set(await this.linksOn(paths));
+    if ((opts.depth ?? 1) >= 2) {
+      const deny = opts.deny ?? [];
+      const next = [...found].filter((p) => !paths.includes(p) && !deny.some((d) => p.includes(d))).slice(0, opts.maxFollow ?? 40);
+      for (const l of await this.linksOn(next)) found.add(l);
+    }
+    return [...found];
+  }
+
+  private async linksOn(paths: string[]): Promise<string[]> {
     const found = new Set<string>();
     for (const p of paths) {
       const { page, evidence } = await this.newPage();

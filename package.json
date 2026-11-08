@@ -7,11 +7,12 @@
     "bootstrap": "tsx src/cli/bootstrap.ts",
     "enrich": "tsx --env-file-if-exists=.env src/cli/enrich.ts",
     "pin": "tsx src/cli/pin.ts",
-    "typecheck":"tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
     "jev:smoke": "tsx --env-file-if-exists=.env src/cli/jev-smoke.ts",
     "eval:prepare": "tsx src/cli/eval-prepare.ts",
     "eval": "tsx --env-file-if-exists=.env src/cli/eval.ts",
+    "qa:seed": "tsx src/cli/qa-seed.ts",
     "qa:baseline": "tsx --env-file-if-exists=.env src/cli/qa-baseline.ts",
     "qa:check": "tsx --env-file-if-exists=.env src/cli/qa-check.ts",
     "qa:report": "tsx src/cli/qa-report.ts"

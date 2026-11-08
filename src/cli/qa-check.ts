@@ -161,7 +161,7 @@ async function main() {
     results.push(...blocked.notVisited, blocked.gate);
     gate = { node: blocked.gateNode, check: blocked.gate };
   } else try {
-    const links = await session.harvestLinks(config.qa.seedPaths);
+    const links = await session.harvestLinks(config.qa.seedPaths, { depth: config.qa.harvestDepth, deny: config.qa.denyPaths });
     const plan = planVisits(
       affected.map((a) => a.node),
       links,
