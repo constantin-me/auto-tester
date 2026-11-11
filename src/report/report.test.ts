@@ -206,3 +206,18 @@ test("report: an unpinned expectation finding says so, and non-expectation findi
   assert.match(md, /Held at baseline \(not pinned\)\./);
   assert.equal((md.match(/Held at baseline/g) ?? []).length, 1);
 });
+
+test("markdown: nothing tested reads as clean when the change reaches no flow or none is affected", () => {
+  const none = buildReport(input({ judged: [], results: [] }));
+  assert.equal(none.verdict, "nothing-tested");
+  assert.match(renderMarkdown(none), /\*\*No UI flow is reached by this change\.\*\*/);
+
+  const i = input({ results: [] });
+  i.judged = i.judged.map((j) => ({ ...j, triage: triage(false, 0.2), affected: false }));
+  assert.match(renderMarkdown(buildReport(i)), /\*\*No flow is judged affected by this change\.\*\*/);
+
+  const flows = ["search", "root", "add-music", "add-books"];
+  const blocked = buildReport(input({ results: flows.map((f) => ({ flow: `node:${f}`, status: "unreachable-here", reason: "404" }) as never) }));
+  assert.equal(blocked.verdict, "nothing-tested");
+  assert.match(renderMarkdown(blocked), /\*\*Nothing could be tested\.\*\*/);
+});

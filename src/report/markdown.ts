@@ -15,6 +15,15 @@ const VERDICT_LINE: Record<Report["verdict"], string> = {
   "nothing-tested": "Nothing could be tested",
 };
 
+// "nothing tested" is a failure only when affected flows could not be visited; a change
+// that reaches no flow, or none Jev judges affected, is a clean result
+function verdictLine(r: Report): string {
+  if (r.verdict !== "nothing-tested") return VERDICT_LINE[r.verdict];
+  if (r.summary.candidates === 0) return "No UI flow is reached by this change";
+  if (r.summary.affected === 0) return "No flow is judged affected by this change";
+  return VERDICT_LINE[r.verdict];
+}
+
 // a PR comment stays readable; the full list is always in report.json
 const MAX_NOT_TESTED = 25;
 
@@ -44,7 +53,7 @@ export function renderMarkdown(r: Report): string {
   lines.push("## Auto-tester report (advisory)");
   lines.push("");
   const worst = Math.max(-1, ...bad.flatMap((f) => f.findings.map((x) => x.severity)));
-  const verdict = VERDICT_LINE[r.verdict] + (worst >= 0 && r.verdict !== "no-regression-found" ? `: worst severity ${worst}/5 (${SEVERITY_LABELS[worst]})` : "");
+  const verdict = verdictLine(r) + (worst >= 0 && r.verdict !== "no-regression-found" ? `: worst severity ${worst}/5 (${SEVERITY_LABELS[worst]})` : "");
   lines.push(`**${verdict}.** ${plural(r.summary.failed, "flow")} failed, ${r.summary.maybe} uncertain, ${r.summary.passed} passed.`);
   lines.push("");
   lines.push(

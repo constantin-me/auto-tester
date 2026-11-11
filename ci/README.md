@@ -1,12 +1,10 @@
 # Running auto-tester in CI
 
-**Status: never run on GitHub; rehearsed locally end to end.** `ci/rehearse.sh <app-repo>
-<base> <head>` runs the workflow's steps in the same order on a clone of the app (its own
-compose project on :3299, Jev cache kept in `.autotester/ci-cache` like `actions/cache`):
-build at base, `qa:seed`, bootstrap, baseline, rebuild at head, `qa:check`. On DVinyl
-`a589636`: 37 flows baselined, 5 affected, 5 passed; 47k tokens for the baseline with a warm
-cache, 7k for the check. What remains for a first real run: GitHub-only behaviour (runner
-sandbox, checkout token, artifact upload).
+**Status: runs on GitHub.** First run on DVinyl's fork (PR #1, a CI-only change): built,
+seeded, logged in, baselined 37 flows (identical to the local run), 0 candidates, about
+4 minutes and 271k Jev tokens with a cold cache. The DVinyl config runs Chrome with
+`--no-sandbox` (untested without it). `ci/rehearse.sh <app-repo> <base> <head>` still mirrors the workflow
+locally (its own compose project on :3299, Jev cache in `.autotester/ci-cache`).
 
 `github-workflow.yml` is a template for the **app's** repository. It builds the PR's base,
 records a baseline, rebuilds at the head, checks the change, and uploads `report.md` /
@@ -45,11 +43,10 @@ depending on how widely the change reaches. The baseline runs on every PR: about
 tokens cold, about 10–50k once `.autotester/cache` is warm. The template keeps it with
 `actions/cache`, so unchanged pages and repeated questions cost nothing.
 
-## Likely first failures (verify, not yet fixed)
+## Known caveats
 
-- **Headless Chrome sandbox** on ubuntu-24.04 runners (AppArmor restricts unprivileged user
-  namespaces). Puppeteer may need `--no-sandbox` there: set `"qa": { "launchArgs": ["--no-sandbox"] }` in the
-  app's config (opt-in; only on a runner you trust, since it turns off Chrome's sandbox).
+- **Headless Chrome sandbox**: ubuntu-24.04 runners restrict unprivileged user namespaces;
+  the DVinyl config sets `"qa": { "launchArgs": ["--no-sandbox"] }` (only on a runner you trust).
 - **The app's `.env`** is written by the template with fresh random secrets (DVinyl refuses
   empty or published ones). Another app needs its own version of that step.
 - **A private auto-tester repo** needs `token:` on the second checkout.
